@@ -1,0 +1,11 @@
+SLIDE 3 - Informacion General Empresa
+============================================================
+
+SECCIÓN: 03 Informacion Empresa
+
+CONTEXTO DE TEXTO EN PRESENTACIÓN:
+INGENIERIA VIAL TEPATE, S.A. DE C.V. Empresa dedicada a Ingeniería Civil, Arquitectura, Ingeniería Vial, Estudios Viales en Semaforización, Aeropuerto, Ciclovías, Fabricación de Equipos Termoplásticos. Área Metropolitana, Apodaca y Guadalupe, N.L. 16 años de experiencia. Clientes estatales, municipales e iniciativa privada. Contacto disponible por WhatsApp.
+
+IMÁGENES EN ESTA CARPETA:
+  - slide03_Informacion_General_Empresa_img1.png
+  - slide03_Informacion_General_Empresa_img3.png

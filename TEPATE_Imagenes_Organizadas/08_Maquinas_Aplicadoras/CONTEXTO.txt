@@ -1,0 +1,12 @@
+SLIDE 10 - Maquinas Aplicadoras
+============================================================
+
+SECCIÓN: 08 Maquinas Aplicadoras
+
+CONTEXTO DE TEXTO EN PRESENTACIÓN:
+FABRICACION DE MAQUINAS APLICADORAS termoplásticas. Tanques disponibles: 300kg, 250kg, 200kg.
+
+IMÁGENES EN ESTA CARPETA:
+  - slide10_Maquinas_Aplicadoras_img1.jpeg
+  - slide10_Maquinas_Aplicadoras_img2.jpeg
+  - slide10_Maquinas_Aplicadoras_img3.jpeg

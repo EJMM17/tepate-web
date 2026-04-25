@@ -1,0 +1,11 @@
+SLIDE 1 - Portada 2024
+============================================================
+
+SECCIÓN: 01 Portada
+
+CONTEXTO DE TEXTO EN PRESENTACIÓN:
+Portada principal. Lema: 'Fomentando la Cultura Vial y sus Valores'. Año 2024. WWW.TEPATE.COM.MX
+
+IMÁGENES EN ESTA CARPETA:
+  - slide01_Portada_2024_img1.png
+  - slide01_Portada_2024_img2.png

@@ -1,0 +1,11 @@
+MARCAS DE COMPONENTES PARA CALDERAS TERMOPLÁSTICAS
+===================================================
+Slides: 6, 7, 8, 9
+
+Estas marcas aparecen como proveedores de componentes en la fabricación de
+calderas termoplásticas de TEPATE (capacidades 2,000kg / 1,000kg / 500kg / 400kg):
+
+- Kohler_motores.jpeg      → KOHLER: Motores para las calderas
+- Continental.png          → CONTINENTAL: Componente hidráulico/mecánico
+- Vickers_hidraulica.png   → VICKERS (Danfoss): Sistema hidráulico 100%
+- Parker_Hannifin.png      → PARKER HANNIFIN: Componentes hidráulicos y de movimiento

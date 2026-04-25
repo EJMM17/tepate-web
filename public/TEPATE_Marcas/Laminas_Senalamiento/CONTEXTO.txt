@@ -1,0 +1,15 @@
+MARCAS DE LÁMINAS RETROREFLECTIVAS PARA SEÑALAMIENTO
+=====================================================
+Slides: 15, 16, 17, 18, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32
+
+Estas marcas aparecen como proveedores de láminas en el señalamiento vertical
+y horizontal (preventivo, restrictivo, informativo, elevado SID-13/SID-15):
+
+- 3M.png              → 3M: Láminas retroreflectivas (grado ingeniería, alta
+                        intensidad y diamante). Presente en prácticamente
+                        todos los slides de señalamiento.
+- Avery_Dennison.png  → AVERY DENNISON: Láminas retroreflectivas, alternativa
+                        a 3M en todos los proyectos de señalamiento.
+- Ennis_Flint.png     → ENNIS-FLINT ("The Mark of Traffic Safety"): Proveedor
+                        de pinturas y materiales para señalamiento horizontal
+                        tipo tráfico base agua.
