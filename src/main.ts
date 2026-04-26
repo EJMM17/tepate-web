@@ -3,6 +3,10 @@
  * Handling Form AJAX, Navigation, and SEO Schema injection
  */
 
+// ── VERCEL WEB ANALYTICS ────────────────────────────────────────
+import { inject } from '@vercel/analytics';
+inject();
+
 // ── AUDIT: FORM SCRIPT (AJAX to Formspree) ──────────────────
 const contactForm = document.getElementById('contactForm') as HTMLFormElement | null;
 const formSuccess = document.getElementById('formSuccess');
