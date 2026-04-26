@@ -486,25 +486,4 @@ const initAccordion = () => {
 
   window.addEventListener('hashchange', handleHash);
   handleHash(); // Run on initial load
-};
-
-initAccordion();
-
-// ── ACTIVE LINK HIGHLIGHTING ───────────────────────────────────────────
-const highlightActiveLinks = () => {
-  const currentPath = window.location.pathname;
-  const fileName = currentPath.split('/').pop() || 'index.html';
-  
-  const navLinks = document.querySelectorAll('.nav-links a, .mobile-menu a');
-  
-  navLinks.forEach(link => {
-    const href = link.getAttribute('href');
-    if (href === fileName || (fileName === 'index.html' && href === '/')) {
-      link.classList.add('active');
-    } else {
-      link.classList.remove('active');
-    }
-  });
-};
-
-highlightActiveLinks();
+};
