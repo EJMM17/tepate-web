@@ -7,8 +7,8 @@
 
 :root{
   /* Core palette */
-  --neon:#ffff05;          /* Industrial Traffic Yellow */
-  --neon-dim:#e5e504;      /* Dimmer yellow for hover states */
+  --neon:#E1FF00;          /* Reflective Road Sign Yellow-Green */
+  --neon-dim:#C8E500;      /* Dimmer reflective yellow for hover states */
   --black:#000000;         /* Pure black background */
   --asphalt:#0A0A0A;       /* Dark asphalt grey */
   --coal:#0F0F0F;          /* Slightly lifted surface */
