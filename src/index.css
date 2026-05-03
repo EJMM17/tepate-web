@@ -1,3 +1,5 @@
+@import "./styles/homepage.css";
+
 /* ═══════════════════════════════════════════════════════════
    INGENIERÍA VIAL TEPATE — INDUSTRIAL BRUTALIST
    No glow. No shadows. No rounded corners. Hard edges only.
@@ -1808,6 +1810,4 @@ footer{
 .f-legal a:hover {
   color: var(--neon);
 }
-
-@import "./styles/homepage.css";
 .nav-drop-trigger{background:none;border:0;color:inherit;font:inherit;text-transform:uppercase}.nav-has-dropdown.is-open>.nav-dropdown-panel,.nav-has-dropdown.is-open .nav-sub-panel{display:flex}
