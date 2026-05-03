@@ -93,37 +93,6 @@
   .btn-pdf:hover { background: var(--black); color: var(--neon); }
   .btn-pdf svg { flex-shrink: 0; }
 
-  /* ── Mobile accordion (MOD-A) ── */
-  .mob-cat-toggle {
-    display: flex; align-items: center; justify-content: space-between;
-    width: 100%;
-    background: none; border: none; border-bottom: 1px solid var(--concrete);
-    color: var(--bone);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 13px; font-weight: 600; text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 14px 24px; cursor: pointer;
-    text-align: left;
-  }
-  .mob-cat-toggle:hover { color: var(--neon); }
-  .mob-cat-toggle .chev-mob {
-    border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
-    width: 9px; height: 9px; transform: rotate(45deg);
-    transition: transform 0.2s; flex-shrink: 0;
-  }
-  .mob-cat-toggle.open .chev-mob { transform: rotate(-135deg); }
-  .mob-sub-links { display: none; flex-direction: column; background: var(--asphalt); }
-  .mob-sub-links.open { display: flex; }
-  .mob-sub-links a {
-    padding: 11px 36px;
-    font-size: 12px; color: var(--bone);
-    text-decoration: none;
-    font-family: 'IBM Plex Mono', monospace;
-    text-transform: uppercase; letter-spacing: 0.06em;
-    border-bottom: 1px solid var(--rule);
-  }
-  .mob-sub-links a:hover { color: var(--neon); }
-
   /* ── MOD-C: Galería de maquinaria ── */
   .mach-gallery { padding: 80px 24px; background: var(--asphalt); }
   .mach-gallery .sec-tag { margin-bottom: 8px; }
