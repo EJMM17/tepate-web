@@ -25,3 +25,14 @@ export const initDesktopDropdowns = () => {
     drop.addEventListener('keydown', (e) => e.key === 'Escape' && (setOpen(false), trigger.focus()));
   });
 };
+export const initMobileAccordion = () => {
+  document.querySelectorAll<HTMLButtonElement>('.mob-cat-toggle').forEach((toggle) => {
+    const sub = document.getElementById(toggle.id + '-sub');
+    if (!sub) return;
+    toggle.addEventListener('click', () => {
+      const open = toggle.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+      sub.classList.toggle('open', open);
+    });
+  });
+};
