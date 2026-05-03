@@ -18,3 +18,12 @@ View your app in AI Studio: https://ai.studio/apps/93509c25-496b-4dc7-a791-4d1bf
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
 3. Run the app:
    `npm run dev`
+
+## Homepage audit remediation (2026-05-02)
+- Added keyboard-accessible desktop dropdown triggers and ARIA state handling.
+- Added modal dialog accessibility attributes/focus handling foundations.
+- Improved contact form ARIA error semantics and summary alert region.
+- Extracted homepage inline CSS to `src/styles/homepage.css`.
+- Split `src/main.ts` concerns into `src/scripts/*` modules.
+- Tightened homepage font weight requests to reduce payload.
+

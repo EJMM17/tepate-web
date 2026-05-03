@@ -1808,3 +1808,6 @@ footer{
 .f-legal a:hover {
   color: var(--neon);
 }
+
+@import "./styles/homepage.css";
+.nav-drop-trigger{background:none;border:0;color:inherit;font:inherit;text-transform:uppercase}.nav-has-dropdown.is-open>.nav-dropdown-panel,.nav-has-dropdown.is-open .nav-sub-panel{display:flex}
