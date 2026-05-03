@@ -10,8 +10,9 @@ export const initMobileNav = () => {
     document.body.style.overflow = open ? 'hidden' : '';
     (open ? closeBtn : hamBtn)?.focus();
   };
-  hamBtn.addEventListener('click', () => toggleMenu(true));
+  hamBtn.addEventListener('click', () => toggleMenu(!mobileMenu.classList.contains('open')));
   closeBtn?.addEventListener('click', () => toggleMenu(false));
+  mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) toggleMenu(false); });
   document.addEventListener('keydown', (e) => e.key === 'Escape' && mobileMenu.classList.contains('open') && toggleMenu(false));
 };
 export const initDesktopDropdowns = () => {
