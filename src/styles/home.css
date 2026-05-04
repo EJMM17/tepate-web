@@ -177,6 +177,10 @@
 }
 @media(min-width:640px){.prod-grid{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:1024px){.prod-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:639px){
+  .prod-grid{grid-template-columns:1fr}
+  .cat{padding:28px 24px;min-height:auto}
+}
 
 .cat{
   background:var(--coal);padding:32px 24px;min-height:200px;
@@ -491,3 +495,63 @@
 .contact{background:var(--black);border-top:1px solid var(--steel)}
 .contact-grid{display:flex;flex-direction:column;gap:48px;margin-top:48px}
 @media(min-width:1024px){.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px}}
+
+/* ── PLANT SECTION (fabricación Apodaca) ─────────────── */
+.plant-section{background:var(--asphalt);border-top:1px solid var(--steel);position:relative;overflow:hidden}
+.plant-section::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(-45deg,transparent,transparent 24px,rgba(57,255,20,.025) 24px,rgba(57,255,20,.025) 48px);
+  pointer-events:none;
+}
+.plant-header{position:relative;z-index:1;margin-bottom:40px}
+.plant-grid{
+  display:grid;grid-template-columns:1fr;gap:3px;
+  background:var(--steel);border:1px solid var(--steel);
+  position:relative;z-index:1;
+}
+@media(min-width:640px){.plant-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.plant-grid{grid-template-columns:2fr 1fr 1fr}}
+.plant-item{
+  background:var(--coal);position:relative;overflow:hidden;
+  min-height:220px;
+  border:1px solid var(--concrete);
+  transition:transform .3s ease,border-color .3s ease;
+}
+.plant-item:hover{transform:scale(1.01);border-color:var(--neon);z-index:2}
+.plant-item img{
+  width:100%;height:100%;object-fit:cover;
+  display:block;transition:transform .4s ease;
+}
+.plant-item:hover img{transform:scale(1.04)}
+.plant-item:first-child{min-height:280px}
+@media(min-width:1024px){.plant-item:first-child{grid-row:span 2;min-height:auto}}
+.plant-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(transparent,rgba(0,0,0,.92));
+  padding:28px 18px 16px;
+  border-top:1px solid var(--neon);
+  transform:translateY(100%);transition:transform .3s;
+}
+.plant-item:hover .plant-caption{transform:translateY(0)}
+.plant-cap-title{
+  font-family:var(--fd);font-weight:800;font-size:14px;
+  text-transform:uppercase;letter-spacing:.3px;color:var(--white);
+}
+.plant-cap-sub{
+  font-family:var(--fm);font-size:10px;color:var(--neon);
+  letter-spacing:.8px;text-transform:uppercase;margin-top:4px;
+}
+.plant-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--neon);color:var(--black);
+  font-family:var(--fm);font-size:10px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  padding:6px 14px;margin-bottom:16px;
+}
+.plant-loc{
+  font-family:var(--fm);font-size:11px;color:var(--mist);
+  letter-spacing:.5px;margin-top:12px;display:flex;align-items:center;gap:8px;
+}
+.plant-loc::before{
+  content:'';display:block;width:24px;height:2px;background:var(--neon);
+}

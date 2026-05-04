@@ -1,23 +1,14 @@
 # AGENTS.md — Ingeniería Vial TEPATE
 
-> This file contains project-specific context for AI coding agents. The reader is assumed to know nothing about this repository.
+> Keep this file concise, current, and action-oriented. Link to repo docs instead of repeating them.
 
 ---
 
 ## Project Overview
 
-This is the official corporate website for **Ingeniería Vial TEPATE, S.A. de C.V.**, a Mexican B2B manufacturer and installer of road safety infrastructure. The company is based in Apodaca/Guadalupe, Nuevo León, Mexico, and serves clients nationwide including municipalities, state governments, and private construction firms.
+This is the corporate website for **Ingeniería Vial TEPATE, S.A. de C.V.**. It is a static multi-page site for a Mexican B2B road-safety manufacturer/installer. All user-facing content is in Spanish (Mexico), and the visual system is intentionally industrial/brutalist: black surfaces, neon accents, square corners, and monospace details.
 
-The site is a **static multi-page website** (not a SPA) built with vanilla TypeScript, custom CSS, and Vite. It follows an "industrial brutalist" visual design: pure black backgrounds, neon yellow-green accents (`#E1FF00`), zero rounded corners, hard edges, and monospace typography.
-
-**Key business lines represented on the site:**
-- Thermoplastic boilers and application machines (fabricated in-house)
-- Horizontal and vertical road signage
-- Work zone protection devices (cones, barrels, barriers)
-- Solar-powered traffic equipment
-- Traffic engineering studies
-
-All user-facing content is in **Spanish (Mexico)**.
+The site is not a SPA. Navigation between pages is a full request. Keep changes aligned with the existing HTML-first architecture.
 
 ---
 
@@ -40,44 +31,16 @@ All user-facing content is in **Spanish (Mexico)**.
 
 ## Project Structure
 
-```
-tepate-web/
-├── index.html                 # Homepage
-├── productos.html             # Product catalog (calderas, señalamiento, etc.)
-├── servicios.html             # Services detail page
-├── proyectos.html             # Project portfolio / gallery
-├── nosotros.html              # About us / company info
-├── contacto.html              # Contact form page
-├── aviso-privacidad.html      # Privacy policy (legal)
-├── 404.html                   # Not found page
-│
-├── src/
-│   ├── main.ts                # Entry point — composes and initializes all modules
-│   ├── index.css              # Main stylesheet (~1800 lines, design system + all page styles)
-│   ├── scripts/
-│   │   ├── analytics.ts       # Vercel Analytics injection
-│   │   ├── contact-form.ts    # Form validation, ARIA error semantics, Formspree submission
-│   │   ├── mobile-nav.ts      # Mobile hamburger menu, desktop dropdowns, mobile accordion
-│   │   └── product-modal.ts   # Product detail modal with focus trap and focus return
-│   └── styles/
-│       └── homepage.css       # Homepage-specific styles (nav dropdowns, machinery gallery, PDF buttons, footer)
-│
-├── public/                    # Static assets served at root
-│   ├── TEPATE_Imagenes_Organizadas/   # Product and project photos
-│   ├── TEPATE_Marcas/                 # Client and supplier brand logos
-│   ├── *.pdf, *.webp, *.png, etc.     # Catalogs, hero images, favicons
-│   └── .htaccess
-│
-├── dist/                      # Vite build output (generated, not committed)
-├── vercel.json                # Vercel deployment config (headers, redirects, CSP)
-├── sitemap.xml                # SEO sitemap
-├── robots.txt                 # Crawler instructions
-├── package.json
-├── vite.config.ts
-├── tsconfig.json
-├── .env.example               # GEMINI_API_KEY, APP_URL (for AI Studio runtime)
-└── metadata.json              # AI Studio app metadata
-```
+Key files and folders:
+
+- [index.html](index.html), [productos.html](productos.html), [servicios.html](servicios.html), [proyectos.html](proyectos.html), [nosotros.html](nosotros.html), [contacto.html](contacto.html), [aviso-privacidad.html](aviso-privacidad.html), [404.html](404.html)
+- [src/main.ts](src/main.ts) for bootstrapping the shared UI behavior
+- [src/scripts/](src/scripts) for isolated DOM modules
+- [src/index.css](src/index.css) as the only stylesheet entry point; it now imports modular styles from [src/styles/](src/styles)
+- [public/](public) for static assets served from `/`
+- [vercel.json](vercel.json) for edge headers, CSP, and cache rules
+- [AUDIT_REPORT.md](AUDIT_REPORT.md) for remediation history and validation notes
+- [FIX_ISSUES_PROMPT.md](FIX_ISSUES_PROMPT.md) for the original fix scope and verification checklist
 
 ---
 
@@ -103,7 +66,10 @@ npm run lint
 npm run clean
 ```
 
-**Important:** There is no test suite, no formatter (Prettier), and no linter (ESLint) configured. The only quality gate is `tsc --noEmit`.
+Important:
+- There is no automated test suite in this repo.
+- The only code-quality gate is `npm run lint` (`tsc --noEmit`).
+- `npm run clean` uses `rm -rf`; on Windows, prefer deleting `dist/` manually if needed.
 
 ---
 
@@ -128,11 +94,11 @@ npm run clean
 
 ---
 
-## Code Organization
+### Code Organization
 
 ### Entry Point (`src/main.ts`)
 
-This file is intentionally thin. It imports and initializes all feature modules:
+This file is intentionally thin. It only composes shared modules and a tiny back-to-top handler:
 
 ```ts
 import { initAnalytics } from './scripts/analytics';
@@ -148,7 +114,7 @@ initDesktopDropdowns();
 initProductModal();
 ```
 
-Plus a small inline handler for the back-to-top button.
+If you need new behavior, prefer a new module in `src/scripts/` and keep `src/main.ts` as composition only.
 
 ### Script Modules
 
@@ -161,16 +127,16 @@ Plus a small inline handler for the back-to-top button.
 
 ### Styling
 
-The CSS has been modularized into a layered architecture. All modules are imported from `src/index.css` (the single entry point consumed by every HTML page).
+The stylesheet is modular now. [src/index.css](src/index.css) imports the layered files under [src/styles/](src/styles); do not reintroduce large inline CSS blocks unless there is a strong reason.
 
 | File | Responsibility |
 |------|---------------|
-| `src/styles/base.css` | Design tokens, global reset, accessibility focus states, CLS prevention, animations, skip-link, `prefers-reduced-motion`, print styles |
-| `src/styles/layout.css` | Topbar, sticky nav, hamburger, mobile menu, footer, WhatsApp float, back-to-top |
-| `src/styles/components.css` | Buttons, cards, forms, accordion, filter bar, pagination, modal, contact info, map overrides |
-| `src/styles/home.css` | Hero, stats, products grid, services grid, CTA band, why section, gallery, testimonials, contact section |
-| `src/styles/pages.css` | Page headers, product categories (`pcat`), spec grids, duo panels, client grids, MVV cards, project masonry, legal prose, contact page layout |
-| `src/styles/homepage.css` | Nav dropdown panels, mobile accordion, machinery gallery, PDF buttons, footer slogan/credits |
+| [src/styles/base.css](src/styles/base.css) | Tokens, reset, focus states, motion reduction, print styles |
+| [src/styles/layout.css](src/styles/layout.css) | Shared chrome: topbar, nav, mobile menu, footer, WhatsApp float, back-to-top |
+| [src/styles/components.css](src/styles/components.css) | Buttons, cards, forms, accordion, pagination, modal, filters |
+| [src/styles/home.css](src/styles/home.css) | Homepage sections |
+| [src/styles/pages.css](src/styles/pages.css) | Secondary page layouts and content patterns |
+| [src/styles/homepage.css](src/styles/homepage.css) | Homepage-only dropdowns, mobile accordion, gallery, PDF buttons, footer details |
 
 **Design system tokens (excerpt):**
 ```css
@@ -210,32 +176,29 @@ Pages include SEO metadata per page:
 ## Development Conventions
 
 ### Comment Markers
-You will see inline HTML comments like `<!-- MOD-A-START -->` and `<!-- MOD-A-END -->` throughout `index.html`. These markers denote feature boundaries added during iterative development. They are present in production markup. Do not remove them unless you are explicitly refactoring that section into a cleaner structure.
+Preserve existing HTML comment markers such as `MOD-*` and `AUDIT` unless you are explicitly refactoring the affected section. They are part of the repo’s editing history.
 
 ### CSS Conventions
 - Class names are lowercase, hyphenated, and often abbreviated (`.hprod`, `.svc`, `.gitem`, `.pcat`, `.mvv`).
-- BEM-like naming is **not** used.
-- Media queries are inline next to their rules, not grouped.
-- `!important` is used sparingly but intentionally for global resets (e.g., `border-radius: 0 !important`).
+- BEM-like naming is not used.
+- Keep media queries near the rules they affect.
+- `!important` is reserved for global resets or other unavoidable overrides.
 
 ### Accessibility (A11y) Requirements
-This project has undergone formal accessibility remediation. All new interactive components **must** adhere to these patterns:
-- Use `<button>` elements for all clickable triggers (not `<div>` or `<span>`).
-- Maintain `aria-expanded` and `aria-controls` on expandable widgets.
-- Trap focus inside modals while open and return focus to the trigger on close.
-- Use `aria-invalid` and `aria-describedby` for form validation errors.
-- Provide visible `:focus-visible` outlines (neon color, 3px solid).
-- Support Escape key dismissal for menus, modals, and dropdowns.
-- Every page must include a skip-to-content link (`<a href="#main-content" class="skip-link">`) and wrap primary content in `<main id="main-content">`.
-- Respect `prefers-reduced-motion` for animations and transitions.
-- Provide basic `@media print` styles for printable output.
+New interactive UI must follow the existing patterns:
+- Use real `<button>` elements for triggers.
+- Keep `aria-expanded`, `aria-controls`, and Escape handling in sync for expandable widgets.
+- Trap focus in modals and return focus to the opener.
+- Use `aria-invalid` and `aria-describedby` for form errors.
+- Keep visible `:focus-visible` outlines and `prefers-reduced-motion` behavior intact.
+- Preserve the skip link and `<main id="main-content">` structure on every page.
 
 ### Image Handling
-- Hero/gallery images are in `/TEPATE_Imagenes_Organizadas/` (organized by category).
-- Brand logos are in `/TEPATE_Marcas/`.
+- Hero/gallery images live under `/TEPATE_Imagenes_Organizadas/`.
+- Brand logos live under `/TEPATE_Marcas/`.
 - Use `loading="lazy"` for non-critical images.
 - Use `fetchpriority="high"` and `decoding="async"` for hero images.
-- Use `aspect-ratio` CSS on image containers to prevent CLS.
+- Keep CLS protections such as `aspect-ratio` in place.
 
 ---
 
@@ -258,7 +221,7 @@ The deployment configuration includes:
 - **Redirects:** `/index.html` → `/` (permanent)
 - **Clean URLs:** Disabled (`.html` extensions are preserved in URLs)
 
-**Warning:** If you add new external domains (fonts, APIs, images), you **must** update the CSP in `vercel.json` or the resource will be blocked in production.
+Warning: if you add a new external domain, update the CSP in [vercel.json](vercel.json) or production will block it.
 
 ### Environment Variables
 
@@ -275,63 +238,37 @@ For normal local development, these are not required.
 
 ## Testing Strategy
 
-**Current state:** There is no automated test suite (no Jest, Vitest, Playwright, or Cypress).
+There is no automated test suite in this repo. Validate changes with:
+1. `npm run lint`
+2. `npm run build`
+3. Manual keyboard checks for nav, modal, mobile menu, and contact form behavior
 
-Validation is manual and build-based:
-1. `npm run lint` — TypeScript type checking
-2. `npm run build` — Vite production build must succeed without errors
-3. Manual checks:
-   - Keyboard navigation for desktop dropdowns (Tab, Shift+Tab, Escape)
-   - Modal open/close, focus trap, focus return
-   - Mobile hamburger menu open/close
-   - Form validation error announcements
-   - Responsive layout across breakpoints (mobile, tablet, desktop)
-
-**If adding tests:** The project would benefit from minimal E2E smoke tests for the navigation, modal, and contact form flows. There is no testing infrastructure in place yet.
+If tests are added later, keep them lightweight and focused on the shared navigation/modal/form flows.
 
 ---
 
 ## Security Considerations
 
-1. **CSP is enforced** via Vercel headers. Any new external script, style, font, image, or connect domain must be added to the CSP directive.
-2. **The contact form** submits to Formspree (`formspree.io`) via client-side `fetch`. There is no server-side rate limiting or bot protection in this codebase. If adding a backend endpoint, implement honeypot fields and rate limiting.
-3. **No sensitive data** (passwords, API keys, PII) is stored in the repository. The `.env.example` is safe to commit.
-4. **Vercel Analytics** injects a small script for Web Vitals. This is already whitelisted in the CSP.
-
----
-
-## Asset Inventory
-
-### Fonts (Google Fonts, external)
-- Barlow Condensed (weights 400, 700; used for headlines)
-- Barlow (weights 400, 600; used for body)
-- IBM Plex Mono (weights 400, 600; used for labels, tags, metadata)
-
-### Static Files in `public/`
-- `TEPATE_Imagenes_Organizadas/` — Product photos and project gallery images (WebP)
-- `TEPATE_Marcas/` — Client logos and supplier brand marks (WebP)
-- `calderas-termoplasticas-tepate.pdf` — Product catalog PDF
-- `logo.webp`, `favicon.ico`, `apple-touch-icon.png`, etc. — Brand assets
-- `.htaccess` — Apache fallback rules
-
-### Images
-Images are largely unoptimized in the repository. Hero images should ideally be < 250 KB WebP, gallery images < 150 KB WebP. Lazy loading is required for all non-hero images.
-
----
-
-## Common Pitfalls
-
-1. **Do not treat this as a SPA.** Navigation between pages is a full server round-trip. Shared components (nav, footer) are duplicated across HTML files.
-2. **Do not add a frontend framework** without explicit user approval. The current architecture is intentionally lightweight.
-3. **Modifying `src/index.css` affects all pages.** It is a monolithic stylesheet. For page-specific styles, consider adding a new file under `src/styles/` and importing it from the relevant HTML page.
-4. **The `clean` script uses `rm -rf`.** This will not work on Windows natively. Use `npm run build` instead, or delete `dist/` manually.
-5. **Comment markers** like `MOD-A`, `MOD-B`, `AUDIT` should be preserved during minor edits. Only remove them during intentional refactoring.
+1. CSP and related headers are enforced through [vercel.json](vercel.json).
+2. The contact form uses client-side `fetch` to Formspree; preserve the current validation and ARIA semantics if you change it.
+3. Do not commit secrets. The `.env.example` file only documents AI Studio variables.
+4. Vercel Analytics is already accounted for in the CSP.
 
 ---
 
 ## Useful References
 
-- **Audit report:** `AUDIT_REPORT.md` — Full accessibility, performance, SEO, and security audit from 2026-05-02.
-- **Fix prompt:** `FIX_ISSUES_PROMPT.md` — Detailed prompt used to implement the audit remediation.
-- **Vercel config:** `vercel.json` — Edge headers and caching rules.
-- **Sitemap:** `sitemap.xml` — All indexed pages and priorities.
+- [README.md](README.md) for local run instructions and the short project overview
+- [AUDIT_REPORT.md](AUDIT_REPORT.md) for implementation history and validation notes
+- [FIX_ISSUES_PROMPT.md](FIX_ISSUES_PROMPT.md) for the remediation scope and checklist
+- [vercel.json](vercel.json) for edge headers and caching rules
+- [sitemap.xml](sitemap.xml) for the indexed page list
+
+---
+
+## Common Pitfalls
+
+1. Do not treat this as a SPA.
+2. Do not add a frontend framework unless the user explicitly asks.
+3. Do not bypass [src/index.css](src/index.css); route styles through the modular `src/styles/` files.
+4. Do not use `app/applet/optimize.js` as part of the normal build; it is a legacy HTML rewriting script.
