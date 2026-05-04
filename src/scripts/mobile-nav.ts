@@ -13,7 +13,7 @@ export const initMobileNav = () => {
   hamBtn.addEventListener('click', () => toggleMenu(!mobileMenu.classList.contains('open')));
   closeBtn?.addEventListener('click', () => toggleMenu(false));
   mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) toggleMenu(false); });
-  document.addEventListener('keydown', (e) => e.key === 'Escape' && mobileMenu.classList.contains('open') && toggleMenu(false));
+  document.addEventListener('keydown', (e: KeyboardEvent) => e.key === 'Escape' && mobileMenu.classList.contains('open') && toggleMenu(false));
 };
 export const initDesktopDropdowns = () => {
   const dropdowns = Array.from(document.querySelectorAll('.nav-has-dropdown'));
@@ -23,7 +23,7 @@ export const initDesktopDropdowns = () => {
     const setOpen = (open: boolean) => { drop.classList.toggle('is-open', open); trigger.setAttribute('aria-expanded', String(open)); };
     trigger.addEventListener('click', () => setOpen(!drop.classList.contains('is-open')));
     drop.addEventListener('focusout', () => setTimeout(() => !drop.contains(document.activeElement) && setOpen(false), 0));
-    drop.addEventListener('keydown', (e) => e.key === 'Escape' && (setOpen(false), trigger.focus()));
+    drop.addEventListener('keydown', (e: KeyboardEvent) => e.key === 'Escape' && (setOpen(false), trigger.focus()));
   });
 };
 export const initMobileAccordion = () => {
