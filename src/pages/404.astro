@@ -1,0 +1,105 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { buildSeo } from '@/lib/seo';
+import { COMPANY } from '@/data/navigation';
+
+const seo = buildSeo({
+  title: 'Página no encontrada — Ingeniería Vial TEPATE',
+  description:
+    'Página no encontrada. Regresa al inicio de Ingeniería Vial TEPATE o visita nuestro catálogo de productos de señalamiento vial.',
+  canonical: `${COMPANY.url}/`,
+});
+---
+
+<meta name="robots" content="noindex,follow" slot="head" />
+
+<Layout {...seo}>
+  <div class="err-wrap">
+    <div class="err-code">Error 404</div>
+    <h1 class="err-title">PÁGINA NO<br />ENCONTRADA</h1>
+    <p class="err-desc">
+      La URL que buscas no existe o fue movida. Regresa al inicio o visita nuestro catálogo de
+      productos.
+    </p>
+    <div class="err-actions">
+      <a href="/" class="err-btn-main">← Ir al inicio</a>
+      <a href="/productos" class="err-btn-sec">Ver productos</a>
+      <a href="/contacto" class="err-btn-sec">Contacto</a>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .err-wrap {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 24px;
+  }
+  .err-code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--neon);
+    margin-bottom: 16px;
+  }
+  .err-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(48px, 10vw, 96px);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--bone);
+    margin-bottom: 20px;
+  }
+  .err-desc {
+    font-family: 'Barlow', sans-serif;
+    font-size: 16px;
+    color: var(--mist);
+    max-width: 420px;
+    line-height: 1.6;
+    margin-bottom: 36px;
+  }
+  .err-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+  .err-btn-main {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--neon);
+    color: var(--black);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 12px 24px;
+    text-decoration: none;
+  }
+  .err-btn-sec {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--steel);
+    color: var(--bone);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 12px 24px;
+    text-decoration: none;
+  }
+  .err-btn-sec:hover {
+    border-color: var(--neon);
+    color: var(--neon);
+  }
+</style>

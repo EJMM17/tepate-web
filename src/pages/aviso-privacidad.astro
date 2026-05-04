@@ -1,0 +1,156 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { buildSeo, buildBreadcrumbJsonLd } from '@/lib/seo';
+import { COMPANY } from '@/data/navigation';
+
+const seo = buildSeo({
+  title: 'Aviso de Privacidad — Ingeniería Vial TEPATE',
+  description:
+    'Aviso de privacidad de Ingeniería Vial TEPATE conforme a la LFPDPPP. Derechos ARCO, finalidades del tratamiento y medidas de seguridad.',
+  canonical: `${COMPANY.url}/aviso-privacidad`,
+  jsonLd: buildBreadcrumbJsonLd([
+    { name: 'Inicio', url: COMPANY.url },
+    { name: 'Aviso de Privacidad', url: `${COMPANY.url}/aviso-privacidad` },
+  ]),
+});
+---
+
+<Layout {...seo}>
+  <section class="page-header">
+    <div class="ph-inner">
+      <div class="ph-crumb"><a href="/">Inicio</a><span>/</span>Aviso de Privacidad</div>
+      <h1 class="ph-title">AVISO DE <span class="acc">PRIVACIDAD</span></h1>
+      <p class="ph-lead">
+        Conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares
+        (LFPDPPP) y su Reglamento, así como los Lineamientos del Aviso de Privacidad emitidos por
+        el INAI.
+      </p>
+    </div>
+  </section>
+
+  <section class="legal">
+    <div class="legal-inner">
+
+      <h2>1. Responsable del tratamiento</h2>
+      <p>
+        <strong>INGENIERÍA VIAL TEPATE, S.A. de C.V.</strong> (en adelante "TEPATE"), con domicilio
+        en el Área Metropolitana de Monterrey, municipios de Apodaca y Guadalupe, Nuevo León, C.P.
+        66000, México, es responsable del tratamiento y protección de sus datos personales.
+      </p>
+      <p>
+        Contacto para asuntos de privacidad: <strong>admon_facturacion@outlook.com</strong> ·
+        Tel. (81) 8453-2875.
+      </p>
+
+      <h2>2. Datos personales recabados</h2>
+      <p>
+        Para las finalidades señaladas en el presente aviso, TEPATE puede recabar los siguientes
+        datos personales:
+      </p>
+      <ul>
+        <li>Datos de identificación: nombre completo, RFC, identificación oficial</li>
+        <li>Datos de contacto: correo electrónico, teléfono fijo y celular, domicilio</li>
+        <li>Datos laborales: empresa, cargo, área de adscripción</li>
+        <li>Datos fiscales: razón social, RFC, domicilio fiscal, uso de CFDI</li>
+        <li>Datos del proyecto: tipo de obra, ubicación, especificaciones técnicas</li>
+      </ul>
+      <p>
+        TEPATE no recaba datos personales sensibles conforme al artículo 3, fracción VI, de la
+        LFPDPPP.
+      </p>
+
+      <h2>3. Finalidades del tratamiento</h2>
+      <p><strong>Finalidades primarias</strong> (necesarias para la relación jurídica):</p>
+      <ul>
+        <li>Atención y respuesta a solicitudes de cotización</li>
+        <li>Elaboración de propuestas técnicas y económicas</li>
+        <li>Celebración de contratos de compraventa, suministro o servicios</li>
+        <li>Emisión de facturas CFDI conforme a la legislación fiscal mexicana</li>
+        <li>Entrega y seguimiento de productos y servicios contratados</li>
+        <li>Atención postventa, garantías y reclamaciones</li>
+        <li>Cumplimiento de obligaciones legales, contables y fiscales</li>
+      </ul>
+      <p><strong>Finalidades secundarias</strong> (no necesarias, el titular puede negarse):</p>
+      <ul>
+        <li>Envío de información comercial sobre nuevos productos y servicios</li>
+        <li>Invitaciones a eventos, ferias y capacitaciones</li>
+        <li>Encuestas de satisfacción y mejora continua</li>
+      </ul>
+      <p>
+        Si usted no desea que sus datos se utilicen para las finalidades secundarias, puede
+        manifestarlo al correo <strong>admon_facturacion@outlook.com</strong>.
+      </p>
+
+      <h2>4. Transferencias de datos</h2>
+      <p>
+        TEPATE puede transferir sus datos personales a las siguientes entidades, sin requerir su
+        consentimiento conforme al artículo 37 de la LFPDPPP:
+      </p>
+      <ul>
+        <li>Autoridades fiscales (SAT) para cumplimiento de obligaciones tributarias</li>
+        <li>Autoridades competentes en caso de requerimiento legal</li>
+        <li>Contadores externos y auditores bajo acuerdo de confidencialidad</li>
+        <li>Empresas de paquetería y logística para entrega de productos</li>
+      </ul>
+      <p>
+        TEPATE no vende, alquila ni comparte sus datos personales con terceros para fines
+        comerciales ajenos a la relación con el titular.
+      </p>
+
+      <h2>5. Derechos ARCO</h2>
+      <p>
+        Usted tiene derecho a <strong>Acceder</strong>, <strong>Rectificar</strong>,
+        <strong>Cancelar</strong> u <strong>Oponerse</strong> al tratamiento de sus datos personales
+        (derechos ARCO), así como a revocar su consentimiento en cualquier momento.
+      </p>
+      <p>
+        Para ejercer estos derechos, envíe su solicitud por escrito al correo
+        <strong>admon_facturacion@outlook.com</strong> con los siguientes datos:
+      </p>
+      <ul>
+        <li>Nombre completo y medio para recibir respuesta</li>
+        <li>Documentos que acrediten su identidad (copia de identificación oficial)</li>
+        <li>Descripción clara y precisa de los datos sobre los que busca ejercer el derecho</li>
+        <li>Cualquier otro elemento que facilite la localización de sus datos</li>
+      </ul>
+      <p>
+        TEPATE responderá su solicitud en un plazo máximo de <strong>20 días hábiles</strong>
+        conforme a la LFPDPPP.
+      </p>
+
+      <h2>6. Uso de cookies y tecnologías de rastreo</h2>
+      <p>
+        Este sitio web puede utilizar cookies, web beacons u otras tecnologías a través de las
+        cuales es posible monitorear el comportamiento del usuario como visitante del sitio. Los
+        datos obtenidos son: páginas visitadas, tiempo de permanencia, tipo de navegador y sistema
+        operativo.
+      </p>
+      <p>Estas tecnologías pueden deshabilitarse desde la configuración de su navegador.</p>
+
+      <h2>7. Medidas de seguridad</h2>
+      <p>
+        TEPATE implementa medidas administrativas, técnicas y físicas razonables para proteger sus
+        datos personales contra daño, pérdida, alteración, destrucción, uso, acceso o tratamiento
+        no autorizado.
+      </p>
+
+      <h2>8. Modificaciones al aviso de privacidad</h2>
+      <p>
+        TEPATE se reserva el derecho de efectuar en cualquier momento modificaciones al presente
+        aviso de privacidad. Cualquier modificación se hará del conocimiento del titular mediante
+        publicación en este mismo sitio web.
+      </p>
+      <p><strong>Última actualización:</strong> Abril 2026</p>
+
+      <div class="legal-disclaimer">
+        <p>
+          ⚠ PLANTILLA BASE — Este aviso de privacidad fue generado como plantilla general conforme
+          a la LFPDPPP mexicana. Antes de publicar en producción, debe ser revisado y validado por
+          un abogado especialista en protección de datos personales para ajustarlo a las
+          particularidades reales del tratamiento de datos de TEPATE.
+        </p>
+      </div>
+
+    </div>
+  </section>
+</Layout>

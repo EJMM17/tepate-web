@@ -1,0 +1,147 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { buildSeo, buildBreadcrumbJsonLd } from '@/lib/seo';
+import { COMPANY } from '@/data/navigation';
+import { PRODUCTS, PRODUCT_CATEGORIES } from '@/data/products';
+
+const seo = buildSeo({
+  title: 'Productos — Ingeniería Vial TEPATE',
+  description:
+    'Catálogo completo de calderas termoplásticas, máquinas aplicadoras, dados, señalamiento horizontal y vertical, dispositivos de protección y equipos solares. Cumplimiento SCT y ASTM.',
+  canonical: `${COMPANY.url}/productos`,
+  ogImage:
+    'https://tepate.com.mx/TEPATE_Imagenes_Organizadas/12_Pintura_Trafico/slide15_Pintura_Trafico_Base_Agua_img1.webp',
+  jsonLd: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Productos de Señalamiento Vial TEPATE',
+      description:
+        'Catálogo de calderas termoplásticas, máquinas aplicadoras, dados, zapatas y equipos de confinamiento vial.',
+      url: `${COMPANY.url}/productos`,
+      numberOfItems: 5,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Calderas Termoplásticas', url: `${COMPANY.url}/productos#calderas` },
+        { '@type': 'ListItem', position: 2, name: 'Máquinas Aplicadoras', url: `${COMPANY.url}/productos#maquinas` },
+        { '@type': 'ListItem', position: 3, name: 'Dados y Zapatas', url: `${COMPANY.url}/productos#dados` },
+        { '@type': 'ListItem', position: 4, name: 'Boyas y Vialetas', url: `${COMPANY.url}/productos#confinamiento` },
+        { '@type': 'ListItem', position: 5, name: 'Equipos Solares Viales', url: `${COMPANY.url}/productos#solar` },
+      ],
+    },
+    buildBreadcrumbJsonLd([
+      { name: 'Inicio', url: COMPANY.url },
+      { name: 'Productos', url: `${COMPANY.url}/productos` },
+    ]),
+  ],
+});
+
+---
+
+<Layout {...seo}>
+  <section class="page-header">
+    <div class="ph-inner">
+      <div class="ph-crumb"><a href="/">Inicio</a><span>/</span>Productos</div>
+      <h1 class="ph-title">CATÁLOGO <span class="acc">COMPLETO</span></h1>
+      <p class="ph-lead">
+        Fabricación directa de equipos termoplásticos, señalamiento vial horizontal y vertical,
+        dispositivos de protección y equipos solares. Todos nuestros productos cumplen con la norma
+        SCT N-CMT-5-001-13 y especificaciones ASTM.
+      </p>
+    </div>
+  </section>
+
+  {PRODUCT_CATEGORIES.map((cat) => {
+    const catProducts = PRODUCTS.filter((p) =>
+      cat.id === 'horizontal' || cat.id === 'vertical'
+        ? p.category === 'senalamiento' && (
+            cat.id === 'horizontal'
+              ? ['sh-urbana','sh-city-county','sh-sct-mx','sh-aashto','sh-txdot','sh-aashto-city'].includes(p.id)
+              : ['sv-sr','sv-sp','sv-sis','sv-sid13','sv-sid15','sv-colonial'].includes(p.id)
+          )
+        : p.category === cat.id
+    );
+    const [headLine1, headLine2] = cat.heading.split('\n');
+    return (
+      <section class="pcat" id={cat.id}>
+        <div class="pcat-head">
+          <div>
+            <div class="pcat-num">{cat.num} · {cat.label}</div>
+            <h2 class="pcat-h2">{headLine1}<br />{headLine2}</h2>
+          </div>
+          <p class="pcat-desc">{cat.desc}</p>
+        </div>
+        <div class="spec-grid">
+          {catProducts.map((product) => (
+            <div class="spec product-trigger" data-img={product.image}>
+              <div class="spec-photo">
+                <img src={product.image} alt={product.imageAlt} loading="lazy" decoding="async" />
+              </div>
+              <div class="spec-info">
+                <div class="spec-model">{product.model}</div>
+                <div class="spec-name">{product.name}</div>
+                <div class="spec-rule"></div>
+                <ul class="spec-list">
+                  {product.specs.map((spec) => (
+                    <li>{spec.label}: {spec.value}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+        {cat.id === 'calderas' && (
+          <div style="margin-top:40px;display:flex;flex-wrap:wrap;gap:12px;">
+            <a
+              href="/ficha-tecnica-IVT302710-04.pdf"
+              download
+              class="inline-flex items-center gap-2 bg-neon text-black font-mono text-xs font-bold uppercase tracking-widest px-4 py-2.5 no-underline"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Ficha Técnica IVT302710-04
+            </a>
+            <a
+              href="/calderas-termoplasticas-tepate.pdf"
+              download
+              class="inline-flex items-center gap-2 border border-neon text-neon font-mono text-xs font-bold uppercase tracking-widest px-4 py-2.5 no-underline"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Catálogo Calderas Termoplásticas
+            </a>
+          </div>
+        )}
+      </section>
+    );
+  })}
+
+  <section class="cta-band" style="padding:0">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-h2">¿No encuentras<br />lo que buscas?</h2>
+        <p class="cta-sub">
+          Fabricamos sobre pedido según las especificaciones de tu proyecto. Envíanos los detalles
+          y recibe cotización en menos de 24 horas.
+        </p>
+      </div>
+      <div class="cta-side">
+        <a href="/contacto" class="btn-dark">Solicitar Cotización</a>
+        <span class="cta-aside">Atención a licitaciones y obra privada</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal-overlay" id="product-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc">
+    <div class="modal-content" tabindex="-1">
+      <button class="modal-close" id="modal-close" aria-label="Cerrar modal">&times;</button>
+      <img id="modal-image" class="modal-image" alt="" style="display:none" />
+      <h3 class="modal-title" id="modal-title">Nombre del Producto</h3>
+      <div class="modal-subtitle" id="modal-subtitle">Modelo</div>
+      <div class="modal-body" id="modal-desc">Descripción detallada del producto.</div>
+      <div class="modal-specs" id="modal-specs-container"></div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import { initProductModal } from '@/scripts/product-modal';
+  initProductModal();
+</script>
