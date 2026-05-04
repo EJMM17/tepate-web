@@ -1,0 +1,101 @@
+---
+import { PRIMARY_NAV, CATALOG_PDF, TOPBAR_ITEMS } from '@/data/navigation';
+import MobileNav from '@/components/MobileNav.tsx';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+
+const isActive = (href: string): boolean =>
+  href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+---
+
+<div
+  class="bg-coal border-b border-rule text-mist font-mono text-[11px] uppercase tracking-widest flex flex-wrap items-center justify-center gap-x-3 gap-y-1 px-4 py-2"
+  role="region"
+  aria-label="Información de la empresa"
+>
+  {
+    TOPBAR_ITEMS.map((item, idx) => (
+      <>
+        {idx === 0 && (
+          <span class="inline-block w-1.5 h-1.5 bg-neon animate-blink" aria-hidden="true" />
+        )}
+        <span>{item}</span>
+        {idx < TOPBAR_ITEMS.length - 1 && (
+          <span class="text-steel" aria-hidden="true">·</span>
+        )}
+      </>
+    ))
+  }
+</div>
+
+<header class="sticky top-0 z-40 bg-asphalt/95 backdrop-blur-sm border-b border-steel">
+  <nav
+    aria-label="Principal"
+    class="max-w-screen-2xl mx-auto flex items-center justify-between px-4 md:px-8 h-16"
+  >
+    <a href="/" class="flex items-center gap-2 shrink-0" aria-label="Inicio — Ingeniería Vial TEPATE">
+      <img
+        src="/logo.webp"
+        alt="Logotipo Ingeniería Vial TEPATE"
+        width="40"
+        height="40"
+        fetchpriority="high"
+        decoding="async"
+        class="h-10 w-10"
+      />
+    </a>
+
+    <ul class="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-widest">
+      {
+        PRIMARY_NAV.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              aria-current={isActive(link.href) ? 'page' : undefined}
+              class:list={[
+                'transition-colors duration-200 ease-brand hover:text-neon focus-visible:text-neon',
+                isActive(link.href) ? 'text-neon' : 'text-bone',
+              ]}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+      <li>
+        <a
+          href={CATALOG_PDF.href}
+          download
+          aria-label={CATALOG_PDF.ariaLabel}
+          class="inline-flex items-center gap-2 bg-neon text-black hover:bg-neonDim transition-colors duration-200 ease-brand px-3 py-2 font-bold rounded-btn"
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          {CATALOG_PDF.label}
+        </a>
+      </li>
+    </ul>
+
+    <button
+      type="button"
+      id="ham-btn"
+      class="md:hidden flex flex-col justify-center items-center gap-1.5 w-10 h-10 -mr-2"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Abrir menú"
+    >
+      <span class="block w-6 h-0.5 bg-bone" aria-hidden="true"></span>
+      <span class="block w-6 h-0.5 bg-bone" aria-hidden="true"></span>
+      <span class="block w-6 h-0.5 bg-bone" aria-hidden="true"></span>
+    </button>
+  </nav>
+
+  <MobileNav navItems={PRIMARY_NAV} catalogPdf={CATALOG_PDF} client:idle />
+</header>
