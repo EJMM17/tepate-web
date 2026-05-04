@@ -95,9 +95,13 @@ This homepage has a strong visual identity and generally good SEO fundamentals (
 
 ## 5) Security
 
+### ✅ Remediated (2026-05-04)
+1. **Content Security Policy (CSP) implemented in `vercel.json`.**
+   - Covers all current external domains: Google Fonts, Formspree, Vercel Analytics.
+   - Additional security headers: HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy, X-Content-Type-Options.
+
 ### ⚠️ High-priority gaps
-1. **No Content Security Policy (CSP) found in page/edge config.**
-   - Recommendation: add CSP in `vercel.json` headers and tighten gradually.
+1. ~~No Content Security Policy (CSP) found in page/edge config.~~ **RESUELTO**
 
 2. **No explicit `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy` in current review scope.**
    - Recommendation: define secure defaults in Vercel headers.
@@ -144,3 +148,67 @@ This homepage has a strong visual identity and generally good SEO fundamentals (
 - Security hardening: **5/10**
 
 **Composite:** **6.5/10** with strong branding/SEO baseline and clear path to 8+/10.
+
+---
+
+# Post-Remediation Status — 2026-05-04
+
+## Fase 1: Seguridad y Build ✅
+- `npm run lint` y `npm run build` validados en Node 20.x.
+- CSP en `vercel.json` verificado contra todos los recursos externos actuales (Google Fonts, Formspree, Vercel Analytics).
+
+## Fase 2: Accesibilidad Estructural ✅
+- **Skip-to-content links** agregados en las 8 páginas HTML.
+- **Landmark `<main id="main-content">`** envuelve el contenido principal en todas las páginas.
+- **`prefers-reduced-motion`** implementado en `src/index.css`.
+- **`@media print`** básico agregado en `src/index.css`.
+- Focus-visible outlines, Escape key dismissal, modal focus trap y form ARIA semantics ya estaban presentes y se validaron.
+
+## Fase 3: Consistencia de Layout ✅
+- **Footer unificado** en las 8 páginas: mismo logo, lema, email, columnas (Señalamiento, Equipo Termoplástico, Empresa), certificaciones y créditos.
+- **Estructura nav/footer** sincronizada; se preservó el nav con dropdowns de index.html y el nav simple de subpáginas.
+
+## Fase 4: Performance y SEO ✅
+- **JSON-LD estructurado** agregado en:
+  - `proyectos.html`: LocalBusiness + BreadcrumbList + ItemList de proyectos destacados.
+  - `aviso-privacidad.html`: LocalBusiness + BreadcrumbList.
+- **Bug de markup corregido** en `proyectos.html` (div mal cerrado en grid de proyectos).
+- **Imágenes auditadas**: los 29 `alt=""` restantes corresponden a logos de marcas en marquee con texto adyacente visible o a imagen de modal cuyo alt se actualiza dinámicamente vía JS.
+- Lazy loading y fetchpriority verificados en todas las páginas.
+
+## Estado de deuda técnica remanente
+- ~~CSS monolítico (`src/index.css` ~50 KB post-build) no fue modularizado (fuera de scope).~~ **RESUELTO**
+- No se agregó suite de tests automatizados (fuera de scope).
+- Image optimization manual (compresión WebP/AVIF) pendiente para futura iteración.
+
+**Build:** ✅ Limpio  
+**Lint:** ✅ Sin errores  
+**Páginas validadas:** 8/8
+
+---
+
+# CSS Modularization — 2026-05-04
+
+## Antes
+- `src/index.css`: ~1,900 líneas monolíticas (~50.34 KB post-build)
+- `src/styles/homepage.css`: 200 líneas (dropdowns, mobile accordion, machinery gallery)
+- Dead code: enhanced footer variant (~150 líneas no referenciadas en ningún HTML)
+
+## Después
+| Módulo | Líneas | KB | Contenido |
+|--------|--------|-----|-----------|
+| `src/index.css` | 11 | 0.7 | Entry point (6 `@import`s) |
+| `src/styles/base.css` | ~155 | 5.2 | Tokens, reset, a11y, animations, print |
+| `src/styles/layout.css` | ~260 | 8.9 | Topbar, nav, mobile menu, footer, WA, back-to-top |
+| `src/styles/components.css` | ~340 | 11.5 | Buttons, cards, forms, modal, accordion, filters, pagination |
+| `src/styles/home.css` | ~510 | 17.2 | Hero, stats, products, services, CTA, why, gallery, testimonials, contact |
+| `src/styles/pages.css` | ~320 | 10.9 | Page headers, pcat, specs, duo, clients, MVV, projects, legal |
+| `src/styles/homepage.css` | 200 | 7.0 | Nav dropdowns, mobile accordion, machinery gallery, PDF buttons |
+
+**Total post-build:** ~48.00 KB (reducción de ~2.3 KB tras eliminar dead code)
+
+## Principios aplicados
+1. **Orden de cascada:** base → layout → components → pages → homepage-specific
+2. **Sin cambios en HTML:** todas las páginas siguen importando `src/index.css`
+3. **Dead code eliminado:** se removió la variante de footer `.footer`/`.footer-inner` no utilizada
+4. **Sin duplicaciones problemáticas:** selectores compartidos (`.proj-img`, `.gitem`) mantienen el comportamiento de cascada original

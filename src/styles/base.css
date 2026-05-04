@@ -1,0 +1,170 @@
+/* ═══════════════════════════════════════════════════════════
+   INGENIERÍA VIAL TEPATE — BASE / DESIGN TOKENS / RESET
+   No glow. No shadows. No rounded corners. Hard edges only.
+   ═══════════════════════════════════════════════════════════ */
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;border-radius:0!important}
+
+:root{
+  /* Core palette */
+  --neon:#E1FF00;          /* Reflective Road Sign Yellow-Green */
+  --neon-dim:#C8E500;      /* Dimmer reflective yellow for hover states */
+  --black:#000000;         /* Pure black background */
+  --asphalt:#0A0A0A;       /* Dark asphalt grey */
+  --coal:#0F0F0F;          /* Slightly lifted surface */
+  --char:#141414;          /* Card surfaces */
+  --concrete:#1A1A1A;      /* Borders & dividers heavy */
+  --steel:#262626;         /* Border medium */
+  --rule:#1F1F1F;          /* Subtle rule */
+  --mist:#777777;          /* Muted text */
+  --bone:#CCCCCC;          /* Body text — off-white */
+  --white:#F2F2F2;         /* Headlines */
+
+  --fd:'Barlow Condensed',sans-serif;
+  --fb:'Barlow',sans-serif;
+  --fm:'IBM Plex Mono',monospace;
+}
+
+html{scroll-behavior:smooth}
+body{
+  background:var(--black);
+  color:var(--bone);
+  font-family:var(--fb);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Selection */
+::selection{background:var(--neon);color:var(--black)}
+
+/* ── AUDIT: ACCESSIBILITY (a11y) ─────────────────────── */
+/* Brutalist focus states: zero rounded corners, hard lines */
+:focus-visible {
+  outline: 3px solid var(--neon) !important;
+  outline-offset: 2px !important;
+  box-shadow: none !important;
+}
+
+/* ── AUDIT: CORE WEB VITALS (CLS) ────────────────────── */
+/* Prevention of Cumulative Layout Shift for multimedia containers */
+.gitem, .proj-img, .hprod-ico, .svc-ico, .mvv-ico, .cicon {
+  aspect-ratio: 1 / 1;
+  background: var(--coal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.proj-img {
+  aspect-ratio: 16 / 9;
+}
+
+/* Ensure images don't shift layout */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Animations — reserved & functional only ─────────── */
+@keyframes stripe{from{background-position:0 0}to{background-position:56px 0}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── Industrial image treatment ──────────────────────── */
+.industrial-img{
+  filter:grayscale(100%) contrast(1.05);
+  transition:filter .35s ease;
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.industrial-img:hover,
+*:hover > .industrial-img{
+  filter:grayscale(0%) contrast(1);
+}
+
+/* ── Section base spacing ────────────────────────────── */
+section{padding:64px 20px}
+@media(min-width:768px){section{padding:80px 40px}}
+@media(min-width:1024px){section{padding:96px 80px}}
+
+.sec-tag{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--fm);font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--neon);margin-bottom:14px;font-weight:600;
+}
+.sec-tag::before{content:'';display:block;width:24px;height:2px;background:var(--neon)}
+.sec-h2{
+  font-family:var(--fd);
+  font-size:clamp(32px,6vw,56px);font-weight:900;
+  text-transform:uppercase;line-height:.94;letter-spacing:-.5px;
+  margin-bottom:12px;color:var(--white);
+}
+
+/* ===== SKIP LINK ===== */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--neon);
+  color: var(--black);
+  font-family: var(--fm);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 10px 16px;
+  text-decoration: none;
+  z-index: 10000;
+  border: none;
+  border-radius: 0;
+  transition: top 0.15s;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid var(--neon);
+  outline-offset: 2px;
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  .skip-link, .wa, .back-to-top, .ham, .mobile-menu, .nav-drop-trigger .chev {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  a {
+    color: #000 !important;
+    text-decoration: underline !important;
+  }
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 10px;
+    word-break: break-all;
+  }
+  a[href^="javascript:"]::after,
+  a[href^="#"]::after,
+  a[href^="tel:"]::after,
+  a[href^="mailto:"]::after {
+    content: "" !important;
+  }
+  nav, footer, .topbar {
+    background: #fff !important;
+    border-color: #ccc !important;
+  }
+}
