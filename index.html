@@ -144,41 +144,84 @@
     </div>
   </div>
   <div class="hero-right">
-    <div class="hero-grid">
-      <a href="productos.html#calderas" class="hprod">
-        <div class="hprod-ico"><svg width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Ícono caldera termoplástica"><rect x="3" y="6" width="14" height="12"/><path d="M17 9h4v6h-4"/><line x1="6" y1="6" x2="6" y2="3"/><line x1="10" y1="6" x2="10" y2="3"/></svg></div>
-        <div class="hprod-name">Calderas Termoplásticas</div>
-        <div class="hprod-sub">400kg · 500kg · 1,000kg · 2,000kg</div>
-      </a>
-      <a href="productos.html#horizontal" class="hprod">
-        <div class="hprod-ico"><svg width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Ícono señalamiento horizontal"><path d="M3 19h18M3 15h18"/><line x1="6" y1="11" x2="18" y2="11"/></svg></div>
-        <div class="hprod-name">Señalamiento Horizontal</div>
-        <div class="hprod-sub">Termoplástica AASHTO · SCT</div>
-      </a>
-      <a href="productos.html#vertical" class="hprod">
-        <div class="hprod-ico"><svg width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Ícono señalamiento vertical"><polygon points="12 3 21 12 12 21 3 12"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="16" r=".7" fill="#39FF14" stroke="none"/></svg></div>
-        <div class="hprod-name">Señalamiento Vertical</div>
-        <div class="hprod-sub">Bajo · Elevado · SR / SP / SIS</div>
-      </a>
-      <a href="productos.html#confinamiento" class="hprod">
-        <div class="hprod-ico"><svg width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Ícono boyas y trafitambos"><polygon points="12 4 20 20 4 20"/><line x1="7" y1="14" x2="17" y2="14"/></svg></div>
-        <div class="hprod-name">Protección de Obra</div>
-        <div class="hprod-sub">Boyas · Trafitambos · Barreras</div>
-      </a>
-      <a href="productos.html#remolques" class="hprod">
-        <div class="hprod-ico"><svg width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Ícono remolques"><rect x="2" y="8" width="20" height="10"/><circle cx="7" cy="20" r="2"/><circle cx="17" cy="20" r="2"/><path d="M5 8V5h14v3"/></svg></div>
-        <div class="hprod-name">Remolques</div>
-        <div class="hprod-sub">3.5 ton · 5.0 ton · Sobre remolque</div>
-      </a>
-      <a href="servicios.html#ciclovias" class="hprod">
-        <div class="hprod-ico"><svg width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Ícono ciclovías"><circle cx="5" cy="18" r="3"/><circle cx="19" cy="18" r="3"/><polyline points="10 4 6 18"/><path d="M6 6l8 4-3.5 6"/><line x1="15" y1="7" x2="19" y2="18"/></svg></div>
-        <div class="hprod-name">Ciclovías</div>
-        <div class="hprod-sub">Delineadores · Señalética · Diseño</div>
-      </a>
-    </div>
-    <div class="hero-badge">
-      <div class="hb-n">16+</div>
-      <div class="hb-l">Años de<br>experiencia</div>
+    <!-- Imagen de fondo con overlay -->
+    <div class="hero-visual">
+      <img src="/TEPATE_Imagenes_Organizadas/24_Senalamiento_Vertical_SID15/slide31_Senalamiento_Vertical_Elevado_SID15_img3.webp"
+           alt="Señalamiento vertical elevado SID-13 en carretera federal de Nuevo León"
+           class="hero-bg-img" fetchpriority="high" decoding="async" width="800" height="600">
+      <div class="hero-visual-overlay"></div>
+
+      <!-- SVG decorativo: Paisaje Industrial Regio -->
+      <svg class="hero-svg-landscape" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="mntGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1a1a1a"/>
+            <stop offset="100%" stop-color="#0a0a0a"/>
+          </linearGradient>
+        </defs>
+        <!-- Montañas estilo Cerro de la Silla -->
+        <path d="M0,380 L80,260 L140,320 L200,180 L280,240 L340,140 L420,220 L500,120 L580,200 L660,100 L720,180 L800,140 L800,500 L0,500 Z" fill="url(#mntGrad)" stroke="#E1FF00" stroke-width="1.5" stroke-opacity="0.15"/>
+        <!-- Segunda capa montañas -->
+        <path d="M0,420 L60,340 L120,380 L180,280 L260,330 L320,250 L400,310 L480,230 L560,290 L640,210 L720,270 L800,240 L800,500 L0,500 Z" fill="#0d0d0d" stroke="#E1FF00" stroke-width="1" stroke-opacity="0.08"/>
+        <!-- Carretera en perspectiva -->
+        <line x1="400" y1="320" x2="400" y2="500" stroke="#E1FF00" stroke-width="2" stroke-opacity="0.25"/>
+        <line x1="360" y1="340" x2="320" y2="500" stroke="#E1FF00" stroke-width="1" stroke-opacity="0.12"/>
+        <line x1="440" y1="340" x2="480" y2="500" stroke="#E1FF00" stroke-width="1" stroke-opacity="0.12"/>
+        <!-- Líneas discontinuas carretera -->
+        <line x1="400" y1="360" x2="400" y2="380" stroke="#E1FF00" stroke-width="3" stroke-opacity="0.4"/>
+        <line x1="400" y1="400" x2="400" y2="420" stroke="#E1FF00" stroke-width="3" stroke-opacity="0.4"/>
+        <line x1="400" y1="440" x2="400" y2="460" stroke="#E1FF00" stroke-width="3" stroke-opacity="0.4"/>
+        <line x1="400" y1="480" x2="400" y2="500" stroke="#E1FF00" stroke-width="3" stroke-opacity="0.4"/>
+        <!-- Poste señalamiento -->
+        <rect x="520" y="200" width="4" height="180" fill="#E1FF00" fill-opacity="0.15"/>
+        <rect x="510" y="200" width="24" height="32" fill="none" stroke="#E1FF00" stroke-width="1.5" stroke-opacity="0.3"/>
+        <polygon points="522,210 528,216 522,222" fill="#E1FF00" fill-opacity="0.4"/>
+        <!-- Guardarraíl -->
+        <line x1="0" y1="420" x2="800" y2="420" stroke="#E1FF00" stroke-width="1" stroke-opacity="0.1"/>
+        <line x1="0" y1="425" x2="800" y2="425" stroke="#E1FF00" stroke-width="0.5" stroke-opacity="0.06"/>
+        <!-- Líneas de dimensión tipo plano -->
+        <line x1="50" y1="100" x2="50" y2="140" stroke="#E1FF00" stroke-width="0.5" stroke-opacity="0.1"/>
+        <line x1="45" y1="105" x2="55" y2="105" stroke="#E1FF00" stroke-width="0.5" stroke-opacity="0.1"/>
+        <line x1="45" y1="135" x2="55" y2="135" stroke="#E1FF00" stroke-width="0.5" stroke-opacity="0.1"/>
+        <text x="60" y="125" font-family="IBM Plex Mono, monospace" font-size="8" fill="#E1FF00" fill-opacity="0.15">MTY</text>
+        <!-- Estrellas / reflectores -->
+        <circle cx="150" cy="80" r="1" fill="#E1FF00" fill-opacity="0.3"/>
+        <circle cx="350" cy="60" r="1.5" fill="#E1FF00" fill-opacity="0.2"/>
+        <circle cx="650" cy="90" r="1" fill="#E1FF00" fill-opacity="0.25"/>
+        <circle cx="750" cy="50" r="1" fill="#E1FF00" fill-opacity="0.15"/>
+      </svg>
+
+      <!-- Video placeholder (listo para reemplazar src cuando haya video real) -->
+      <video class="hero-video" autoplay muted loop playsinline poster="/TEPATE_Imagenes_Organizadas/24_Senalamiento_Vertical_SID15/slide31_Senalamiento_Vertical_Elevado_SID15_img3.webp">
+        <!-- Cuando tengas un video de obra, reemplaza el poster y descomenta:
+        <source src="/video-hero-obra.mp4" type="video/mp4">
+        -->
+        Tu navegador no soporta video HTML5.
+      </video>
+
+      <!-- Stats flotantes -->
+      <div class="hero-float-stats">
+        <div class="hfs-item">
+          <span class="hfs-n">16+</span>
+          <span class="hfs-l">Años</span>
+        </div>
+        <div class="hfs-divider"></div>
+        <div class="hfs-item">
+          <span class="hfs-n">500+</span>
+          <span class="hfs-l">Proyectos</span>
+        </div>
+        <div class="hfs-divider"></div>
+        <div class="hfs-item">
+          <span class="hfs-n">32</span>
+          <span class="hfs-l">Estados</span>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="hero-scroll" aria-hidden="true">
+        <span class="hero-scroll-l">Explorar</span>
+        <div class="hero-scroll-line"></div>
+      </div>
     </div>
   </div>
 </section>
