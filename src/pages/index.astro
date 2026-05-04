@@ -1,0 +1,71 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import ContactForm from '@/components/ContactForm.tsx';
+import { buildSeo, buildLocalBusinessJsonLd } from '@/lib/seo';
+import { COMPANY } from '@/data/navigation';
+
+const seo = buildSeo({
+  title: 'INGENIERÍA VIAL TEPATE — Fomentando la Cultura Vial y sus Valores',
+  description:
+    'Fabricación e instalación de calderas termoplásticas, señalamiento horizontal y vertical, dispositivos de protección y equipos solares. Cumplimiento SCT N-CMT-5-001-13 y ASTM. Envíos en todo México.',
+  canonical: `${COMPANY.url}/`,
+  jsonLd: buildLocalBusinessJsonLd(),
+});
+---
+
+<Layout {...seo}>
+  <section class="relative min-h-[70vh] flex items-center px-4 md:px-8 py-24 border-b border-steel">
+    <div class="max-w-screen-2xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <p class="font-mono text-xs uppercase tracking-widest text-neon mb-6">
+          16 años · SCT N-CMT-5-001-13 · ASTM
+        </p>
+        <h1 class="font-display font-bold text-white text-display-xl uppercase leading-[0.95]">
+          Fomentando la Cultura Vial<br />
+          <span class="text-neon">y sus Valores.</span>
+        </h1>
+        <p class="font-sans text-bone text-base md:text-lg mt-6 max-w-xl leading-relaxed">
+          Fabricación e instalación de calderas termoplásticas, señalamiento horizontal
+          y vertical, dispositivos de protección y equipos solares. Envíos a todo México.
+        </p>
+        <div class="flex flex-wrap gap-3 mt-8">
+          <a
+            href="/contacto"
+            class="inline-flex items-center gap-2 bg-neon text-black hover:bg-neonDim font-mono text-sm uppercase tracking-widest font-bold px-6 py-4 transition-colors duration-200 ease-brand rounded-btn"
+          >
+            Solicitar cotización →
+          </a>
+          <a
+            href="/calderas-termoplasticas-tepate.pdf"
+            download
+            class="inline-flex items-center gap-2 border-2 border-steel text-bone hover:border-neon hover:text-neon font-mono text-sm uppercase tracking-widest px-6 py-4 transition-colors duration-200 ease-brand"
+          >
+            Descargar Catálogo
+          </a>
+        </div>
+      </div>
+      <aside class="hidden lg:block bg-char border-2 border-steel p-8">
+        <p class="font-mono text-xs uppercase tracking-widest text-mist mb-2">Contacto directo</p>
+        <p class="font-display font-bold text-white text-3xl">{COMPANY.phoneDisplay}</p>
+        <p class="font-mono text-xs uppercase tracking-widest text-mist mt-6 mb-2">Correo</p>
+        <p class="text-bone break-all">{COMPANY.email}</p>
+        <p class="font-mono text-xs uppercase tracking-widest text-mist mt-6 mb-2">Horario</p>
+        <p class="text-bone">L–V {COMPANY.hours.weekdays}</p>
+        <p class="text-bone">Sáb {COMPANY.hours.saturday}</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="px-4 md:px-8 py-24" aria-labelledby="contacto-heading">
+    <div class="max-w-screen-md mx-auto">
+      <p class="font-mono text-xs uppercase tracking-widest text-neon mb-3">Contáctanos</p>
+      <h2 id="contacto-heading" class="font-display font-bold text-white text-display-md uppercase mb-3">
+        Cuéntanos tu proyecto
+      </h2>
+      <p class="text-bone mb-10">
+        Respondemos en menos de 24 horas hábiles. Sin spam, sin compromiso.
+      </p>
+      <ContactForm client:visible />
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,88 @@
+---
+import type { SEOMeta } from '@/types';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import '@/styles/global.css';
+
+interface Props extends SEOMeta {
+  currentPath?: string;
+  bodyClass?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage,
+  ogType = 'website',
+  locale = 'es_MX',
+  jsonLd,
+  currentPath = Astro.url.pathname,
+  bodyClass = '',
+} = Astro.props;
+
+const FONTS_HREF =
+  'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Barlow:wght@400;600;900&family=IBM+Plex+Mono:wght@400;600;700&display=swap';
+---
+
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#c8f031" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={locale} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href={FONTS_HREF} />
+    <link rel="stylesheet" media="print" href={FONTS_HREF} onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href={FONTS_HREF} /></noscript>
+
+    {
+      jsonLd && (
+        <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+      )
+    }
+  </head>
+  <body
+    class:list={[
+      'bg-black text-bone font-sans antialiased min-h-screen flex flex-col',
+      bodyClass,
+    ]}
+  >
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-neon focus:text-black focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:uppercase focus:tracking-widest"
+    >
+      Saltar al contenido principal
+    </a>
+
+    <slot name="header"><Header currentPath={currentPath} /></slot>
+
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+
+    <slot name="footer"><Footer /></slot>
+  </body>
+</html>
