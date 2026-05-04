@@ -1,3 +1,5 @@
+@import "./styles/homepage.css";
+
 /* ═══════════════════════════════════════════════════════════
    INGENIERÍA VIAL TEPATE — INDUSTRIAL BRUTALIST
    No glow. No shadows. No rounded corners. Hard edges only.
@@ -7,8 +9,8 @@
 
 :root{
   /* Core palette */
-  --neon:#ffff05;          /* Industrial Traffic Yellow */
-  --neon-dim:#e5e504;      /* Dimmer yellow for hover states */
+  --neon:#E1FF00;          /* Reflective Road Sign Yellow-Green */
+  --neon-dim:#C8E500;      /* Dimmer reflective yellow for hover states */
   --black:#000000;         /* Pure black background */
   --asphalt:#0A0A0A;       /* Dark asphalt grey */
   --coal:#0F0F0F;          /* Slightly lifted surface */
@@ -1270,8 +1272,9 @@ footer{
 @media(min-width:1024px){.spec-grid{grid-template-columns:repeat(3,1fr)}}
 
 .spec{
-  background:var(--coal);padding:32px 24px;
-  display:flex;flex-direction:column;gap:12px;
+  background:var(--coal);
+  display:flex;flex-direction:column;
+  overflow:hidden;
   transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);
   border-bottom: 3px solid transparent;
 }
@@ -1282,6 +1285,26 @@ footer{
   box-shadow: 0 12px 24px rgba(0,0,0,0.6);
   z-index: 1;
 }
+.spec-photo{
+  width:100%;
+  aspect-ratio:4/3;
+  background:var(--asphalt);
+  overflow:hidden;
+  position:relative;
+  border-bottom:1px solid var(--steel);
+}
+.spec-photo img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .4s ease;
+}
+.spec:hover .spec-photo img{transform:scale(1.06)}
+.spec-info{
+  display:flex;flex-direction:column;gap:10px;
+  padding:20px 18px 24px;
+}
+@media(min-width:768px){.spec-info{padding:24px 22px 28px;gap:12px}}
 .spec-model{
   font-family:var(--fm);font-size:10px;letter-spacing:2px;
   text-transform:uppercase;color:var(--neon);font-weight:600;
@@ -1293,6 +1316,7 @@ footer{
 .spec-rule{width:32px;height:2px;background:var(--neon);margin:4px 0}
 .spec-list{
   display:flex;flex-direction:column;gap:8px;margin-top:4px;
+  padding-left:0;
 }
 .spec-list li{
   font-family:var(--fm);font-size:11px;letter-spacing:.3px;
@@ -1545,14 +1569,17 @@ footer{
 .modal-content {
   background: var(--coal);
   border: 1px solid var(--neon);
-  width: 90%;
+  width: 92%;
   max-width: 800px;
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
   transform: translateY(20px);
   transition: transform 0.3s ease;
-  padding: 40px;
+  padding: 24px 20px;
+}
+@media(min-width:768px){
+  .modal-content{width:90%;padding:40px}
 }
 .modal-overlay.active .modal-content {
   transform: translateY(0);
@@ -1573,13 +1600,15 @@ footer{
 }
 .modal-title {
   font-family: var(--fd);
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 900;
   text-transform: uppercase;
   color: var(--white);
   margin-bottom: 10px;
   line-height: 1.1;
+  padding-right: 36px;
 }
+@media(min-width:768px){.modal-title{font-size:32px;padding-right:0}}
 .modal-subtitle {
   font-family: var(--fm);
   font-size: 12px;
@@ -1626,13 +1655,6 @@ footer{
   font-size: 16px;
   color: var(--white);
 }
-.modal-actions {
-  display: flex;
-  gap: 16px;
-  margin-top: 30px;
-  border-top: 1px solid var(--steel);
-  padding-top: 24px;
-}
 .product-trigger {
   cursor: pointer;
   position: relative;
@@ -1640,17 +1662,177 @@ footer{
 .product-trigger::after {
   content: 'VER DETALLES ↗';
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 12px;
+  right: 12px;
   background: var(--neon);
   color: var(--black);
   font-family: var(--fm);
   font-size: 10px;
-  padding: 4px 8px;
-  font-weight: bold;
-  opacity: 0;
-  transition: opacity 0.2s;
+  letter-spacing: .5px;
+  padding: 5px 9px;
+  font-weight: 700;
+  opacity: .9;
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 2;
+  pointer-events: none;
 }
-.product-trigger:hover::after {
+.product-trigger:hover::after,
+.product-trigger:focus-visible::after {
   opacity: 1;
+  transform: translateY(-2px);
 }
+
+/* ── ENHANCED FOOTER (Gallery page compatible) ─────────────────────────────────────────── */
+.footer {
+  background: var(--asphalt);
+  border-top: 1px solid var(--steel);
+  padding: 0;
+}
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  padding: 60px 20px;
+}
+@media(min-width:640px) {
+  .footer-inner {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 60px 40px;
+  }
+}
+@media(min-width:1024px) {
+  .footer-inner {
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding: 72px 80px;
+  }
+}
+.f-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.f-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  margin-bottom: 8px;
+}
+.f-logo img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+.f-logo span {
+  font-family: var(--fd);
+  font-size: 24px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--white);
+  letter-spacing: 0.5px;
+}
+.f-desc {
+  font-size: 13px;
+  color: var(--mist);
+  line-height: 1.65;
+  max-width: 280px;
+}
+.f-title {
+  font-family: var(--fm);
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--neon);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.f-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.f-links li a {
+  font-family: var(--fd);
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--mist);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.f-links li a:hover {
+  color: var(--neon);
+}
+.f-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.f-contact li {
+  font-size: 13px;
+  color: var(--bone);
+  line-height: 1.4;
+}
+.f-lbl {
+  font-family: var(--fm);
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--mist);
+  text-transform: uppercase;
+  margin-right: 6px;
+}
+.footer-bottom {
+  background: var(--black);
+  border-top: 1px solid var(--steel);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  text-align: center;
+}
+@media(min-width:768px) {
+  .footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 18px 40px;
+    text-align: left;
+  }
+}
+@media(min-width:1024px) {
+  .footer-bottom {
+    padding: 20px 80px;
+  }
+}
+.footer-bottom p {
+  font-family: var(--fm);
+  font-size: 11px;
+  color: #3a3a3a;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+.f-legal {
+  display: flex;
+  gap: 16px;
+}
+.f-legal a {
+  font-family: var(--fm);
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--mist);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.f-legal a:hover {
+  color: var(--neon);
+}
+.nav-drop-trigger{background:none;border:0;color:inherit;font:inherit;text-transform:uppercase}.nav-has-dropdown.is-open>.nav-dropdown-panel,.nav-has-dropdown.is-open .nav-sub-panel{display:flex}

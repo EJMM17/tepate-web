@@ -14,6 +14,7 @@ export default defineConfig({
         nosotros:       path.resolve(__dirname, 'nosotros.html'),
         contacto:       path.resolve(__dirname, 'contacto.html'),
         avisoPrivacidad: path.resolve(__dirname, 'aviso-privacidad.html'),
+        notFound:        path.resolve(__dirname, '404.html'),
       },
     },
   },

@@ -131,11 +131,11 @@
         3. Reemplaza "REEMPLAZAR_CON_ENDPOINT_FORMSPREE" abajo
       -->
       <form action="https://formspree.io/f/mojybndb" method="POST" id="contactForm" novalidate>
-        <div style="margin-bottom:16px"><label class="flabel" for="nombre">Nombre completo <span class="req-star">*</span></label><input class="finput" type="text" id="nombre" name="nombre" required placeholder="Ing. Juan Martínez" autocomplete="name"></div>
+        <div style="margin-bottom:16px"><label class="flabel" for="nombre">Nombre completo <span class="req-star">*</span></label><input class="finput" type="text" id="nombre" name="nombre" required placeholder="Ing. Juan Martínez" autocomplete="name"><small id="nombre-error"></small></div>
         <div style="margin-bottom:16px"><label class="flabel" for="empresa">Empresa o constructora</label><input class="finput" type="text" id="empresa" name="empresa" placeholder="Constructora ABC S.A. de C.V." autocomplete="organization"></div>
         <div class="form-row" style="margin-bottom:16px">
-          <div><label class="flabel" for="email">Correo electrónico <span class="req-star">*</span></label><input class="finput" type="email" id="email" name="email" required placeholder="juan@empresa.com" autocomplete="email"></div>
-          <div><label class="flabel" for="telefono">Teléfono <span class="req-star">*</span></label><input class="finput" type="tel" id="telefono" name="telefono" required placeholder="81 1234 5678" autocomplete="tel"></div>
+          <div><label class="flabel" for="email">Correo electrónico <span class="req-star">*</span></label><input class="finput" type="email" id="email" name="email" required placeholder="juan@empresa.com" autocomplete="email"><small id="email-error"></small></div>
+          <div><label class="flabel" for="telefono">Teléfono <span class="req-star">*</span></label><input class="finput" type="tel" id="telefono" name="telefono" required placeholder="81 1234 5678" autocomplete="tel"><small id="telefono-error"></small></div>
         </div>
         <div style="margin-bottom:16px"><label class="flabel" for="tipo_proyecto">Tipo de proyecto</label>
           <select class="finput" id="tipo_proyecto" name="tipo_proyecto">
@@ -150,7 +150,8 @@
             <option>Otro</option>
           </select>
         </div>
-        <div style="margin-bottom:20px"><label class="flabel" for="mensaje">Detalle del proyecto o lista de productos <span class="req-star">*</span></label><textarea class="finput" id="mensaje" name="mensaje" required placeholder="Ej: 1 caldera termoplástica de 1,000 kg sobre remolque 3.5 ton, motor Kohler. Entrega en Monterrey, NL. Plazo deseado: 45 días."></textarea></div>
+        <div style="margin-bottom:20px"><label class="flabel" for="mensaje">Detalle del proyecto o lista de productos <span class="req-star">*</span></label><textarea class="finput" id="mensaje" name="mensaje" required placeholder="Ej: 1 caldera termoplástica de 1,000 kg sobre remolque 3.5 ton, motor Kohler. Entrega en Monterrey, NL. Plazo deseado: 45 días."></textarea><small id="mensaje-error"></small></div>
+        <div id="formErrorSummary" role="alert" aria-live="assertive"></div>
         <div class="form-error" id="formError">⚠ Por favor, completa todos los campos obligatorios marcados con <span class="req-star">*</span>.</div>
         <div class="form-success" id="formSuccess">✓ Mensaje enviado correctamente. Te contactaremos en menos de 24 horas.</div>
         <button type="submit" class="btn-primary" style="cursor:pointer;width:100%;text-align:center">Enviar solicitud &rarr;</button>
@@ -241,58 +242,6 @@
   </div>
 </div>
 
-<!-- Form validation -->
-<script>
-(function(){
-  var form = document.getElementById('contactForm');
-  if(!form) return;
-  var err = document.getElementById('formError');
-  var suc = document.getElementById('formSuccess');
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var nombre = form.querySelector('#nombre').value.trim();
-    var email = form.querySelector('#email').value.trim();
-    var telefono = form.querySelector('#telefono').value.trim();
-    var mensaje = form.querySelector('#mensaje').value.trim();
-    var emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if(!nombre || !email || !telefono || !mensaje || !emailRx.test(email)){
-      err.style.display = 'block';
-      suc.style.display = 'none';
-      return;
-    }
-    err.style.display = 'none';
-    var btn = form.querySelector('[type=submit]');
-    btn.disabled = true;
-    btn.textContent = 'Enviando...';
-    fetch(form.action, {
-      method: 'POST',
-      headers: {'Accept':'application/json','Content-Type':'application/json'},
-      body: JSON.stringify({
-        nombre: nombre,
-        empresa: form.querySelector('#empresa').value.trim(),
-        email: email,
-        telefono: telefono,
-        tipo_proyecto: form.querySelector('#tipo_proyecto').value,
-        mensaje: mensaje
-      })
-    }).then(function(r){ return r.json(); })
-    .then(function(data){
-      if(data.ok){
-        suc.style.display = 'block';
-        form.reset();
-      } else {
-        err.style.display = 'block';
-      }
-      btn.disabled = false;
-      btn.textContent = 'Enviar solicitud →';
-    }).catch(function(){
-      err.style.display = 'block';
-      btn.disabled = false;
-      btn.textContent = 'Enviar solicitud →';
-    });
-  });
-})();
-</script>
 
 <!-- WhatsApp -->
 <a href="https://wa.me/528118959042" class="wa" title="WhatsApp" aria-label="Contactar por WhatsApp">
@@ -302,5 +251,6 @@
 <!-- Back to Top -->
 <button id="back-to-top" class="back-to-top" aria-label="Volver arriba">↑</button>
 
+<script type="module" src="/src/main.ts"></script>
 </body>
 </html>
