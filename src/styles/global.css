@@ -1,5 +1,10 @@
 @import "tailwindcss";
 @config "../../tailwind.config.mjs";
+@import "./base.css";
+@import "./layout.css";
+@import "./components.css";
+@import "./home.css";
+@import "./pages.css";
 
 @layer base {
   *,

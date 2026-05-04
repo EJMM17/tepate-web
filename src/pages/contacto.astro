@@ -1,0 +1,119 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { buildSeo, buildLocalBusinessJsonLd, buildBreadcrumbJsonLd } from '@/lib/seo';
+import { COMPANY } from '@/data/navigation';
+import ContactForm from '@/components/ContactForm';
+
+const seo = buildSeo({
+  title: 'Contacto — Ingeniería Vial TEPATE',
+  description:
+    'Solicita tu cotización de calderas termoplásticas, señalamiento vial o estudios de ingeniería. Respuesta en 24 horas. Envíos a todo México.',
+  canonical: `${COMPANY.url}/contacto`,
+  ogImage:
+    'https://tepate.com.mx/TEPATE_Imagenes_Organizadas/08_Maquinas_Aplicadoras/slide10_Maquinas_Aplicadoras_img1.webp',
+  jsonLd: [
+    buildLocalBusinessJsonLd(),
+    buildBreadcrumbJsonLd([
+      { name: 'Inicio', url: COMPANY.url },
+      { name: 'Contacto', url: `${COMPANY.url}/contacto` },
+    ]),
+  ],
+});
+---
+
+<Layout {...seo}>
+  <section class="page-header">
+    <div class="ph-inner">
+      <div class="ph-crumb"><a href="/">Inicio</a><span>/</span>Contacto</div>
+      <h1 class="ph-title">SOLICITA TU <span class="acc">COTIZACIÓN</span></h1>
+      <p class="ph-lead">
+        Respuesta en menos de 24 horas hábiles. Atendemos clientes estatales, municipales e
+        iniciativa privada en todo México. Envíanos los detalles de tu proyecto y uno de nuestros
+        ingenieros te contactará directamente.
+      </p>
+    </div>
+  </section>
+
+  <section class="pcat" id="formulario">
+    <div class="contact-page-grid">
+      <div class="cform">
+        <div class="sec-tag" style="margin-bottom:20px">Formulario de contacto</div>
+        <ContactForm client:visible />
+      </div>
+
+      <div class="cinfo">
+        <div>
+          <div class="sec-tag" style="margin-bottom:10px">Datos de contacto directo</div>
+          <p style="font-size:14px;color:var(--mist);line-height:1.75">
+            Nuestro equipo responde en menos de 24 horas hábiles. Para proyectos urgentes o
+            licitaciones con cierre próximo, contáctanos directamente por teléfono o WhatsApp.
+          </p>
+        </div>
+
+        <div class="citem">
+          <div class="cicon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="clabel">Ubicación</div>
+            <div class="cval">
+              {COMPANY.address.streetAddress}, N.L.<br />
+              Área Metropolitana de Monterrey<br />
+              C.P. {COMPANY.address.postalCode} · {COMPANY.address.addressCountry}
+            </div>
+          </div>
+        </div>
+
+        <div class="citem">
+          <div class="cicon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="clabel">Teléfonos</div>
+            <div class="cval neon">(81) 8453-2875</div>
+            <div class="cval neon">(811) 895-9042</div>
+            <div class="cval neon">(811) 566-5290</div>
+          </div>
+        </div>
+
+        <div class="citem">
+          <div class="cicon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="clabel">Correo</div>
+            <div class="cval">ventas_tepate@outlook.com</div>
+            <div class="cval">admon_facturacion@outlook.com</div>
+          </div>
+        </div>
+
+        <div class="citem">
+          <div class="cicon">
+            <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.85 11.85 0 0 0 12.06 0C5.42 0 .05 5.37.05 12c0 2.1.56 4.15 1.62 5.97L0 24l6.2-1.62A11.93 11.93 0 0 0 12.06 24C18.7 24 24.07 18.63 24.07 12a11.85 11.85 0 0 0-3.55-8.52z"/></svg>
+          </div>
+          <div>
+            <div class="clabel">WhatsApp directo</div>
+            <div class="cval neon">
+              <a href="https://wa.me/528118959042" style="color:var(--neon);text-decoration:none;border-bottom:1px solid var(--steel)">
+                +52 811 895 9042
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="citem">
+          <div class="cicon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="clabel">Horario</div>
+            <div class="cval">
+              Lun — Vie {COMPANY.hours.weekdays}<br />
+              Sáb {COMPANY.hours.saturday}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

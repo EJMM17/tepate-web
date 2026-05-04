@@ -1,0 +1,168 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { buildSeo, buildBreadcrumbJsonLd } from '@/lib/seo';
+import { COMPANY } from '@/data/navigation';
+
+const seo = buildSeo({
+  title: 'Proyectos — Ingeniería Vial TEPATE',
+  description:
+    'Portafolio de obra TEPATE: Aeropuerto Monterrey, parques industriales, carreteras federales, obras municipales. Más de 500 proyectos entregados en 16 años.',
+  canonical: `${COMPANY.url}/proyectos`,
+  ogImage: 'https://tepate.com.mx/proyectos_nuevos/obra_nocturna_carretera.webp',
+  jsonLd: buildBreadcrumbJsonLd([
+    { name: 'Inicio', url: COMPANY.url },
+    { name: 'Proyectos', url: `${COMPANY.url}/proyectos` },
+  ]),
+});
+
+const brands = [
+  { src: '/TEPATE_Marcas/Principales_Clientes/GP_Construccion.webp', alt: 'GP Construcción', name: 'GP CONSTRUCCIÓN' },
+  { src: '/TEPATE_Marcas/Principales_Clientes/IDEI_Construyendo_Mexico.webp', alt: 'IDEI', name: 'IDEI' },
+  { src: '/TEPATE_Marcas/Laminas_Senalamiento/3M.webp', alt: '3M', name: '3M' },
+  { src: '/TEPATE_Marcas/Laminas_Senalamiento/Avery_Dennison.png', alt: 'Avery Dennison', name: 'AVERY DENNISON' },
+  { src: '/TEPATE_Marcas/Laminas_Senalamiento/Ennis_Flint.webp', alt: 'Ennis-Flint', name: 'ENNIS-FLINT' },
+  { src: '/TEPATE_Marcas/Materiales_Termoplasticos/Dynakrom.png', alt: 'Dynakrom', name: 'DYNAKROM' },
+  { src: '/TEPATE_Marcas/Materiales_Termoplasticos/SWARCO_Road_Marking.webp', alt: 'SWARCO', name: 'SWARCO' },
+  { src: '/TEPATE_Marcas/Materiales_Termoplasticos/Crown_Technology.webp', alt: 'Crown Technology', name: 'CROWN TECHNOLOGY' },
+  { src: '/TEPATE_Marcas/Materiales_Termoplasticos/Voller.png', alt: 'Voller', name: 'VOLLER' },
+  { src: '/TEPATE_Marcas/Materiales_Termoplasticos/Comex_Termoplastico.webp', alt: 'Comex', name: 'COMEX' },
+  { src: '/TEPATE_Marcas/Componentes_Calderas/Kohler_motores.webp', alt: 'Kohler', name: 'KOHLER' },
+  { src: '/TEPATE_Marcas/Componentes_Calderas/Continental.png', alt: 'Continental', name: 'CONTINENTAL' },
+  { src: '/TEPATE_Marcas/Componentes_Calderas/Vickers_hidraulica.png', alt: 'Vickers', name: 'VICKERS' },
+  { src: '/TEPATE_Marcas/Componentes_Calderas/Parker_Hannifin.webp', alt: 'Parker Hannifin', name: 'PARKER HANNIFIN' },
+] as const;
+
+interface Project {
+  img: string;
+  alt: string;
+  tag: string;
+  title: string;
+  loc: string;
+  category: string;
+}
+
+const projects: Project[] = [
+  { img: '/TEPATE_Imagenes_Organizadas/08_Maquinas_Aplicadoras/slide10_Maquinas_Aplicadoras_img1.webp', alt: 'Máquina aplicadora de pintura termoplástica sobre remolque', tag: 'Fabricación', title: 'Máquinas Aplicadoras', loc: 'Fabricación de máquinas termoplásticas de 200kg a 300kg', category: 'industrial' },
+  { img: '/TEPATE_Imagenes_Organizadas/08_Maquinas_Aplicadoras/slide10_Maquinas_Aplicadoras_img2.webp', alt: 'Equipo de aplicación manual de pintura termoplástica', tag: 'Fabricación', title: 'Máquinas Aplicadoras (Serie 200)', loc: 'Equipos compactos de aplicación de pintura termoplástica', category: 'industrial' },
+  { img: '/TEPATE_Imagenes_Organizadas/10_Boyas_Vialetas/slide13_Boyas_Vialetas_Aplicacion_img1.webp', alt: 'Instalación de boyas metálicas y vialetas retroreflectivas en vialidad urbana', tag: 'Municipal', title: 'Instalación de Boyas y Vialetas', loc: 'Aplicación en campo para delimitación vial', category: 'municipal' },
+  { img: '/TEPATE_Imagenes_Organizadas/12_Pintura_Trafico/slide15_Pintura_Trafico_Base_Agua_img1.webp', alt: 'Aplicación de pintura de tráfico base agua en guarniciones amarillas', tag: 'Municipal', title: 'Pintura Tráfico en Guarnición', loc: 'Aplicación de pintura base agua en bordillos', category: 'municipal' },
+  { img: '/TEPATE_Imagenes_Organizadas/12_Pintura_Trafico/slide16_Pintura_Trafico_Guarnicion_img2.webp', alt: 'Señalamiento horizontal en concreto con pintura de tráfico de alta visibilidad', tag: 'Municipal', title: 'Pintura Epóxica en Guarnición', loc: 'Señalamiento horizontal de alta durabilidad en concreto', category: 'municipal' },
+  { img: '/TEPATE_Imagenes_Organizadas/16_Senalamiento_Escolar/slide21_Senalamiento_Preventivo_Digital_Escolar_img1.webp', alt: 'Señales preventivas escolares con tecnología destellante digital', tag: 'Escolar', title: 'Señalamiento Preventivo Escolar', loc: 'Señales con tecnología destellante digital', category: 'municipal' },
+  { img: '/TEPATE_Imagenes_Organizadas/19_Senalamiento_Restrictivo_SR/slide24_Senalamiento_Restrictivo_Tipo_SR_img1.webp', alt: 'Señalamiento restrictivo tipo SR con materiales retroreflectivos de grado ingeniería', tag: 'Carretero', title: 'Señalamiento Restrictivo Tipo SR', loc: 'Restricciones de tránsito con materiales retroreflectivos', category: 'carretero' },
+  { img: '/TEPATE_Imagenes_Organizadas/20_Senalamiento_Preventivo_SP/slide25_Senalamiento_Preventivo_Tipo_SP_img1.webp', alt: 'Señalamiento preventivo tipo SP para advertencia de curvas y peligros', tag: 'Carretero', title: 'Señalamiento Preventivo Tipo SP', loc: 'Advertencia de peligro en carreteras y vialidades', category: 'carretero' },
+  { img: '/TEPATE_Imagenes_Organizadas/22_Senalamiento_Proteccion_Destino/slide27_Senalamiento_Proteccion_Destino_img1.webp', alt: 'Señales de destino e informativas para rutas federales y estatales', tag: 'Carretero', title: 'Señalamiento de Protección y Destino', loc: 'Indicación de rutas y protección de obra', category: 'carretero' },
+  { img: '/TEPATE_Imagenes_Organizadas/22_Senalamiento_Proteccion_Destino/slide27_Senalamiento_Proteccion_Destino_img2.webp', alt: 'Instalación de señales de protección de obra en zona de construcción', tag: 'Carretero', title: 'Señalamiento de Destino (Rutas)', loc: 'Instalación en rutas federales y estatales', category: 'carretero' },
+  { img: '/TEPATE_Imagenes_Organizadas/24_Senalamiento_Vertical_SID15/slide31_Senalamiento_Vertical_Elevado_SID15_img3.webp', alt: 'Estructura de señalamiento vertical elevado tipo bandera SID-15', tag: 'Carretero', title: 'Señalamiento Vertical Elevado SID-15', loc: 'Estructuras elevadas para señalización', category: 'carretero' },
+  { img: '/TEPATE_Imagenes_Organizadas/24_Senalamiento_Vertical_SID15/slide31_Senalamiento_Vertical_Elevado_SID15_img5.webp', alt: 'Señalamiento vertical elevado con lámina retroreflectiva 3M', tag: 'Carretero', title: 'Pórtico Elevado SID-15', loc: 'Estructuras con materiales 3M y Avery Dennison', category: 'carretero' },
+  { img: '/TEPATE_Imagenes_Organizadas/25_Horizontal_Trafico_Agua/slide32_Horizontal_Trafico_Base_Agua_img1.webp', alt: 'Aplicación de pintura horizontal base agua en pista de aterrizaje', tag: 'Aeroportuario', title: 'Pintura Horizontal Base Agua', loc: 'Aplicación de pintura de tráfico base agua', category: 'aeroportuario' },
+  { img: '/TEPATE_Imagenes_Organizadas/25_Horizontal_Trafico_Agua/slide32_Horizontal_Trafico_Base_Agua_img2.webp', alt: 'Señalización horizontal en rampas de aeropuerto con pintura de alta resistencia', tag: 'Aeroportuario', title: 'Pintura Termoplástica (Aeropuerto)', loc: 'Señalización especializada en pistas y rampas', category: 'aeroportuario' },
+  { img: '/TEPATE_Imagenes_Organizadas/10_Boyas_Vialetas/slide12_Boyas_Vialetas_Descripcion_img1.webp', alt: 'Boyas metálicas y vialetas para delimitación de carriles en avenidas', tag: 'Municipal', title: 'Boyas y Vialetas', loc: 'Elementos de confinamiento y delimitación vial', category: 'municipal' },
+  { img: '/TEPATE_Imagenes_Organizadas/12_Pintura_Trafico/slide16_Pintura_Trafico_Guarnicion_img1.webp', alt: 'Pintura de tráfico en guarniciones para mejorar la visibilidad nocturna', tag: 'Municipal', title: 'Aplicación Epóxica en Bordillos', loc: 'Pintura de alta resistencia para guarniciones', category: 'municipal' },
+  { img: '/TEPATE_Imagenes_Organizadas/16_Senalamiento_Escolar/slide21_Senalamiento_Preventivo_Digital_Escolar_img2.webp', alt: 'Señalamiento preventivo escolar con leds destellantes para zonas de alta afluencia', tag: 'Escolar', title: 'Señalización Escolar Inteligente', loc: 'Sistemas autónomos de reducción de velocidad', category: 'municipal' },
+  { img: '/TEPATE_Imagenes_Organizadas/20_Senalamiento_Preventivo_SP/slide25_Senalamiento_Preventivo_Tipo_SP_img4.webp', alt: 'Señales preventivas tipo SP instaladas en carretera federal', tag: 'Carretero', title: 'Señales Preventivas de Alto Impacto', loc: 'Señalización reflectiva para zonas de riesgo', category: 'carretero' },
+  { img: '/TEPATE_Imagenes_Organizadas/24_Senalamiento_Vertical_SID15/slide31_Senalamiento_Vertical_Elevado_SID15_img2.webp', alt: 'Estructura tipo pórtico SID-15 para señalización de destino elevada', tag: 'Carretero', title: 'Pórticos y Banderas SID-15', loc: 'Estructuras de gran claro para autopistas', category: 'carretero' },
+  { img: '/TEPATE_Imagenes_Organizadas/25_Horizontal_Trafico_Agua/slide32_Horizontal_Trafico_Base_Agua_img3.webp', alt: 'Pintura horizontal base agua de alto desempeño para zonas aeroportuarias', tag: 'Aeroportuario', title: 'Señalización Horizontal Base Agua', loc: 'Líneas de delimitación para vías urbanas', category: 'aeroportuario' },
+  { img: '/proyectos_nuevos/boyas_carretera_atardecer_1.webp', alt: 'Instalación de boyas amarillas en carretera al atardecer — Monterrey N.L.', tag: 'Municipal', title: 'Confinamiento Vial con Boyas', loc: 'Instalación de boyas amarillas en vialidad — Monterrey, N.L.', category: 'municipal' },
+  { img: '/proyectos_nuevos/boyas_carretera_atardecer_2.webp', alt: 'Confinamiento vial con boyas amarillas en carretera — vista horizontal', tag: 'Municipal', title: 'Delineación con Boyas — Vista de Campo', loc: 'Confinamiento de carriles en vialidad de alta velocidad', category: 'municipal' },
+  { img: '/proyectos_nuevos/senalamiento_escolar_mty_1.webp', alt: 'Señal preventiva escolar con Sierra de las Mitras al fondo, Monterrey N.L.', tag: 'Escolar', title: 'Señalamiento Escolar — Monterrey N.L.', loc: 'Señal preventiva con lámina retroreflectiva grado diamante', category: 'municipal' },
+  { img: '/proyectos_nuevos/senalamiento_escolar_mty_2.webp', alt: 'Señalamiento preventivo escolar instalado en zona urbana de Monterrey', tag: 'Escolar', title: 'Señalamiento Preventivo Escolar', loc: 'Zona escolar — Monterrey, Nuevo León', category: 'municipal' },
+  { img: '/proyectos_nuevos/topes_instalacion_equipo.webp', alt: 'Cuadrilla TEPATE instalando topes reductores de velocidad en campo', tag: 'Municipal', title: 'Instalación de Topes Reductores', loc: 'Instalación en campo con cuadrilla propia — Monterrey, N.L.', category: 'municipal' },
+  { img: '/proyectos_nuevos/senal_escolar_primer_plano.webp', alt: 'Señal escolar PRECAUCIÓN primer plano con cielo azul de fondo', tag: 'Escolar', title: 'Señal Escolar PRECAUCIÓN', loc: 'Lámina retroreflectiva de alta intensidad — Zona escolar', category: 'municipal' },
+  { img: '/proyectos_nuevos/cebra_nocturna_residencial.webp', alt: 'Cebra peatonal pintada de noche en zona residencial — señalamiento horizontal', tag: 'Municipal', title: 'Cebra Peatonal Nocturna', loc: 'Señalamiento horizontal en fraccionamiento residencial', category: 'municipal' },
+  { img: '/proyectos_nuevos/cebra_diurna_equipo.webp', alt: 'Equipo TEPATE aplicando señalamiento horizontal en cruce peatonal', tag: 'Municipal', title: 'Aplicación de Cebra Peatonal', loc: 'Cuadrilla aplicando pintura termoplástica en cruce', category: 'municipal' },
+  { img: '/proyectos_nuevos/termoplastica_macro_carretera.webp', alt: 'Detalle macro de textura de pintura termoplástica aplicada en carretera', tag: 'Carretero', title: 'Textura Termoplástica en Carretera', loc: 'Detalle de aplicación termoplástica en carpeta asfáltica', category: 'carretero' },
+  { img: '/proyectos_nuevos/cebra_nocturna_fraccionamiento.webp', alt: 'Cebra peatonal pintada de noche en fraccionamiento — señalamiento horizontal TEPATE', tag: 'Municipal', title: 'Cebra Peatonal — Fraccionamiento', loc: 'Señalamiento horizontal nocturno en acceso de fraccionamiento', category: 'municipal' },
+  { img: '/proyectos_nuevos/obra_nocturna_carretera.webp', alt: 'Operación nocturna de señalamiento vial en carretera — cuadrilla TEPATE', tag: 'Carretero', title: 'Obra Nocturna en Carretera', loc: 'Aplicación de señalamiento horizontal en horario nocturno', category: 'carretero' },
+];
+---
+
+<Layout {...seo}>
+  <section class="page-header">
+    <div class="ph-inner">
+      <div class="ph-crumb"><a href="/">Inicio</a><span>/</span>Proyectos</div>
+      <h1 class="ph-title">PORTAFOLIO <span class="acc">DE OBRA</span></h1>
+      <p class="ph-lead">
+        Más de 500 proyectos ejecutados exitosamente. Carreteras federales, aeropuertos, parques
+        industriales, vialidades urbanas y obras municipales en todo el noreste de México.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding:0;background:var(--black)">
+    <div class="sec-tag" style="justify-content:center;margin-top:64px;margin-bottom:0">
+      Marcas que confían en nosotros
+    </div>
+    <div class="marquee-wrapper">
+      <div class="marquee-content">
+        {brands.map((b) => (
+          <div class="marquee-item">
+            <img src={b.src} alt={b.alt} class="brand-logo" loading="lazy" width="120" height="60" />
+            {b.name}
+          </div>
+        ))}
+        <div aria-hidden="true" style="display:contents">
+          {brands.map((b) => (
+            <div class="marquee-item">
+              <img src={b.src} alt="" class="brand-logo" loading="lazy" width="120" height="60" />
+              {b.name}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pcat">
+    <div class="pcat-head">
+      <div>
+        <div class="pcat-num">Proyectos destacados</div>
+        <h2 class="pcat-h2">OBRA<br />REALIZADA</h2>
+      </div>
+      <p class="pcat-desc">
+        Una selección de los proyectos más representativos por tipo de obra y cliente. Cada
+        proyecto incluye fabricación, instalación y seguimiento postventa.
+      </p>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="carretero">Carretero</button>
+      <button class="filter-btn" data-filter="industrial">Industrial</button>
+      <button class="filter-btn" data-filter="municipal">Municipal</button>
+      <button class="filter-btn" data-filter="aeroportuario">Aeroportuario</button>
+    </div>
+
+    <div class="proj-grid" id="projects-container">
+      {projects.map((project) => (
+        <div class="proj" data-category={project.category}>
+          <div class="proj-img">
+            <img src={project.img} alt={project.alt} loading="lazy" width="600" height="400" />
+          </div>
+          <div class="proj-body">
+            <div class="proj-tag">{project.tag}</div>
+            <div class="proj-title">{project.title}</div>
+            <div class="proj-loc">{project.loc}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const btns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.proj');
+  btns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      btns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter ?? 'all';
+      cards.forEach((card) => {
+        card.classList.toggle(
+          'hidden',
+          filter !== 'all' && card.dataset.category !== filter
+        );
+      });
+    });
+  });
+</script>

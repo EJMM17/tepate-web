@@ -31,7 +31,7 @@ export interface NavLink {
   readonly ariaLabel?: string;
 }
 
-export type JsonLd = Record<string, unknown> | readonly Record<string, unknown>[];
+export type JsonLd = Record<string, unknown>;
 
 export interface SEOMeta {
   title: string;
@@ -40,7 +40,7 @@ export interface SEOMeta {
   ogImage?: string;
   ogType?: 'website' | 'article' | 'product';
   locale?: string;
-  jsonLd?: JsonLd;
+  jsonLd?: JsonLd | readonly JsonLd[];
 }
 
 export interface ContactFormPayload {
