@@ -86,6 +86,10 @@ const seo = buildSeo({
                     <li>{spec.label}: {spec.value}</li>
                   ))}
                 </ul>
+                <div class="spec-cta">
+                  <a href={`/contacto?producto=${encodeURIComponent(product.name)}&interes=${product.category === 'senalamiento' ? 'horizontal' : product.category}`}>Cotizar →</a>
+                  <a href={`https://wa.me/528118959042?text=${encodeURIComponent(`Hola, solicito información sobre ${product.name}`)}`} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                </div>
               </div>
             </div>
           ))}
@@ -131,4 +135,37 @@ const seo = buildSeo({
   </section>
 
   <ProductModal products={PRODUCTS} client:idle />
+
+  <!-- Sticky CTA Bar -->
+  <div class="sticky-cta" id="sticky-cta">
+    <div class="sticky-cta-text">
+      <strong>¿Necesitas una cotización formal?</strong>
+      Respuesta en 24h · Atención a licitaciones
+    </div>
+    <div class="sticky-cta-actions">
+      <a href="/contacto" class="sticky-cta-btn">Cotizar ahora</a>
+      <a href="https://wa.me/528118959042" target="_blank" rel="noopener noreferrer" class="sticky-cta-btn-ghost">WhatsApp</a>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const bar = document.getElementById('sticky-cta');
+      if (!bar) return;
+      let shown = false;
+      function onScroll() {
+        const y = window.scrollY || window.pageYOffset;
+        const threshold = 400;
+        if (y > threshold && !shown) {
+          bar.classList.add('visible');
+          shown = true;
+        } else if (y <= threshold && shown) {
+          bar.classList.remove('visible');
+          shown = false;
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
 </Layout>

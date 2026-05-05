@@ -59,6 +59,13 @@ export default function ProductModal({ products }: ProductModalProps): JSX.Eleme
 
   const close = (): void => setSelected(null);
 
+  const getCotizarUrl = (product: Product): string => {
+    const params = new URLSearchParams();
+    params.set('producto', product.name);
+    params.set('interes', product.category === 'senalamiento' ? 'horizontal' : product.category);
+    return `/contacto?${params.toString()}`;
+  };
+
   return (
     <div
       ref={overlayRef}
@@ -113,6 +120,29 @@ export default function ProductModal({ products }: ProductModalProps): JSX.Eleme
                   <div className="font-display text-base text-white">{spec.value}</div>
                 </div>
               ))}
+            </div>
+            {/* CTA de cotización en modal */}
+            <div className="flex flex-wrap gap-3 pt-2 border-t border-steel">
+              <a
+                href={getCotizarUrl(selected)}
+                className="inline-flex items-center gap-2 bg-neon text-black font-mono text-xs font-bold uppercase tracking-widest px-5 py-3 no-underline hover:bg-neonDim transition-colors"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+                Cotizar este producto
+              </a>
+              <a
+                href="https://wa.me/528118959042"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 border border-neon text-neon font-mono text-xs font-bold uppercase tracking-widest px-5 py-3 no-underline hover:bg-neon hover:text-black transition-colors"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.52 3.48A11.85 11.85 0 0 0 12.06 0C5.42 0 .05 5.37.05 12c0 2.1.56 4.15 1.62 5.97L0 24l6.2-1.62A11.93 11.93 0 0 0 12.06 24C18.7 24 24.07 18.63 24.07 12a11.85 11.85 0 0 0-3.55-8.52z"/>
+                </svg>
+                Asesoría por WhatsApp
+              </a>
             </div>
           </>
         )}

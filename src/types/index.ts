@@ -48,6 +48,11 @@ export interface ContactFormPayload {
   empresa: string;
   email: string;
   telefono: string;
+  interes: string;
+  tipoCliente: string;
+  volumen: string;
+  ubicacion: string;
+  fecha: string;
   mensaje: string;
   consent: boolean;
   _honeypot: string;

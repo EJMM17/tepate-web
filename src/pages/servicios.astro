@@ -132,6 +132,10 @@ const seo = buildSeo({
           </div>
         </div>
       </div>
+      <div class="svc-cta-row">
+        <a href="/contacto?interes=fabricacion&servicio=Fabricación%20Termoplástica" class="btn-primary" style="font-size:12px;padding:14px 24px;">Solicitar cotización de fabricación →</a>
+        <a href="https://wa.me/528118959042?text=Hola%2C%20solicito%20cotización%20para%20fabricación%20termoplástica" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="font-size:12px;padding:14px 24px;">Asesoría por WhatsApp</a>
+      </div>
     </div>
   </section>
 
@@ -182,6 +186,10 @@ const seo = buildSeo({
             </ul>
           </div>
         </div>
+      </div>
+      <div class="svc-cta-row">
+        <a href="/contacto?interes=horizontal&servicio=Señalamiento%20Horizontal" class="btn-primary" style="font-size:12px;padding:14px 24px;">Cotizar señalamiento horizontal →</a>
+        <a href="https://wa.me/528118959042?text=Hola%2C%20solicito%20cotización%20para%20señalamiento%20horizontal" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="font-size:12px;padding:14px 24px;">WhatsApp</a>
       </div>
     </div>
   </section>
@@ -234,6 +242,10 @@ const seo = buildSeo({
             </ul>
           </div>
         </div>
+      </div>
+      <div class="svc-cta-row">
+        <a href="/contacto?interes=vertical&servicio=Señalamiento%20Vertical" class="btn-primary" style="font-size:12px;padding:14px 24px;">Cotizar señalamiento vertical →</a>
+        <a href="https://wa.me/528118959042?text=Hola%2C%20solicito%20cotización%20para%20señalamiento%20vertical" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="font-size:12px;padding:14px 24px;">WhatsApp</a>
       </div>
     </div>
   </section>
@@ -288,6 +300,10 @@ const seo = buildSeo({
           </div>
         </div>
       </div>
+      <div class="svc-cta-row">
+        <a href="/contacto?interes=estudios&servicio=Estudios%20de%20Ingeniería%20Vial" class="btn-primary" style="font-size:12px;padding:14px 24px;">Cotizar estudios técnicos →</a>
+        <a href="https://wa.me/528118959042?text=Hola%2C%20solicito%20cotización%20para%20estudios%20de%20ingeniería%20vial" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="font-size:12px;padding:14px 24px;">WhatsApp</a>
+      </div>
     </div>
   </section>
 
@@ -339,6 +355,10 @@ const seo = buildSeo({
           </div>
         </div>
       </div>
+      <div class="svc-cta-row">
+        <a href="/contacto?interes=confinamiento-svc&servicio=Confinamiento%20Vial" class="btn-primary" style="font-size:12px;padding:14px 24px;">Cotizar confinamiento →</a>
+        <a href="https://wa.me/528118959042?text=Hola%2C%20solicito%20cotización%20para%20confinamiento%20vial" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="font-size:12px;padding:14px 24px;">WhatsApp</a>
+      </div>
     </div>
   </section>
 
@@ -358,6 +378,39 @@ const seo = buildSeo({
       </div>
     </div>
   </section>
+
+  <!-- Sticky CTA Bar -->
+  <div class="sticky-cta" id="sticky-cta-svc">
+    <div class="sticky-cta-text">
+      <strong>¿Necesitas una cotización formal?</strong>
+      Respuesta en 24h · Atención a licitaciones
+    </div>
+    <div class="sticky-cta-actions">
+      <a href="/contacto" class="sticky-cta-btn">Cotizar ahora</a>
+      <a href="https://wa.me/528118959042" target="_blank" rel="noopener noreferrer" class="sticky-cta-btn-ghost">WhatsApp</a>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const bar = document.getElementById('sticky-cta-svc');
+      if (!bar) return;
+      let shown = false;
+      function onScroll() {
+        const y = window.scrollY || window.pageYOffset;
+        const threshold = 400;
+        if (y > threshold && !shown) {
+          bar.classList.add('visible');
+          shown = true;
+        } else if (y <= threshold && shown) {
+          bar.classList.remove('visible');
+          shown = false;
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
 </Layout>
 
 <script>

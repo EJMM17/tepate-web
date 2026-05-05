@@ -516,6 +516,79 @@
   color: var(--white);
 }
 
+/* ── QUICK QUOTE — B2B conversion strip ───────────────── */
+.quick-quote {
+  background: var(--asphalt);
+  border-top: 1px solid var(--steel);
+  border-bottom: 1px solid var(--steel);
+  padding: 80px 24px;
+}
+@media (min-width: 1024px) {
+  .quick-quote { padding: 120px 80px; }
+}
+.quick-quote-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.quick-quote-head {
+  margin-bottom: 56px;
+  max-width: 720px;
+}
+.quick-quote-lead {
+  font-size: 16px;
+  color: var(--mist);
+  line-height: 1.7;
+  margin-top: 20px;
+}
+.quick-quote-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--steel);
+  border: 1px solid var(--steel);
+  margin-bottom: 48px;
+}
+@media (min-width: 768px) {
+  .quick-quote-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.qq-step {
+  background: var(--coal);
+  padding: 40px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: background 0.3s;
+}
+.qq-step:hover {
+  background: var(--char);
+}
+.qq-num {
+  font-family: var(--fm);
+  font-size: 11px;
+  color: var(--neon);
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+.qq-title {
+  font-family: var(--fd);
+  font-weight: 800;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1.15;
+}
+.qq-desc {
+  font-size: 14px;
+  color: var(--mist);
+  line-height: 1.7;
+}
+.quick-quote-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
 /* ── TRUST BAND — Monumental stats ──────────────────── */
 .trust-band {
   background: var(--asphalt);
