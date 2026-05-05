@@ -388,8 +388,9 @@ export function initGrainOverlay() {
   canvas.className = 'grain-overlay';
   document.body.appendChild(canvas);
 
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return;
+  const ctxRaw = canvas.getContext('2d');
+  if (!ctxRaw) return;
+  const ctx: CanvasRenderingContext2D = ctxRaw;
 
   function resize() {
     canvas.width = window.innerWidth;
@@ -403,8 +404,9 @@ export function initGrainOverlay() {
   const grainCanvas = document.createElement('canvas');
   grainCanvas.width = grainSize;
   grainCanvas.height = grainSize;
-  const grainCtx = grainCanvas.getContext('2d');
-  if (!grainCtx) return;
+  const grainCtxRaw = grainCanvas.getContext('2d');
+  if (!grainCtxRaw) return;
+  const grainCtx: CanvasRenderingContext2D = grainCtxRaw;
 
   function updateGrain() {
     const imgData = grainCtx.createImageData(grainSize, grainSize);
