@@ -21,6 +21,13 @@
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    cursor: none; /* Hide default cursor on desktop */
+  }
+
+  @media (pointer: coarse) {
+    body {
+      cursor: auto;
+    }
   }
 
   ::selection {
@@ -43,13 +50,172 @@
   }
 }
 
+/* ═══════════════════════════════════════════════════════════
+   AWWWARDS-LEVEL UI EFFECTS
+   Preloader, Custom Cursor, Grain, Magnetic buttons
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Preloader ───────────────────────────────────────── */
+#preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  clip-path: inset(0 0 0 0);
+}
+.preloader-logo {
+  font-family: var(--fd);
+  font-size: clamp(32px, 8vw, 72px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.preloader-logo span {
+  color: var(--neon);
+}
+.preloader-track {
+  width: 200px;
+  height: 2px;
+  background: var(--steel);
+  margin-top: 32px;
+  overflow: hidden;
+}
+.preloader-progress {
+  width: 0%;
+  height: 100%;
+  background: var(--neon);
+}
+
+/* ── Custom Cursor ───────────────────────────────────── */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--neon);
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s, border-color 0.3s, background 0.3s;
+  mix-blend-mode: difference;
+}
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  background: var(--neon);
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+}
+.custom-cursor.cursor-hover {
+  width: 64px;
+  height: 64px;
+  background: rgba(225, 255, 0, 0.08);
+  border-color: var(--neon);
+}
+@media (pointer: coarse) {
+  .custom-cursor,
+  .custom-cursor-dot {
+    display: none !important;
+  }
+}
+
+/* ── Film Grain Overlay ──────────────────────────────── */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9997;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+}
+
+/* ── Magnetic Button Base ────────────────────────────── */
+.magnetic {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+/* ── Text Reveal Utilities ───────────────────────────── */
+.reveal-up {
+  will-change: transform, opacity;
+}
+.reveal-stagger {
+  will-change: transform, opacity;
+}
+
+/* ── Hero Word Mask (for split-type) ─────────────────── */
+.hero-h1 .word {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: top;
+}
+.hero-h1 .word-inner {
+  display: inline-block;
+  transform: translateY(0);
+}
+
+/* ── Neon Glow Text ──────────────────────────────────── */
+.neon-glow-text {
+  text-shadow: 0 0 20px rgba(225, 255, 0, 0.3), 0 0 40px rgba(225, 255, 0, 0.1);
+}
+
+/* ── Smooth Image Reveal ─────────────────────────────── */
+.img-reveal {
+  overflow: hidden;
+  position: relative;
+}
+.img-reveal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--neon);
+  transform: scaleY(1);
+  transform-origin: top;
+  transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+}
+.img-reveal.revealed::after {
+  transform: scaleY(0);
+  transform-origin: bottom;
+}
+
+/* ── Horizontal Scroll Section ───────────────────────── */
+.horizontal-scroll {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 24px;
+}
+
+/* ── Sticky Label ────────────────────────────────────── */
+.sticky-label {
+  position: sticky;
+  top: 100px;
+  align-self: flex-start;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0ms !important;
     scroll-behavior: auto !important;
+  }
+  .grain-overlay {
+    display: none;
   }
 }

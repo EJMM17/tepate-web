@@ -78,7 +78,7 @@ const projects: Project[] = [
 
 <Layout {...seo}>
   <section class="page-header">
-    <div class="ph-inner">
+    <div class="ph-inner reveal-up">
       <div class="ph-crumb"><a href="/">Inicio</a><span>/</span>Proyectos</div>
       <h1 class="ph-title">PORTAFOLIO <span class="acc">DE OBRA</span></h1>
       <p class="ph-lead">
@@ -89,10 +89,10 @@ const projects: Project[] = [
   </section>
 
   <section style="padding:0;background:var(--black)">
-    <div class="sec-tag" style="justify-content:center;margin-top:clamp(32px,6vw,64px);margin-bottom:0">
+    <div class="sec-tag reveal-up" style="justify-content:center;margin-top:clamp(32px,6vw,64px);margin-bottom:0">
       Marcas que confían en nosotros
     </div>
-    <div class="marquee-wrapper">
+    <div class="marquee-wrapper reveal-up">
       <div class="marquee-content">
         {brands.map((b) => (
           <div class="marquee-item">
@@ -113,7 +113,7 @@ const projects: Project[] = [
   </section>
 
   <section class="pcat">
-    <div class="pcat-head">
+    <div class="pcat-head reveal-up">
       <div>
         <div class="pcat-num">Proyectos destacados</div>
         <h2 class="pcat-h2">OBRA<br />REALIZADA</h2>
@@ -124,7 +124,7 @@ const projects: Project[] = [
       </p>
     </div>
 
-    <div class="filter-bar">
+    <div class="filter-bar reveal-up">
       <button class="filter-btn active" data-filter="all">Todos</button>
       <button class="filter-btn" data-filter="carretero">Carretero</button>
       <button class="filter-btn" data-filter="industrial">Industrial</button>
@@ -132,7 +132,7 @@ const projects: Project[] = [
       <button class="filter-btn" data-filter="aeroportuario">Aeroportuario</button>
     </div>
 
-    <div class="proj-grid" id="projects-container">
+    <div class="proj-grid reveal-stagger" id="projects-container">
       {projects.map((project) => (
         <div class="proj" data-category={project.category}>
           <div class="proj-img">

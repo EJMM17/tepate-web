@@ -13,7 +13,7 @@ const isActive = (href: string): boolean =>
 ---
 
 <div
-  class="bg-coal border-b border-rule text-mist font-mono text-[11px] uppercase tracking-widest flex flex-wrap items-center justify-center gap-x-3 gap-y-1 px-4 py-2"
+  class="topbar"
   role="region"
   aria-label="Información de la empresa"
 >
@@ -21,23 +21,23 @@ const isActive = (href: string): boolean =>
     TOPBAR_ITEMS.map((item, idx) => (
       <>
         {idx === 0 && (
-          <span class="inline-block w-1.5 h-1.5 bg-neon animate-blink" aria-hidden="true" />
+          <span class="dot" aria-hidden="true" />
         )}
         <span>{item}</span>
         {idx < TOPBAR_ITEMS.length - 1 && (
-          <span class="text-steel" aria-hidden="true">·</span>
+          <span class="sep" aria-hidden="true">·</span>
         )}
       </>
     ))
   }
 </div>
 
-<header class="sticky top-0 z-40 bg-asphalt/95 backdrop-blur-sm border-b border-steel">
+<header class="sticky top-0 z-40" style="backdrop-filter: blur(20px) saturate(1.2); background: rgba(0,0,0,0.85); border-bottom: 1px solid #262626;">
   <nav
     aria-label="Principal"
-    class="max-w-screen-2xl mx-auto flex items-center justify-between px-4 md:px-8 h-16"
+    class="max-w-screen-2xl mx-auto flex items-center justify-between px-6 md:px-12 h-[72px]"
   >
-    <a href="/" class="flex items-center gap-2 shrink-0" aria-label="Inicio — Ingeniería Vial TEPATE">
+    <a href="/" class="flex items-center gap-3 shrink-0" aria-label="Inicio — Ingeniería Vial TEPATE">
       <img
         src="/logo.webp"
         alt="Logotipo Ingeniería Vial TEPATE"
@@ -47,9 +47,12 @@ const isActive = (href: string): boolean =>
         decoding="async"
         class="h-10 w-10"
       />
+      <span class="hidden sm:block font-display font-black text-white text-lg tracking-wide uppercase">
+        TEPATE
+      </span>
     </a>
 
-    <ul class="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-widest">
+    <ul class="hidden md:flex items-center gap-10 font-mono text-xs uppercase tracking-widest">
       {
         PRIMARY_NAV.map((link) => (
           <li>
@@ -57,11 +60,14 @@ const isActive = (href: string): boolean =>
               href={link.href}
               aria-current={isActive(link.href) ? 'page' : undefined}
               class:list={[
-                'transition-colors duration-200 ease-brand hover:text-neon focus-visible:text-neon',
-                isActive(link.href) ? 'text-neon' : 'text-bone',
+                'transition-colors duration-300 ease-brand hover:text-neon focus-visible:text-neon relative py-1',
+                isActive(link.href) ? 'text-neon' : 'text-mist',
               ]}
             >
               {link.label}
+              {isActive(link.href) && (
+                <span class="absolute bottom-0 left-0 w-full h-[1px] bg-neon" />
+              )}
             </a>
           </li>
         ))
@@ -71,9 +77,9 @@ const isActive = (href: string): boolean =>
           href={CATALOG_PDF.href}
           download
           aria-label={CATALOG_PDF.ariaLabel}
-          class="inline-flex items-center gap-2 bg-neon text-black hover:bg-neonDim transition-colors duration-200 ease-brand px-3 py-2 font-bold rounded-btn"
+          class="inline-flex items-center gap-2 bg-neon text-black hover:bg-transparent hover:text-neon border-2 border-neon transition-all duration-300 ease-brand px-5 py-3 font-bold text-[11px] tracking-widest"
         >
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
             <polyline points="7 10 12 15 17 10" />
             <line x1="12" y1="15" x2="12" y2="3" />
@@ -86,14 +92,14 @@ const isActive = (href: string): boolean =>
     <button
       type="button"
       id="ham-btn"
-      class="md:hidden flex flex-col justify-center items-center gap-1.5 w-10 h-10 -mr-2"
+      class="md:hidden flex flex-col justify-center items-center gap-[6px] w-12 h-12 -mr-2 border border-steel hover:border-neon transition-colors"
       aria-expanded="false"
       aria-controls="mobile-menu"
       aria-label="Abrir menú"
     >
-      <span class="block w-6 h-0.5 bg-bone" aria-hidden="true"></span>
-      <span class="block w-6 h-0.5 bg-bone" aria-hidden="true"></span>
-      <span class="block w-6 h-0.5 bg-bone" aria-hidden="true"></span>
+      <span class="block w-6 h-[2px] bg-bone transition-colors" aria-hidden="true"></span>
+      <span class="block w-6 h-[2px] bg-bone transition-colors" aria-hidden="true"></span>
+      <span class="block w-6 h-[2px] bg-bone transition-colors" aria-hidden="true"></span>
     </button>
   </nav>
 

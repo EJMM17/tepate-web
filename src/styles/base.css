@@ -1,25 +1,44 @@
 /* ═══════════════════════════════════════════════════════════
    INGENIERÍA VIAL TEPATE — BASE / DESIGN TOKENS / RESET
-   No glow. No shadows. No rounded corners. Hard edges only.
+   Trophy Industrial: solid mass, neon glow, polished greys.
+   STRICT PALETTE: neon (#E1FF00) + greys + black only.
    ═══════════════════════════════════════════════════════════ */
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;border-radius:0!important}
 
 :root{
-  /* Core palette */
-  --neon:#E1FF00;          /* Reflective Road Sign Yellow-Green */
-  --neon-dim:#C8E500;      /* Dimmer reflective yellow for hover states */
-  --black:#000000;         /* Pure black background */
-  --asphalt:#0A0A0A;       /* Dark asphalt grey */
-  --coal:#0F0F0F;          /* Slightly lifted surface */
-  --char:#141414;          /* Card surfaces */
-  --concrete:#1A1A1A;      /* Borders & dividers heavy */
-  --steel:#262626;         /* Border medium */
-  --rule:#1F1F1F;          /* Subtle rule */
+  /* STRICT PALETTE — no other colors allowed */
+  --neon:#E1FF00;          /* Primary accent — reflective road yellow */
+  --neon-dim:#C8E500;      /* Hover / depth neon */
+  --neon-glow:rgba(225,255,0,0.12);  /* Ambient glow */
+  --neon-glow-strong:rgba(225,255,0,0.22);
+
+  /* Greyscale — polished concrete to gunmetal */
+  --black:#000000;         /* Deepest background */
+  --asphalt:#0A0A0A;       /* Elevated base */
+  --coal:#0F0F0F;          /* Card surfaces */
+  --char:#141414;          /* Hover surfaces */
+  --concrete:#1A1A1A;      /* Heavy borders */
+  --steel:#262626;         /* Medium borders */
+  --rule:#1F1F1F;          /* Subtle rules */
   --mist:#777777;          /* Muted text */
-  --bone:#CCCCCC;          /* Body text — off-white */
+  --bone:#CCCCCC;          /* Body text */
   --white:#F2F2F2;         /* Headlines */
 
+  /* Trophy effects — derived from greyscale + neon only */
+  --shine-gradient: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.04) 0%,
+    transparent 35%,
+    transparent 65%,
+    rgba(255,255,255,0.02) 100%
+  );
+  --polished-edge: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  --neon-edge: linear-gradient(90deg, transparent, var(--neon), transparent);
+  --heavy-shadow: 0 12px 40px rgba(0,0,0,0.7), 0 4px 12px rgba(0,0,0,0.5);
+  --heavy-shadow-hover: 0 20px 60px rgba(0,0,0,0.8), 0 6px 16px rgba(0,0,0,0.6);
+
+  /* Typography */
   --fd:'Barlow Condensed',sans-serif;
   --fb:'Barlow',sans-serif;
   --fm:'IBM Plex Mono',monospace;
@@ -34,11 +53,10 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 
-/* Selection */
+/* Selection — neon */
 ::selection{background:var(--neon);color:var(--black)}
 
-/* ── AUDIT: ACCESSIBILITY (a11y) ─────────────────────── */
-/* Brutalist focus states: zero rounded corners, hard lines */
+/* ── AUDIT: ACCESSIBILITY ────────────────────────────── */
 :focus-visible {
   outline: 3px solid var(--neon) !important;
   outline-offset: 2px !important;
@@ -46,7 +64,6 @@ body{
 }
 
 /* ── AUDIT: CORE WEB VITALS (CLS) ────────────────────── */
-/* Prevention of Cumulative Layout Shift for multimedia containers */
 .gitem, .proj-img, .hprod-ico, .svc-ico, .mvv-ico, .cicon {
   aspect-ratio: 1 / 1;
   background: var(--coal);
@@ -54,23 +71,27 @@ body{
   align-items: center;
   justify-content: center;
 }
+.proj-img { aspect-ratio: 16 / 9; }
 
-.proj-img {
-  aspect-ratio: 16 / 9;
-}
+img { max-width: 100%; height: auto; display: block; }
 
-/* Ensure images don't shift layout */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* ── Animations — reserved & functional only ─────────── */
+/* ── Animations ──────────────────────────────────────── */
 @keyframes stripe{from{background-position:0 0}to{background-position:56px 0}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes neonPulse {
+  0%, 100% { box-shadow: 0 0 20px var(--neon-glow); }
+  50% { box-shadow: 0 0 30px var(--neon-glow-strong); }
+}
 
 /* ── Industrial image treatment ──────────────────────── */
 .industrial-img{
@@ -81,13 +102,11 @@ img {
   height:100%;
   object-fit:cover;
 }
-.industrial-img:hover,
-*:hover > .industrial-img{
+.industrial-img:hover, *:hover > .industrial-img{
   filter:saturate(1) contrast(1);
 }
 
 /* ── Section base spacing ────────────────────────────── */
-/* In @layer base so Tailwind utilities (py-*, px-*) can override per-section */
 @layer base {
   section{padding:48px 16px}
   @media(min-width:640px){section{padding:56px 24px}}
@@ -95,28 +114,20 @@ img {
   @media(min-width:1024px){section{padding:96px 80px}}
 }
 
-/* ── Road divider (línea de carretera) ───────────────── */
+/* ── Road divider (dashed neon line) ─────────────────── */
 .road-divider{
   height:3px;
-  background:repeating-linear-gradient(
-    90deg,
-    var(--neon) 0px, var(--neon) 32px,
-    transparent 32px, transparent 64px
-  );
+  background:repeating-linear-gradient(90deg, var(--neon) 0px, var(--neon) 32px, transparent 32px, transparent 64px);
   opacity:0.5;
   margin:0;
   border:none;
 }
 .road-divider.thin{
   height:2px;
-  background:repeating-linear-gradient(
-    90deg,
-    var(--neon) 0px, var(--neon) 20px,
-    transparent 20px, transparent 40px
-  );
+  background:repeating-linear-gradient(90deg, var(--neon) 0px, var(--neon) 20px, transparent 20px, transparent 40px);
 }
 
-/* ── Grid pattern (plano técnico) ────────────────────── */
+/* ── Grid pattern (technical blueprint) ──────────────── */
 .grid-bg{
   position:relative;
 }
@@ -125,8 +136,8 @@ img {
   position:absolute;
   inset:0;
   background-image:
-    linear-gradient(to right, rgba(57,255,20,.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(57,255,20,.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(225,255,0,.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(225,255,0,.025) 1px, transparent 1px);
   background-size:40px 40px;
   pointer-events:none;
   z-index:0;
@@ -155,6 +166,7 @@ img {
   z-index:0;
 }
 
+/* ── Section headings ────────────────────────────────── */
 .sec-tag{
   display:flex;align-items:center;gap:10px;
   font-family:var(--fm);font-size:10px;letter-spacing:3px;text-transform:uppercase;
@@ -172,7 +184,173 @@ img {
   .sec-h2{margin-bottom:12px}
 }
 
-/* ===== SKIP LINK ===== */
+/* ════════════════════════════════════════════════════════
+   TROPHY DESIGN SYSTEM — neon + grey + black only
+   ════════════════════════════════════════════════════════ */
+
+/* ══ TROPHY BADGE (prestige marker) ══ */
+.trophy-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--neon);
+  color: var(--black);
+  font-family: var(--fm);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border: 2px solid var(--neon);
+  position: relative;
+}
+.trophy-badge::before {
+  content: '★';
+  font-size: 12px;
+  color: var(--black);
+}
+.trophy-badge--outline {
+  background: transparent;
+  color: var(--neon);
+}
+.trophy-badge--outline::before {
+  color: var(--neon);
+}
+
+/* ══ TROPHY CARD (heavy physical mass) ══
+   Thick bottom border = weighted base like a trophy pedestal */
+.trophy-card {
+  background: var(--coal);
+  border: 1px solid var(--steel);
+  border-bottom: 4px solid var(--steel);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* Polished top edge — simulates machined metal */
+.trophy-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--polished-edge);
+}
+.trophy-card:hover {
+  background: var(--char);
+  border-bottom-color: var(--neon);
+  box-shadow: var(--heavy-shadow-hover);
+  transform: translateY(-6px);
+}
+.trophy-card:hover::before {
+  background: var(--neon-edge);
+  opacity: 0.6;
+}
+
+/* ══ NEON PANEL (glowing trophy display) ══ */
+.neon-panel {
+  background: var(--coal);
+  border: 1px solid var(--steel);
+  border-bottom: 3px solid var(--neon);
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.neon-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--polished-edge);
+}
+.neon-panel:hover {
+  background: var(--char);
+  border-color: var(--neon);
+  box-shadow: 0 0 30px var(--neon-glow), 0 0 60px var(--neon-glow);
+  transform: translateY(-4px);
+}
+
+/* ══ PLAQUE (engraved metal look) ══
+   Inset text effect for certifications, awards, specs */
+.plaque {
+  background: var(--asphalt);
+  border: 1px solid var(--steel);
+  border-top: 2px solid var(--steel);
+  border-bottom: 2px solid var(--steel);
+  position: relative;
+}
+.plaque::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--shine-gradient);
+  pointer-events: none;
+}
+/* Plaque text has subtle engraved shadow */
+.plaque-text {
+  font-family: var(--fm);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--mist);
+  text-shadow: 0 1px 0 rgba(0,0,0,0.8);
+}
+
+/* ══ PEDESTAL (section separator with weight) ══ */
+.pedestal {
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--steel), transparent);
+  position: relative;
+  margin: 0;
+  border: none;
+}
+.pedestal::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: var(--neon);
+  box-shadow: 0 0 12px var(--neon-glow-strong);
+}
+
+/* ══ LASER CUT BORDER ══
+   Precise geometric corners like CNC-machined metal */
+.laser-cut {
+  position: relative;
+  border: 1px solid var(--steel);
+}
+.laser-cut::before,
+.laser-cut::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: var(--neon);
+  border-style: solid;
+  transition: all 0.3s ease;
+}
+.laser-cut::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+}
+.laser-cut::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 2px 2px 0;
+}
+.laser-cut:hover::before,
+.laser-cut:hover::after {
+  width: 16px;
+  height: 16px;
+}
+
+/* ══ SKIP LINK ══ */
 .skip-link {
   position: absolute;
   top: -40px;

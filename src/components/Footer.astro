@@ -4,65 +4,75 @@ import { COMPANY, PRIMARY_NAV } from '@/data/navigation';
 const year = new Date().getFullYear();
 ---
 
-<footer class="block bg-coal border-t border-steel text-mist font-mono text-xs uppercase tracking-widest py-12 mt-24">
-  <div class="max-w-screen-2xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-3 gap-12">
-    <section aria-labelledby="footer-brand">
-      <h2 id="footer-brand" class="font-display font-bold text-bone text-2xl mb-3 not-italic">
+<footer>
+  <div class="f-grid">
+    <section aria-labelledby="footer-brand" class="fbrand-wrap">
+      <h2 id="footer-brand" class="fbrand">
+        <span class="fbrand-mark">T</span>
         {COMPANY.shortName}
       </h2>
-      <p class="text-mist normal-case tracking-normal text-sm leading-relaxed">
-        {COMPANY.tagline}.
+      <p class="ftag">
+        {COMPANY.tagline}. Fabricación e instalación de equipos y señalamiento vial con cumplimiento normativo SCT.
       </p>
-      <address class="not-italic text-mist normal-case tracking-normal text-sm mt-4 leading-relaxed">
-        {COMPANY.address.streetAddress}<br />
-        {COMPANY.address.addressLocality}, {COMPANY.address.addressRegion} {COMPANY.address.postalCode}<br />
-        {COMPANY.address.addressCountry}
-      </address>
+      <span class="fnorm">SCT N-CMT-5-001-13</span>
+      <span class="fnorm" style="margin-left: 8px;">ASTM</span>
     </section>
 
     <nav aria-labelledby="footer-nav">
-      <h2 id="footer-nav" class="text-neon mb-3">Navegación</h2>
-      <ul class="space-y-2">
+      <h2 id="footer-nav" class="fct">Navegación</h2>
+      <ul class="flinks">
         {
           PRIMARY_NAV.map((link) => (
             <li>
-              <a href={link.href} class="hover:text-neon transition-colors duration-200 ease-brand">
-                {link.label}
-              </a>
+              <a href={link.href}>{link.label}</a>
             </li>
           ))
         }
         <li>
-          <a href="/aviso-privacidad" class="hover:text-neon transition-colors duration-200 ease-brand">
-            Aviso de Privacidad
-          </a>
+          <a href="/aviso-privacidad">Aviso de Privacidad</a>
         </li>
       </ul>
     </nav>
 
+    <section aria-labelledby="footer-products">
+      <h2 id="footer-products" class="fct">Productos</h2>
+      <ul class="flinks">
+        <li><a href="/productos?cat=calderas">Calderas Termoplásticas</a></li>
+        <li><a href="/productos?cat=maquinas">Máquinas Aplicadoras</a></li>
+        <li><a href="/productos?cat=senalamiento">Señalamiento</a></li>
+        <li><a href="/productos?cat=confinamiento">Confinamiento</a></li>
+      </ul>
+    </section>
+
     <section aria-labelledby="footer-contact">
-      <h2 id="footer-contact" class="text-neon mb-3">Contacto</h2>
-      <ul class="space-y-2 normal-case tracking-normal text-sm">
+      <h2 id="footer-contact" class="fct">Contacto</h2>
+      <ul class="flinks">
         <li>
-          <a href={`tel:${COMPANY.phones[0]}`} class="hover:text-neon transition-colors duration-200 ease-brand">
-            Tel. {COMPANY.phoneDisplay}
-          </a>
+          <a href={`tel:${COMPANY.phones[0]}`}>Tel. {COMPANY.phoneDisplay}</a>
         </li>
         <li>
-          <a href={`mailto:${COMPANY.email}`} class="hover:text-neon transition-colors duration-200 ease-brand break-all">
-            {COMPANY.email}
-          </a>
+          <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>
         </li>
-        <li class="text-mist">L–V {COMPANY.hours.weekdays}</li>
-        <li class="text-mist">Sáb {COMPANY.hours.saturday}</li>
+        <li><span class="text-mist">L–V {COMPANY.hours.weekdays}</span></li>
+        <li><span class="text-mist">Sáb {COMPANY.hours.saturday}</span></li>
+        <li class="mt-2">
+          <address class="not-italic text-mist text-xs leading-relaxed normal-case tracking-normal">
+            {COMPANY.address.streetAddress}<br />
+            {COMPANY.address.addressLocality}, {COMPANY.address.addressRegion}
+          </address>
+        </li>
       </ul>
     </section>
   </div>
 
-  <div class="max-w-screen-2xl mx-auto px-4 md:px-8 mt-12 pt-6 border-t border-rule flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-    <small class="normal-case tracking-normal text-xs text-mist">
+  <div class="fbot">
+    <small class="fcp">
       © {year} {COMPANY.legalName}. Todos los derechos reservados.
     </small>
-    <small class="text-mist">SCT N-CMT-5-001-13 · ASTM</small>
+    <div class="fnoms">
+      <span class="fnom">SCT</span>
+      <span class="fnom">ASTM</span>
+      <span class="fnom">ISO 9001</span>
+    </div>
   </div>
 </footer>

@@ -4,8 +4,14 @@ export default {
   theme: {
     extend: {
       colors: {
+        /* Core neon — NEVER CHANGE. Client mandate. */
         neon: '#E1FF00',
         neonDim: '#C8E500',
+        /* Trophy metallic accents — overlaid on neon, never replacing */
+        gold: '#D4AF37',
+        goldBright: '#F4D03F',
+        bronze: '#CD7F32',
+        /* Dark industrial surfaces */
         black: '#000000',
         asphalt: '#0A0A0A',
         coal: '#0F0F0F',

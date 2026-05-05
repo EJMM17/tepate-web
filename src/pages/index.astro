@@ -14,36 +14,64 @@ const seo = buildSeo({
 ---
 
 <Layout {...seo}>
-  <!-- ── HERO ─────────────────────────────────────────── -->
-  <div class="hero">
+  <!-- ═══════════════════════════════════════════════════════════
+       HERO — Cinematic Editorial Layout
+       Monumental typography, asymmetric grid, parallax depth
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="hero" aria-label="Inicio">
     <div class="hero-left">
       <span class="eyebrow">
         <span class="dot"></span>
         16 años · SCT N-CMT-5-001-13 · ASTM
       </span>
+
       <h1 class="hero-h1">
-        Fomentando la Cultura Vial<br />
-        <span class="acc">y sus Valores.</span>
+        <span class="line">Fomentando</span>
+        <span class="line">la Cultura Vial</span>
+        <span class="line acc">y sus Valores.</span>
       </h1>
+
       <p class="hero-sub">
         Fabricación e instalación de <strong>calderas termoplásticas</strong>,
         señalamiento horizontal y vertical, dispositivos de protección y equipos
         solares. Envíos a todo México.
       </p>
+
       <div class="hero-actions">
-        <a href="/contacto" class="btn-primary">Solicitar cotización →</a>
-        <a
-          href="/calderas-termoplasticas-tepate.pdf"
-          download
-          class="btn-ghost"
-        >Descargar Catálogo</a>
+        <a href="/contacto" class="btn-primary magnetic">
+          <span>Solicitar cotización</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="/calderas-termoplasticas-tepate.pdf" download class="btn-ghost magnetic">
+          <span>Descargar Catálogo</span>
+        </a>
+      </div>
+
+      <!-- Stats floating -->
+      <div class="hero-float-stats">
+        <div class="hfs-item">
+          <span class="hfs-n" data-value="16">0</span>
+          <span class="hfs-l">Años de Exp.</span>
+        </div>
+        <div class="hfs-divider"></div>
+        <div class="hfs-item">
+          <span class="hfs-n">SCT</span>
+          <span class="hfs-l">Certificación</span>
+        </div>
+        <div class="hfs-divider"></div>
+        <div class="hfs-item">
+          <span class="hfs-n">ASTM</span>
+          <span class="hfs-l">Estándar</span>
+        </div>
       </div>
     </div>
 
     <div class="hero-right">
       <div class="hero-visual">
         <img
-          class="hero-bg-img"
+          class="hero-bg-img parallax-img"
           src="/hero-bg.gif"
           alt=""
           aria-hidden="true"
@@ -51,31 +79,19 @@ const seo = buildSeo({
           decoding="async"
         />
         <div class="hero-visual-overlay"></div>
-        <div class="hero-float-stats">
-          <div class="hfs-item">
-            <span class="hfs-n">16+</span>
-            <span class="hfs-l">Años de Exp.</span>
-          </div>
-          <div class="hfs-divider"></div>
-          <div class="hfs-item">
-            <span class="hfs-n">SCT</span>
-            <span class="hfs-l">Certificación</span>
-          </div>
-          <div class="hfs-divider"></div>
-          <div class="hfs-item">
-            <span class="hfs-n">ASTM</span>
-            <span class="hfs-l">Estándar</span>
-          </div>
-        </div>
+
+        <!-- Scroll indicator -->
         <div class="hero-scroll" aria-hidden="true">
           <span class="hero-scroll-l">Scroll</span>
           <div class="hero-scroll-line"></div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- ── TICKER MARQUEE ────────────────────────────────── -->
+  <!-- ═══════════════════════════════════════════════════════════
+       MARQUEE — Product categories ticker
+       ═══════════════════════════════════════════════════════════ -->
   <div class="prod-ticker" aria-hidden="true">
     <div class="prod-ticker-track">
       <span>Calderas Termoplásticas</span><span class="ptick-sep">◆</span>
@@ -95,16 +111,18 @@ const seo = buildSeo({
     </div>
   </div>
 
-  <!-- ── BENTO PRODUCTOS ────────────────────────────────── -->
+  <!-- ═══════════════════════════════════════════════════════════
+       BENTO GRID — Product lines showcase
+       Asymmetric, magazine-style product presentation
+       ═══════════════════════════════════════════════════════════ -->
   <section class="prod-bento-section" aria-labelledby="prods-bento-heading">
-    <div class="prod-bento-header">
+    <div class="prod-bento-header reveal-up">
       <span id="prods-bento-heading" class="prod-bento-eyebrow">Nuestras Líneas</span>
-      <a href="/productos" class="prod-bento-all">Catálogo completo →</a>
+      <a href="/productos" class="prod-bento-all magnetic">Catálogo completo →</a>
     </div>
 
-    <div class="prod-bento-grid">
-
-      <!-- 01 — CALDERAS (featured) -->
+    <div class="prod-bento-grid reveal-stagger">
+      <!-- 01 — CALDERAS (featured, spans 2 rows on desktop) -->
       <a href="/productos?cat=calderas" class="pbc pbc--featured">
         <span class="pbc-num">01</span>
         <div class="pbc-ico">
@@ -118,7 +136,7 @@ const seo = buildSeo({
         </div>
         <p class="pbc-name">Calderas Termoplásticas</p>
         <p class="pbc-desc">100% hidráulicas, diseñadas sobre pedido. Doble cilindraje disponible. Componentes Kohler, Parker y Vickers. Unidades individuales o sobre remolque.</p>
-        <span class="pbc-tags">400 kg &nbsp;·&nbsp; 500 kg &nbsp;·&nbsp; 1,000 kg &nbsp;·&nbsp; 2,000 kg</span>
+        <span class="pbc-tags">400 kg · 500 kg · 1,000 kg · 2,000 kg</span>
         <span class="pbc-link">Ver modelos →</span>
       </a>
 
@@ -135,39 +153,7 @@ const seo = buildSeo({
           </svg>
         </div>
         <p class="pbc-name">Máquinas Aplicadoras</p>
-        <span class="pbc-tags">200 kg &nbsp;·&nbsp; 250 kg &nbsp;·&nbsp; 300 kg</span>
-        <span class="pbc-link">Ver →</span>
-      </a>
-
-      <!-- 04 — SEÑALAMIENTO HORIZONTAL -->
-      <a href="/productos?cat=senalamiento" class="pbc">
-        <span class="pbc-num">04</span>
-        <div class="pbc-ico">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
-            <line x1="3" y1="6" x2="21" y2="6"/>
-            <line x1="3" y1="12" x2="21" y2="12"/>
-            <line x1="3" y1="18" x2="21" y2="18"/>
-          </svg>
-        </div>
-        <p class="pbc-name">Señalamiento Horizontal</p>
-        <span class="pbc-tags">Termoplástica AASHTO &nbsp;·&nbsp; SCT</span>
-        <span class="pbc-link">Ver →</span>
-      </a>
-
-      <!-- 06 — CONFINAMIENTO -->
-      <a href="/productos?cat=confinamiento" class="pbc">
-        <span class="pbc-num">06</span>
-        <div class="pbc-ico">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
-            <rect x="2" y="10" width="20" height="4"/>
-            <line x1="6" y1="10" x2="5" y2="6"/>
-            <line x1="18" y1="10" x2="19" y2="6"/>
-            <line x1="6" y1="14" x2="5" y2="18"/>
-            <line x1="18" y1="14" x2="19" y2="18"/>
-          </svg>
-        </div>
-        <p class="pbc-name">Dispositivos de Confinamiento</p>
-        <span class="pbc-tags">Confinamiento &nbsp;·&nbsp; Delimitación</span>
+        <span class="pbc-tags">200 kg · 250 kg · 300 kg</span>
         <span class="pbc-link">Ver →</span>
       </a>
 
@@ -189,6 +175,21 @@ const seo = buildSeo({
         <span class="pbc-link">Ver →</span>
       </a>
 
+      <!-- 04 — SEÑALAMIENTO HORIZONTAL -->
+      <a href="/productos?cat=senalamiento" class="pbc">
+        <span class="pbc-num">04</span>
+        <div class="pbc-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </div>
+        <p class="pbc-name">Señalamiento Horizontal</p>
+        <span class="pbc-tags">Termoplástica AASHTO · SCT</span>
+        <span class="pbc-link">Ver →</span>
+      </a>
+
       <!-- 05 — SEÑALAMIENTO VERTICAL -->
       <a href="/productos?cat=senalamiento" class="pbc">
         <span class="pbc-num">05</span>
@@ -200,7 +201,24 @@ const seo = buildSeo({
           </svg>
         </div>
         <p class="pbc-name">Señalamiento Vertical</p>
-        <span class="pbc-tags">Bajo &nbsp;·&nbsp; Elevado &nbsp;·&nbsp; SR / SP / SIS</span>
+        <span class="pbc-tags">Bajo · Elevado · SR / SP / SIS</span>
+        <span class="pbc-link">Ver →</span>
+      </a>
+
+      <!-- 06 — CONFINAMIENTO -->
+      <a href="/productos?cat=confinamiento" class="pbc">
+        <span class="pbc-num">06</span>
+        <div class="pbc-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+            <rect x="2" y="10" width="20" height="4"/>
+            <line x1="6" y1="10" x2="5" y2="6"/>
+            <line x1="18" y1="10" x2="19" y2="6"/>
+            <line x1="6" y1="14" x2="5" y2="18"/>
+            <line x1="18" y1="14" x2="19" y2="18"/>
+          </svg>
+        </div>
+        <p class="pbc-name">Dispositivos de Confinamiento</p>
+        <span class="pbc-tags">Confinamiento · Delimitación</span>
         <span class="pbc-link">Ver →</span>
       </a>
 
@@ -216,24 +234,136 @@ const seo = buildSeo({
           </svg>
         </div>
         <p class="pbc-name">Equipos con Panel Solar</p>
-        <span class="pbc-tags">Destellantes &nbsp;·&nbsp; Vial</span>
+        <span class="pbc-tags">Destellantes · Vial</span>
         <span class="pbc-link">Ver →</span>
       </a>
-
     </div>
   </section>
 
-  <!-- ── CONTACTO ─────────────────────────────────────── -->
-  <section class="px-4 md:px-8 py-12 md:py-20 lg:py-24" aria-labelledby="contacto-heading">
-    <div class="max-w-screen-md mx-auto">
-      <p class="font-mono text-xs uppercase tracking-widest text-neon mb-3">Contáctanos</p>
-      <h2 id="contacto-heading" class="font-display font-bold text-white text-display-md uppercase mb-3">
-        Cuéntanos tu proyecto
-      </h2>
-      <p class="text-bone mb-8 md:mb-10">
-        Respondemos en menos de 24 horas hábiles. Sin spam, sin compromiso.
-      </p>
-      <ContactForm client:visible />
+  <!-- ═══════════════════════════════════════════════════════════
+       TRUST BAND — Stats & credibility
+       Full-width numerical impact
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="trust-band" aria-label="Estadísticas de la empresa">
+    <div class="trust-grid">
+      <div class="trust-item reveal-up">
+        <span class="trust-n" data-value="16">0</span>
+        <span class="trust-plus">+</span>
+        <span class="trust-l">Años de experiencia</span>
+      </div>
+      <div class="trust-item reveal-up">
+        <span class="trust-n" data-value="500">0</span>
+        <span class="trust-plus">+</span>
+        <span class="trust-l">Proyectos ejecutados</span>
+      </div>
+      <div class="trust-item reveal-up">
+        <span class="trust-n" data-value="32">0</span>
+        <span class="trust-l">Estados de México</span>
+      </div>
+      <div class="trust-item reveal-up">
+        <span class="trust-n">SCT</span>
+        <span class="trust-l">Norma N-CMT-5-001-13</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       WHY TEPATE — Editorial split layout
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="why-editorial" aria-labelledby="why-heading">
+    <div class="why-visual reveal-up">
+      <div class="why-img-wrap">
+        <img src="/TEPATE_Imagenes_Organizadas/03_Informacion_Empresa/fabrica-apodaca.webp" alt="Planta de fabricación TEPATE en Apodaca" loading="lazy" class="parallax-img" />
+      </div>
+      <div class="why-img-caption">
+        <span class="trophy-badge">Planta Apodaca, NL</span>
+      </div>
+    </div>
+
+    <div class="why-content">
+      <div class="reveal-up">
+        <span class="sec-tag">Por qué elegirnos</span>
+        <h2 id="why-heading" class="sec-h2">
+          Ingeniería que<br/><span class="acc">cumple.</span>
+        </h2>
+      </div>
+
+      <div class="why-list reveal-stagger">
+        <div class="why-item">
+          <span class="why-num">01</span>
+          <div>
+            <h3 class="why-title">Fabricación propia</h3>
+            <p class="why-desc">Diseñamos y construimos cada equipo en nuestra planta de Apodaca. Control total de calidad, sin intermediarios.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <span class="why-num">02</span>
+          <div>
+            <h3 class="why-title">Normativa SCT & ASTM</h3>
+            <p class="why-desc">Todos nuestros productos cumplen con la Norma N-CMT-5-001-13 de la SCT y estándares ASTM internacionales.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <span class="why-num">03</span>
+          <div>
+            <h3 class="why-title">Envíos nacionales</h3>
+            <p class="why-desc">Entregamos en los 32 estados de México. Logística propia y tiempos de entrega competitivos.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <span class="why-num">04</span>
+          <div>
+            <h3 class="why-title">Soporte técnico</h3>
+            <p class="why-desc">Asesoría en campo, capacitación de operadores y mantenimiento preventivo post-venta.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CTA BAND — High-contrast conversion zone
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="cta-band" aria-label="Cotización">
+    <div class="cta-inner">
+      <div class="reveal-up">
+        <h2 class="cta-h2">
+          ¿Tienes un proyecto<br/>de señalización?
+        </h2>
+        <p class="cta-sub">
+          Recibe una propuesta técnica y económica en menos de 24 horas hábiles.
+          Sin compromiso.
+        </p>
+      </div>
+      <div class="cta-side reveal-up">
+        <a href="/contacto" class="btn-dark magnetic">
+          <span>Iniciar cotización</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <span class="cta-aside">Respuesta garantizada en 24h</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CONTACT — Minimal, confident form
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="contact-section" aria-labelledby="contacto-heading">
+    <div class="contact-inner">
+      <div class="contact-head reveal-up">
+        <span class="sec-tag">Contáctanos</span>
+        <h2 id="contacto-heading" class="sec-h2">
+          Cuéntanos tu<br/><span class="acc">proyecto.</span>
+        </h2>
+        <p class="contact-lead">
+          Respondemos en menos de 24 horas hábiles. Sin spam, sin compromiso.
+        </p>
+      </div>
+      <div class="contact-form-wrap reveal-up">
+        <ContactForm client:visible />
+      </div>
     </div>
   </section>
 </Layout>
