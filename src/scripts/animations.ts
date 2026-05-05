@@ -46,34 +46,53 @@ export function initPreloader() {
   const preloader = document.getElementById('preloader');
   if (!preloader) return;
 
-  const tl = gsap.timeline({
-    onComplete: () => {
-      preloader.style.display = 'none';
-      document.body.classList.add('loaded');
-      initHeroReveal();
-    },
-  });
+  // Safety fallback: force hide after 3.5s no matter what
+  const safetyTimeout = setTimeout(() => {
+    forceHidePreloader(preloader);
+  }, 3500);
 
-  tl.to('.preloader-progress', {
-    width: '100%',
-    duration: 1.2,
-    ease: 'power2.inOut',
-  })
-    .to('.preloader-logo', {
-      opacity: 0,
-      y: -20,
-      duration: 0.4,
-      ease: 'power2.in',
-    })
-    .to(
-      preloader,
-      {
-        clipPath: 'inset(0 0 100% 0)',
-        duration: 0.8,
-        ease: 'power4.inOut',
+  function forceHidePreloader(el: HTMLElement) {
+    clearTimeout(safetyTimeout);
+    gsap.set(el, { display: 'none', opacity: 0 });
+    el.style.display = 'none';
+    document.body.classList.add('loaded');
+    initHeroReveal();
+  }
+
+  try {
+    const tl = gsap.timeline({
+      onComplete: () => {
+        clearTimeout(safetyTimeout);
+        preloader.style.display = 'none';
+        document.body.classList.add('loaded');
+        initHeroReveal();
       },
-      '-=0.1'
-    );
+    });
+
+    tl.to('.preloader-progress', {
+      width: '100%',
+      duration: 1.2,
+      ease: 'power2.inOut',
+    })
+      .to('.preloader-logo', {
+        opacity: 0,
+        y: -20,
+        duration: 0.4,
+        ease: 'power2.in',
+      })
+      .to(
+        preloader,
+        {
+          clipPath: 'inset(0 0 100% 0)',
+          duration: 0.8,
+          ease: 'power4.inOut',
+        },
+        '-=0.1'
+      );
+  } catch {
+    // If GSAP fails, force hide immediately
+    forceHidePreloader(preloader);
+  }
 }
 
 /* ── Hero Typography Reveal ──────────────────────────── */
