@@ -89,7 +89,8 @@ img {
 /* ── Section base spacing ────────────────────────────── */
 /* In @layer base so Tailwind utilities (py-*, px-*) can override per-section */
 @layer base {
-  section{padding:64px 20px}
+  section{padding:48px 16px}
+  @media(min-width:640px){section{padding:56px 24px}}
   @media(min-width:768px){section{padding:80px 40px}}
   @media(min-width:1024px){section{padding:96px 80px}}
 }
@@ -157,14 +158,18 @@ img {
 .sec-tag{
   display:flex;align-items:center;gap:10px;
   font-family:var(--fm);font-size:10px;letter-spacing:3px;text-transform:uppercase;
-  color:var(--neon);margin-bottom:14px;font-weight:600;
+  color:var(--neon);margin-bottom:12px;font-weight:600;
 }
 .sec-tag::before{content:'';display:block;width:24px;height:2px;background:var(--neon)}
 .sec-h2{
   font-family:var(--fd);
-  font-size:clamp(32px,6vw,56px);font-weight:900;
+  font-size:clamp(26px,6vw,56px);font-weight:900;
   text-transform:uppercase;line-height:.94;letter-spacing:-.5px;
-  margin-bottom:12px;color:var(--white);
+  margin-bottom:10px;color:var(--white);
+}
+@media(min-width:768px){
+  .sec-tag{margin-bottom:14px}
+  .sec-h2{margin-bottom:12px}
 }
 
 /* ===== SKIP LINK ===== */
