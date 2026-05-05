@@ -3,6 +3,7 @@ import Layout from '@/layouts/Layout.astro';
 import { buildSeo, buildBreadcrumbJsonLd } from '@/lib/seo';
 import { COMPANY } from '@/data/navigation';
 import { PRODUCTS, PRODUCT_CATEGORIES } from '@/data/products';
+import ProductModal from '@/components/ProductModal';
 
 const seo = buildSeo({
   title: 'Productos — Ingeniería Vial TEPATE',
@@ -72,7 +73,7 @@ const seo = buildSeo({
         </div>
         <div class="spec-grid">
           {catProducts.map((product) => (
-            <div class="spec product-trigger" data-img={product.image}>
+            <div class="spec product-trigger" data-product-id={product.id} data-img={product.image}>
               <div class="spec-photo">
                 <img src={product.image} alt={product.imageAlt} loading="lazy" decoding="async" width="600" height="450" />
               </div>
@@ -129,19 +130,5 @@ const seo = buildSeo({
     </div>
   </section>
 
-  <div class="modal-overlay" id="product-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc">
-    <div class="modal-content" tabindex="-1">
-      <button class="modal-close" id="modal-close" aria-label="Cerrar modal">&times;</button>
-      <img id="modal-image" class="modal-image" alt="" style="display:none" />
-      <h3 class="modal-title" id="modal-title">Nombre del Producto</h3>
-      <div class="modal-subtitle" id="modal-subtitle">Modelo</div>
-      <div class="modal-body" id="modal-desc">Descripción detallada del producto.</div>
-      <div class="modal-specs" id="modal-specs-container"></div>
-    </div>
-  </div>
+  <ProductModal products={PRODUCTS} client:idle />
 </Layout>
-
-<script>
-  import { initProductModal } from '@/scripts/product-modal';
-  initProductModal();
-</script>
