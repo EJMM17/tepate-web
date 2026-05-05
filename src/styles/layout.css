@@ -28,6 +28,8 @@
 @media(min-width:768px){.sep{display:inline}}
 
 /* ── NAV ────────────────────────────────────────────── */
+/* In @layer base so Tailwind utilities on <nav> elements take precedence */
+@layer base {
 nav{
   position:sticky;top:0;z-index:1100;
   background:rgba(0,0,0,.96);
@@ -35,6 +37,7 @@ nav{
   border-bottom:1px solid var(--steel);
   display:flex;align-items:center;justify-content:space-between;
   padding:0 20px;height:64px;
+}
 }
 .nav-logo{
   font-family:var(--fd);font-weight:900;font-size:22px;
@@ -84,8 +87,11 @@ nav{
 .nav-cta:active {
   transform: scale(0.98) !important;
 }
-@media(min-width:768px){.nav-links{display:flex};nav{padding:0 40px}}
-@media(min-width:1024px){nav{padding:0 56px}}
+@layer base {
+  @media(min-width:768px){nav{padding:0 40px}}
+  @media(min-width:1024px){nav{padding:0 56px}}
+}
+@media(min-width:768px){.nav-links{display:flex}}
 
 /* Hamburger */
 .ham{
@@ -165,13 +171,16 @@ nav{
 }
 
 /* ── FOOTER ─────────────────────────────────────────── */
-footer{
-  background:var(--asphalt);border-top:1px solid var(--steel);
-  padding:48px 20px;
-  display:grid;grid-template-columns:1fr 1fr;gap:36px;
+/* In @layer base so Tailwind utilities on <footer> elements take precedence */
+@layer base {
+  footer{
+    background:var(--asphalt);border-top:1px solid var(--steel);
+    padding:48px 20px;
+    display:grid;grid-template-columns:1fr 1fr;gap:36px;
+  }
+  @media(min-width:640px){footer{grid-template-columns:repeat(2,1fr);padding:52px 40px}}
+  @media(min-width:1024px){footer{grid-template-columns:1.4fr 1fr 1fr 1fr;padding:56px 80px}}
 }
-@media(min-width:640px){footer{grid-template-columns:repeat(2,1fr);padding:52px 40px}}
-@media(min-width:1024px){footer{grid-template-columns:1.4fr 1fr 1fr 1fr;padding:56px 80px}}
 
 .fbrand-wrap{grid-column:1/-1}
 @media(min-width:1024px){.fbrand-wrap{grid-column:auto}}
