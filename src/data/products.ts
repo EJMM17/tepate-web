@@ -433,7 +433,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'tt-01',
     model: 'TT-01',
     name: 'Trafitambos',
-    image: '/TEPATE_Imagenes_Organizadas/24_Senalamiento_Vertical_SID15/slide31_Senalamiento_Vertical_Elevado_SID15_img8.webp',
+    image: '/TEPATE_Imagenes_Organizadas/24_Senalamiento_Vertical_SID15/slide31_Senalamiento_Vertical_Elevado_SID15_img8.png',
     imageAlt: 'Trafitambos',
     category: 'confinamiento',
     specs: [

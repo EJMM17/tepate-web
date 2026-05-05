@@ -46,10 +46,10 @@ export function initPreloader() {
   const preloader = document.getElementById('preloader');
   if (!preloader) return;
 
-  // Safety fallback: force hide after 3.5s no matter what
+  // Safety fallback: force hide after 1.8s no matter what
   const safetyTimeout = setTimeout(() => {
     forceHidePreloader(preloader);
-  }, 3500);
+  }, 1800);
 
   function forceHidePreloader(el: HTMLElement) {
     clearTimeout(safetyTimeout);
@@ -71,23 +71,23 @@ export function initPreloader() {
 
     tl.to('.preloader-progress', {
       width: '100%',
-      duration: 1.2,
-      ease: 'power2.inOut',
+      duration: 0.5,
+      ease: 'power2.out',
     })
-      .to('.preloader-logo', {
+      .to('.preloader-logo-img', {
         opacity: 0,
-        y: -20,
-        duration: 0.4,
+        y: -12,
+        duration: 0.25,
         ease: 'power2.in',
       })
       .to(
         preloader,
         {
           clipPath: 'inset(0 0 100% 0)',
-          duration: 0.8,
-          ease: 'power4.inOut',
+          duration: 0.45,
+          ease: 'power3.inOut',
         },
-        '-=0.1'
+        '-=0.05'
       );
   } catch {
     // If GSAP fails, force hide immediately
@@ -103,15 +103,15 @@ function initHeroReveal() {
   const heroActions = document.querySelector('.hero-actions');
   const heroVisual = document.querySelector('.hero-visual');
 
-  const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
   let hasAnimated = false;
 
   if (heroEyebrow) {
     hasAnimated = true;
     tl.from(heroEyebrow, {
-      y: 30,
+      y: 16,
       opacity: 0,
-      duration: 0.8,
+      duration: 0.5,
     });
   }
 
@@ -122,21 +122,21 @@ function initHeroReveal() {
       tl.from(
         split.words || [],
         {
-          y: '120%',
+          y: '40%',
           opacity: 0,
-          duration: 1.2,
-          stagger: 0.03,
-          skewY: 4,
+          duration: 0.7,
+          stagger: 0.02,
+          skewY: 2,
         },
-        '-=0.4'
+        '-=0.25'
       );
     } catch {
       // Fallback if SplitType fails
       tl.from(heroH1, {
-        y: 60,
+        y: 30,
         opacity: 0,
-        duration: 1,
-      }, '-=0.4');
+        duration: 0.6,
+      }, '-=0.25');
     }
   }
 
@@ -145,11 +145,11 @@ function initHeroReveal() {
     tl.from(
       heroSub,
       {
-        y: 40,
+        y: 20,
         opacity: 0,
-        duration: 1,
+        duration: 0.6,
       },
-      '-=0.8'
+      '-=0.35'
     );
   }
 
@@ -158,12 +158,12 @@ function initHeroReveal() {
     tl.from(
       heroActions.children,
       {
-        y: 30,
+        y: 16,
         opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
+        duration: 0.5,
+        stagger: 0.06,
       },
-      '-=0.6'
+      '-=0.3'
     );
   }
 
@@ -172,10 +172,10 @@ function initHeroReveal() {
     tl.from(
       heroVisual,
       {
-        scale: 1.15,
+        scale: 1.05,
         opacity: 0,
-        duration: 1.4,
-        ease: 'power3.out',
+        duration: 0.8,
+        ease: 'power2.out',
       },
       0
     );
@@ -206,13 +206,13 @@ export function initScrollReveals() {
   // Generic fade-up reveal for sections
   gsap.utils.toArray<HTMLElement>('.reveal-up').forEach((el) => {
     gsap.from(el, {
-      y: 60,
+      y: 40,
       opacity: 0,
-      duration: 1,
+      duration: 0.7,
       ease: 'power3.out',
       scrollTrigger: {
         trigger: el,
-        start: 'top 85%',
+        start: 'top 88%',
         toggleActions: 'play none none none',
       },
     });
@@ -223,14 +223,14 @@ export function initScrollReveals() {
     const children = container.children;
     if (!children.length) return;
     gsap.from(children, {
-      y: 50,
+      y: 30,
       opacity: 0,
-      duration: 0.8,
-      stagger: 0.1,
+      duration: 0.6,
+      stagger: 0.06,
       ease: 'power3.out',
       scrollTrigger: {
         trigger: container,
-        start: 'top 80%',
+        start: 'top 85%',
         toggleActions: 'play none none none',
       },
     });

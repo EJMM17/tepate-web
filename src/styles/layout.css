@@ -329,17 +329,11 @@ footer {
   gap: 12px;
 }
 
-.fbrand-mark {
-  width: 36px;
-  height: 36px;
-  background: var(--neon);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--black);
-  font-family: var(--fd);
-  font-weight: 900;
-  font-size: 18px;
+.fbrand-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .ftag {
