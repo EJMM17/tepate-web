@@ -6,13 +6,16 @@
 /* ── TOPBAR ─────────────────────────────────────────── */
 .topbar{
   background:var(--neon);
-  font-family:var(--fm);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+  font-family:var(--fm);font-size:9px;letter-spacing:1px;text-transform:uppercase;
   color:var(--black);font-weight:600;
   display:flex;justify-content:center;align-items:center;
-  flex-wrap:wrap;gap:10px 20px;
-  padding:9px 16px;
+  flex-wrap:wrap;gap:6px 12px;
+  padding:8px 12px;
   position:relative;overflow:hidden;text-align:center;
   border-bottom:1px solid var(--neon);
+}
+@media(min-width:640px){
+  .topbar{font-size:10px;letter-spacing:1.5px;gap:10px 20px;padding:9px 16px}
 }
 .topbar::before{
   content:'';position:absolute;inset:0;
@@ -175,14 +178,16 @@ nav{
 @layer base {
   footer{
     background:var(--asphalt);border-top:1px solid var(--steel);
-    padding:48px 20px;
-    display:grid;grid-template-columns:1fr 1fr;gap:36px;
+    padding:36px 16px;
+    display:grid;grid-template-columns:1fr;gap:28px;
   }
-  @media(min-width:640px){footer{grid-template-columns:repeat(2,1fr);padding:52px 40px}}
+  @media(min-width:480px){footer{grid-template-columns:1fr 1fr;gap:32px;padding:40px 20px}}
+  @media(min-width:640px){footer{grid-template-columns:repeat(2,1fr);padding:52px 40px;gap:36px}}
   @media(min-width:1024px){footer{grid-template-columns:1.4fr 1fr 1fr 1fr;padding:56px 80px}}
 }
 
 .fbrand-wrap{grid-column:1/-1}
+@media(min-width:480px){.fbrand-wrap{grid-column:1/-1}}
 @media(min-width:1024px){.fbrand-wrap{grid-column:auto}}
 .fbrand{
   font-family:var(--fd);font-size:24px;font-weight:900;
@@ -230,8 +235,8 @@ nav{
 
 /* ── WHATSAPP FLOAT (square, brutalist) ─────────────── */
 .wa{
-  position:fixed;bottom:24px;right:24px;
-  width:56px;height:56px;
+  position:fixed;bottom:16px;right:16px;
+  width:48px;height:48px;
   background:var(--neon);color:var(--black);
   display:flex;align-items:center;justify-content:center;
   z-index:999;text-decoration:none;
@@ -239,15 +244,19 @@ nav{
   transition:background .2s;
 }
 .wa:hover{background:var(--white)}
-.wa svg{width:26px;height:26px;fill:var(--black)}
+.wa svg{width:22px;height:22px;fill:var(--black)}
+@media(min-width:640px){
+  .wa{bottom:24px;right:24px;width:56px;height:56px}
+  .wa svg{width:26px;height:26px}
+}
 
 /* ── BACK TO TOP ─────────────────────────────────────────── */
 .back-to-top {
   position: fixed;
-  bottom: 96px;
-  right: 24px;
-  width: 56px;
-  height: 56px;
+  bottom: 76px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
   background: var(--coal);
   border: 1px solid var(--neon);
   color: var(--neon);
@@ -271,11 +280,15 @@ nav{
   color: var(--black);
 }
 .back-to-top svg {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   stroke: currentColor;
   fill: none;
   stroke-width: 2;
   stroke-linecap: square;
   stroke-linejoin: miter;
+}
+@media(min-width:640px){
+  .back-to-top{bottom:96px;right:24px;width:56px;height:56px}
+  .back-to-top svg{width:24px;height:24px}
 }

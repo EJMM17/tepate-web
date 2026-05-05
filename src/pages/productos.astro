@@ -74,7 +74,7 @@ const seo = buildSeo({
           {catProducts.map((product) => (
             <div class="spec product-trigger" data-img={product.image}>
               <div class="spec-photo">
-                <img src={product.image} alt={product.imageAlt} loading="lazy" decoding="async" />
+                <img src={product.image} alt={product.imageAlt} loading="lazy" decoding="async" width="600" height="450" />
               </div>
               <div class="spec-info">
                 <div class="spec-model">{product.model}</div>

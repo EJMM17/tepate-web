@@ -8,7 +8,7 @@
   position: relative;
   font-family: var(--fd);
   font-weight: 900;
-  font-size: 16px;
+  font-size: 15px;
   letter-spacing: 2px;
   text-transform: uppercase;
   cursor: pointer;
@@ -19,12 +19,16 @@
   gap: 8px;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 2px;
+  min-height: 48px;
+}
+@media(min-width:640px){
+  .btn-primary, .btn-ghost, .btn-dark { font-size: 16px; }
 }
 
 .btn-primary {
   background: var(--neon);
   color: var(--black);
-  padding: 16px 36px;
+  padding: 14px 28px;
   border: 2px solid var(--neon);
 }
 .btn-primary:hover {
@@ -37,7 +41,7 @@
 
 .btn-ghost {
   color: var(--neon);
-  padding: 16px 36px;
+  padding: 14px 28px;
   border: 2px solid var(--neon);
   background: transparent;
 }
@@ -52,7 +56,7 @@
 .btn-dark {
   background: var(--black);
   color: var(--white);
-  padding: 16px 40px;
+  padding: 14px 32px;
   border: 2px solid var(--steel);
 }
 .btn-dark:hover {
@@ -61,6 +65,11 @@
 }
 .btn-dark:active {
   transform: scale(0.98);
+}
+
+@media(min-width:640px){
+  .btn-primary, .btn-ghost { padding: 16px 36px; }
+  .btn-dark { padding: 16px 40px; }
 }
 
 /* ── MARQUEE / LOGOS ────────────────────────────────── */
@@ -139,21 +148,24 @@
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 30px;
+  gap: 8px;
+  margin-bottom: 24px;
 }
+@media(min-width:640px){.filter-bar{gap:10px;margin-bottom:30px}}
 .filter-btn {
   background: transparent;
   border: 1px solid var(--steel);
   color: var(--mist);
-  padding: 8px 16px;
+  padding: 10px 14px;
   font-family: var(--fm);
-  font-size: 12px;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.2s ease;
+  min-height: 44px;
 }
+@media(min-width:640px){.filter-btn{padding:8px 16px;font-size:12px}}
 .filter-btn:hover {
   border-color: var(--neon);
   color: var(--white);
@@ -391,7 +403,8 @@
 }
 
 /* ── CONTACT FORM ───────────────────────────────────── */
-.cform{display:flex;flex-direction:column;gap:16px}
+.cform{display:flex;flex-direction:column;gap:14px}
+@media(min-width:640px){.cform{gap:16px}}
 .flabel{
   font-family:var(--fm);font-size:10px;letter-spacing:2px;text-transform:uppercase;
   color:var(--neon);margin-bottom:6px;display:block;font-weight:600;
@@ -399,7 +412,7 @@
 .finput{
   background:var(--coal);
   border:1px solid var(--steel);
-  color:var(--white);font-family:var(--fb);font-size:14px;
+  color:var(--white);font-family:var(--fb);font-size:16px;
   padding:14px 16px;width:100%;outline:none;
   transition:border-color .2s;
   -webkit-appearance:none;
@@ -407,9 +420,9 @@
 .finput:focus{border-color:var(--neon)}
 .finput.invalid{border-color:#ff4444}
 .finput::placeholder{color:#3a3a3a}
-textarea.finput{height:130px;resize:none}
-.form-row{display:grid;grid-template-columns:1fr;gap:16px}
-@media(min-width:480px){.form-row{grid-template-columns:1fr 1fr}}
+textarea.finput{height:120px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:480px){.form-row{grid-template-columns:1fr 1fr;gap:16px}}
 
 .form-success, .form-error {
   display: none;
