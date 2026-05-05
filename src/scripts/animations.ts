@@ -22,12 +22,6 @@ export function initSmoothScroll() {
     touchMultiplier: 2,
   });
 
-  function raf(time: number) {
-    lenisInstance?.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-
   lenisInstance.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((time) => {
     lenisInstance?.raf(time * 1000);
@@ -366,7 +360,7 @@ export function initScrollMarquee() {
 
 /* ── Image Parallax ──────────────────────────────────── */
 export function initImageParallax() {
-  gsap.utils.toArray<HTMLElement>('.parallax-img').forEach((img) => {
+  gsap.utils.toArray<HTMLElement>('.parallax-img:not(.hero-bg-img)').forEach((img) => {
     const parent = img.parentElement;
     if (!parent) return;
     gsap.to(img, {
