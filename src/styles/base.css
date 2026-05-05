@@ -87,9 +87,12 @@ img {
 }
 
 /* ── Section base spacing ────────────────────────────── */
-section{padding:64px 20px}
-@media(min-width:768px){section{padding:80px 40px}}
-@media(min-width:1024px){section{padding:96px 80px}}
+/* In @layer base so Tailwind utilities (py-*, px-*) can override per-section */
+@layer base {
+  section{padding:64px 20px}
+  @media(min-width:768px){section{padding:80px 40px}}
+  @media(min-width:1024px){section{padding:96px 80px}}
+}
 
 /* ── Road divider (línea de carretera) ───────────────── */
 .road-divider{

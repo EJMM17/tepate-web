@@ -63,7 +63,7 @@ export default function MobileNav({ navItems, catalogPdf }: MobileNavProps): JSX
       >
         CERRAR ×
       </button>
-      <nav aria-label="Móvil" className="flex flex-col">
+      <nav aria-label="Móvil" className="flex flex-col h-full overflow-y-auto">
         {navItems.map((link) => (
           <a key={link.href} href={link.href} className={linkClass} onClick={() => setOpen(false)}>
             {link.label}
