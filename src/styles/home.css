@@ -97,46 +97,6 @@
   align-items: center;
 }
 
-/* Stats floating */
-.hero-float-stats {
-  margin-top: 48px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  padding-top: 32px;
-  border-top: 1px solid var(--steel);
-}
-
-.hfs-item {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.hfs-n {
-  font-family: var(--fd);
-  font-size: 32px;
-  font-weight: 900;
-  color: var(--white);
-  line-height: 1;
-}
-
-.hfs-l {
-  font-family: var(--fm);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--neon);
-}
-
-.hfs-divider {
-  width: 1px;
-  height: 32px;
-  background: var(--steel);
-}
-
 /* Hero right visual */
 .hero-right {
   background: var(--asphalt);
@@ -205,7 +165,6 @@
 @media (min-width: 768px) {
   .hero-left { padding: 120px 48px 64px; }
   .hero-right { min-height: 60vh; }
-  .hfs-n { font-size: 40px; }
 }
 
 @media (min-width: 1024px) {
@@ -223,11 +182,6 @@
     min-height: auto;
     border-top: none;
   }
-  .hero-float-stats {
-    margin-top: auto;
-    padding-top: 40px;
-  }
-  .hfs-n { font-size: 48px; }
 }
 
 /* ── MARQUEE TICKER ─────────────────────────────────── */
