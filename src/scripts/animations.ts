@@ -250,21 +250,7 @@ export function initScrollReveals() {
     });
   });
 
-  gsap.utils.toArray<HTMLElement>('.hfs-n[data-value]').forEach((stat) => {
-    const target = parseInt(stat.dataset.value || '0', 10);
-    if (!target || isNaN(target)) return;
-
-    const obj = { val: 0 };
-    gsap.to(obj, {
-      val: target,
-      duration: 2,
-      ease: 'power2.out',
-      delay: 1.5, // after hero animation
-      onUpdate: () => {
-        stat.textContent = Math.round(obj.val).toString();
-      },
-    });
-  });
+  // Note: hero floating stats were removed to avoid duplicate counters.
 }
 
 /* ── Magnetic Buttons ────────────────────────────────── */
