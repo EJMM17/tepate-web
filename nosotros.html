@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nosotros — Ingeniería Vial TEPATE</title>
+<title>Nuestra Empresa: 16 Años de Experiencia Vial | TEPATE</title>
 <meta name="description" content="Ingeniería Vial TEPATE — 16 años fabricando equipos termoplásticos y señalamiento vial. Misión, visión, clientes y proveedores. Cumplimiento SCT y ASTM.">
 <meta property="og:title" content="Nosotros — Ingeniería Vial TEPATE">
 <meta property="og:description" content="Ingeniería Vial TEPATE — 16 años fabricando equipos termoplásticos y señalamiento vial. Misión, visión, clientes y proveedores. Cumplimiento SCT y ASTM.">
@@ -29,6 +29,12 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"></noscript>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <link rel="stylesheet" href="/src/index.css">
+<style>
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:box-shadow 0.3s ease;}
+nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.5);border-bottom:1px solid rgba(200,240,49,0.1);}
+body{padding-top:72px;}
+.hero{margin-top:-72px;padding-top:72px;}
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -69,7 +75,9 @@
   <span class="sep">·</span>
   <span>Cumplimiento SCT N-CMT-5-001-13</span>
   <span class="sep">·</span>
-  <span>Tel. (81) 8453-2875</span>
+  <span>Tel. <a href="tel:+528184532875" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--steel)">(81) 8453-2875</a></span>
+  <span class="sep">·</span>
+  <span><a href="https://wa.me/528118959042" target="_blank" rel="noopener noreferrer" style="color:var(--neon);text-decoration:none;border-bottom:1px solid var(--steel)">WhatsApp</a></span>
   <span class="sep">·</span>
   <span>16 años de experiencia</span>
 </div>
@@ -81,6 +89,8 @@
   </a>
   <div class="nav-links">
     <a href="index.html">Inicio</a>
+    <a href="productos.html">Productos</a>
+    <a href="servicios.html">Servicios</a>
     <a href="proyectos.html">Proyectos</a>
     <a href="nosotros.html">Nosotros</a>
     <a href="contacto.html">Contacto</a>
@@ -98,6 +108,8 @@
 <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú de navegación" aria-hidden="true">
   <button class="mobile-close" id="mobile-close-btn" aria-label="Cerrar menú">CERRAR ×</button>
   <a href="index.html">Inicio</a>
+  <a href="productos.html">Productos</a>
+  <a href="servicios.html">Servicios</a>
   <a href="proyectos.html">Proyectos</a>
   <a href="nosotros.html">Nosotros</a>
   <a href="contacto.html">Contacto</a>
@@ -313,21 +325,21 @@
   <div>
     <div class="fct">Señalamiento</div>
     <div class="flinks">
-      <a href="productos.html#horizontal">Señalamiento Horizontal</a>
-      <a href="productos.html#vertical">Señalamiento Vertical Bajo</a>
-      <a href="productos.html#vertical">Vertical Elevado SID-15</a>
-      <a href="servicios.html#ciclovias">Ciclovías</a>
-      <a href="productos.html#confinamiento">Protección de Obra</a>
+      <a href="productos.html">Señalamiento Horizontal</a>
+      <a href="productos.html">Señalamiento Vertical Bajo</a>
+      <a href="productos.html">Vertical Elevado SID-15</a>
+      <a href="servicios.html">Ciclovías</a>
+      <a href="productos.html">Protección de Obra</a>
     </div>
   </div>
   <div>
     <div class="fct">Equipo Termoplástico</div>
     <div class="flinks">
-      <a href="productos.html#calderas">Calderas Termoplásticas</a>
-      <a href="productos.html#remolques">Calderas Sobre Remolque</a>
-      <a href="productos.html#maquinas">Máquinas Aplicadoras</a>
-      <a href="productos.html#dados">Dados y Zapatas</a>
-      <a href="productos.html#solar">Equipos con Panel Solar</a>
+      <a href="productos.html">Calderas Termoplásticas</a>
+      <a href="productos.html">Calderas Sobre Remolque</a>
+      <a href="productos.html">Máquinas Aplicadoras</a>
+      <a href="productos.html">Dados y Zapatas</a>
+      <a href="productos.html">Equipos con Panel Solar</a>
     </div>
   </div>
   <div>
@@ -337,6 +349,7 @@
       <a href="proyectos.html">Proyectos</a>
       <a href="mailto:facturacion_tepate@outlook.com">facturacion_tepate@outlook.com</a>
       <a href="contacto.html">Contacto y Cotización</a>
+      <a href="index.html#faq">Preguntas Frecuentes</a>
       <a href="aviso-privacidad.html">Aviso de Privacidad</a>
       <a href="https://www.facebook.com/profile.php?id=100063746240114" target="_blank" rel="noopener noreferrer">Facebook</a>
     </div>
@@ -349,7 +362,7 @@
     <span class="fnom">Norma ASTM</span>
     <span class="fnom">Envíos MX</span>
   </div>
-  <p class="f-credits">Ingenieria Vial Tepate 2026 · Diseñado por Gerardo Treviño</p>
+  <p class="f-credits">Ingenieria Vial Tepate 2026 · Diseñado por Null Group</p>
 </div>
 
 <!-- WhatsApp -->
@@ -359,5 +372,17 @@
 <button id="back-to-top" class="back-to-top" aria-label="Volver arriba">↑</button>
 
 <script type="module" src="/src/main.ts"></script>
+<script>(function(){var n=document.querySelector('nav');if(!n)return;function s(){if(window.scrollY>50)n.classList.add('scrolled');else n.classList.remove('scrolled');}window.addEventListener('scroll',s,{passive:true});s();})();</script>
+
+<!-- Cookie Banner -->
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,10,0.98);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid rgba(200,240,49,0.2);padding:18px 24px;z-index:9999;font-family:var(--fm,'IBM Plex Mono',monospace);">
+  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;">
+    <p style="color:var(--mist);font-size:13px;line-height:1.6;margin:0;flex:1;min-width:260px;">
+      Usamos cookies para mejorar tu experiencia y analizar el tráfico del sitio. Al continuar navegando, aceptas nuestro uso de cookies. <a href="aviso-privacidad.html" style="color:var(--neon);text-decoration:none;border-bottom:1px solid var(--steel);">Aviso de Privacidad</a>.
+    </p>
+    <button id="cookie-accept" style="background:var(--neon);color:#0a0a0a;border:none;padding:10px 20px;font-family:inherit;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;border-radius:2px;">Aceptar</button>
+  </div>
+</div>
+<script>(function(){try{if(!localStorage.getItem('tepate_cookies_accepted')){var b=document.getElementById('cookie-banner');if(b){b.style.display='block';var btn=document.getElementById('cookie-accept');if(btn){btn.addEventListener('click',function(){localStorage.setItem('tepate_cookies_accepted','1');b.style.display='none';});}}}}catch(e){}})();</script>
 </body>
 </html>
