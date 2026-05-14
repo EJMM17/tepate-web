@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Servicios — Ingeniería Vial TEPATE</title>
+<title>Servicios de Ingeniería Vial y Señalamiento | TEPATE</title>
 <meta name="description" content="Fabricación termoplástica, señalamiento horizontal y vertical, estudios de ingeniería vial con Synchro Studio v12, y confinamiento de obra. 16 años de experiencia.">
 <meta property="og:title" content="Servicios — Ingeniería Vial TEPATE">
 <meta property="og:description" content="Fabricación termoplástica, señalamiento horizontal y vertical, estudios de ingeniería vial con Synchro Studio v12, y confinamiento de obra. 16 años de experiencia.">
@@ -28,6 +28,12 @@
 <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"></noscript>
 <link rel="stylesheet" href="/src/index.css">
+<style>
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:box-shadow 0.3s ease;}
+nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.5);border-bottom:1px solid rgba(200,240,49,0.1);}
+body{padding-top:72px;}
+.hero{margin-top:-72px;padding-top:72px;}
+</style>
 
 <!-- JSON-LD Structured Data for Services -->
 <script type="application/ld+json">
@@ -105,6 +111,16 @@
         "serviceType": "Seguridad Vial y Confinamiento"
       }
     }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Inicio","item":"https://tepate.com.mx/"},
+    {"@type":"ListItem","position":2,"name":"Servicios","item":"https://tepate.com.mx/servicios.html"}
   ]
 }
 </script>
@@ -531,5 +547,17 @@
 <button id="back-to-top" class="back-to-top" aria-label="Volver arriba">↑</button>
 
 <script type="module" src="/src/main.ts"></script>
+<script>(function(){var n=document.querySelector('nav');if(!n)return;function s(){if(window.scrollY>50)n.classList.add('scrolled');else n.classList.remove('scrolled');}window.addEventListener('scroll',s,{passive:true});s();})();</script>
+
+<!-- Cookie Banner -->
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,10,0.98);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid rgba(200,240,49,0.2);padding:18px 24px;z-index:9999;font-family:var(--fm,'IBM Plex Mono',monospace);">
+  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;">
+    <p style="color:var(--mist);font-size:13px;line-height:1.6;margin:0;flex:1;min-width:260px;">
+      Usamos cookies para mejorar tu experiencia y analizar el tráfico del sitio. Al continuar navegando, aceptas nuestro uso de cookies. <a href="aviso-privacidad.html" style="color:var(--neon);text-decoration:none;border-bottom:1px solid var(--steel);">Aviso de Privacidad</a>.
+    </p>
+    <button id="cookie-accept" style="background:var(--neon);color:#0a0a0a;border:none;padding:10px 20px;font-family:inherit;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;border-radius:2px;">Aceptar</button>
+  </div>
+</div>
+<script>(function(){try{if(!localStorage.getItem('tepate_cookies_accepted')){var b=document.getElementById('cookie-banner');if(b){b.style.display='block';var btn=document.getElementById('cookie-accept');if(btn){btn.addEventListener('click',function(){localStorage.setItem('tepate_cookies_accepted','1');b.style.display='none';});}}}}catch(e){}})();</script>
 </body>
 </html>
