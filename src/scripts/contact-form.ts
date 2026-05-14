@@ -5,7 +5,20 @@ export const initContactForm = () => {
   const successEl = document.getElementById('formSuccess');
   const errorEl = document.getElementById('formError');
   const submitBtn = form.querySelector<HTMLButtonElement>('[type="submit"]');
+  const btnText = document.getElementById('btnText');
+  const btnSpinner = document.getElementById('btnSpinner');
   const required = form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[required]');
+
+  const setLoading = (loading: boolean) => {
+    if (!submitBtn) return;
+    submitBtn.disabled = loading;
+    if (btnText && btnSpinner) {
+      btnText.style.display = loading ? 'none' : '';
+      btnSpinner.style.display = loading ? 'inline-block' : 'none';
+    } else {
+      submitBtn.textContent = loading ? 'Enviando…' : 'Enviar solicitud →';
+    }
+  };
 
   const validate = (): boolean => {
     let ok = true;
@@ -31,7 +44,7 @@ export const initContactForm = () => {
     }
     if (summary) summary.textContent = '';
     errorEl?.classList.remove('show');
-    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Enviando…'; }
+    setLoading(true);
     try {
       const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
       if (res.ok) {
@@ -44,7 +57,7 @@ export const initContactForm = () => {
     } catch {
       errorEl?.classList.add('show');
     } finally {
-      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Enviar solicitud →'; }
+      setLoading(false);
     }
   });
 };

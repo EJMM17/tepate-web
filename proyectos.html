@@ -212,7 +212,7 @@ body{padding-top:72px;}
 
   <div class="proj-grid" id="projects-container">
     <div class="proj" data-category="industrial">
-      <div class="proj-img"><img src="/TEPATE_Imagenes_Organizadas/08_Maquinas_Aplicadoras/slide10_Maquinas_Aplicadoras_img1.webp" alt="Máquina aplicadora de pintura termoplástica sobre remolque" loading="lazy" width="600" height="400"></div>
+      <div class="proj-img"><img src="/TEPATE_Imagenes_Organizadas/08_Maquinas_Aplicadoras/slide10_Maquinas_Aplicadoras_img3.webp" alt="Máquina aplicadora de pintura termoplástica operando en carretera" loading="lazy" width="600" height="400"></div>
       <div class="proj-body">
         <div class="proj-tag">Fabricación</div>
         <div class="proj-title">Máquinas Aplicadoras</div>
@@ -236,7 +236,7 @@ body{padding-top:72px;}
       </div>
     </div>
     <div class="proj" data-category="municipal">
-      <div class="proj-img"><img src="/TEPATE_Imagenes_Organizadas/12_Pintura_Trafico/slide15_Pintura_Trafico_Base_Agua_img1.webp" alt="Aplicación de pintura de tráfico base agua en guarniciones amarillas" loading="lazy" width="600" height="400"></div>
+      <div class="proj-img"><img src="/TEPATE_Imagenes_Organizadas/12_Pintura_Trafico/slide15_Pintura_Trafico_Base_Agua_img2.webp" alt="Aplicación de pintura de tráfico base agua sobre guarniciones en avenida urbana" loading="lazy" width="600" height="400"></div>
       <div class="proj-body">
         <div class="proj-tag">Municipal</div>
         <div class="proj-title">Pintura Tráfico en Guarnición</div>
@@ -252,7 +252,7 @@ body{padding-top:72px;}
       </div>
     </div>
     <div class="proj" data-category="municipal">
-      <div class="proj-img"><img src="/TEPATE_Imagenes_Organizadas/16_Senalamiento_Escolar/slide21_Senalamiento_Preventivo_Digital_Escolar_img1.webp" alt="Señales preventivas escolares con tecnología destellante digital" loading="lazy" width="600" height="400"></div>
+      <div class="proj-img"><img src="/TEPATE_Imagenes_Organizadas/16_Senalamiento_Escolar/slide21_Senalamiento_Preventivo_Digital_Escolar_img5.webp" alt="Señalamiento escolar destellante instalado frente a plantel educativo" loading="lazy" width="600" height="400"></div>
       <div class="proj-body">
         <div class="proj-tag">Escolar</div>
         <div class="proj-title">Señalamiento Preventivo Escolar</div>
@@ -537,5 +537,29 @@ body{padding-top:72px;}
   </div>
 </div>
 <script>(function(){try{if(!localStorage.getItem('tepate_cookies_accepted')){var b=document.getElementById('cookie-banner');if(b){b.style.display='block';var btn=document.getElementById('cookie-accept');if(btn){btn.addEventListener('click',function(){localStorage.setItem('tepate_cookies_accepted','1');b.style.display='none';});}}}}catch(e){}})();</script>
+
+<!-- Lightbox -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Vista ampliada de imagen" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:10000;align-items:center;justify-content:center;cursor:zoom-out;padding:24px;">
+  <img id="lightbox-img" src="" alt="" style="max-width:95%;max-height:95%;object-fit:contain;border:1px solid var(--concrete);cursor:default;">
+  <button id="lightbox-close" type="button" aria-label="Cerrar" style="position:fixed;top:20px;right:24px;background:none;border:none;color:#f5f5f5;font-size:32px;line-height:1;cursor:pointer;font-family:var(--fm,'IBM Plex Mono',monospace);">&times;</button>
+</div>
+<script>
+(function(){
+  var lb=document.getElementById('lightbox');
+  var lbImg=document.getElementById('lightbox-img');
+  var lbClose=document.getElementById('lightbox-close');
+  if(!lb||!lbImg) return;
+  function open(src,alt){lbImg.src=src;lbImg.alt=alt||'';lb.style.display='flex';document.body.style.overflow='hidden';}
+  function close(){lb.style.display='none';lbImg.src='';document.body.style.overflow='';}
+  document.querySelectorAll('.proj-img img').forEach(function(img){
+    img.style.cursor='zoom-in';
+    img.addEventListener('click',function(){open(this.src,this.alt);});
+  });
+  lb.addEventListener('click',function(e){if(e.target===lb) close();});
+  lbImg.addEventListener('click',function(e){e.stopPropagation();});
+  if(lbClose) lbClose.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&lb.style.display==='flex') close();});
+})();
+</script>
 </body>
 </html>

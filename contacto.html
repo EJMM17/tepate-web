@@ -158,6 +158,14 @@ body{padding-top:72px;}
         2. Crea un nuevo formulario y copia el endpoint (ej: https://formspree.io/f/xyzabc123)
         3. Reemplaza "REEMPLAZAR_CON_ENDPOINT_FORMSPREE" abajo
       -->
+      <!--
+        NOTA: Para habilitar reCAPTCHA v2:
+        1. Registrar el sitio en https://www.google.com/recaptcha/admin
+        2. Obtener el site key.
+        3. Agregar antes de </head>: <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        4. Agregar dentro del <form>: <div class="g-recaptcha" data-sitekey="TU_SITE_KEY"></div>
+        5. Validar el token en el backend / Formspree.
+      -->
       <form action="https://formspree.io/f/mojybndb" method="POST" id="contactForm" novalidate>
         <div style="margin-bottom:16px"><label class="flabel" for="nombre">Nombre completo <span class="req-star">*</span></label><input class="finput" type="text" id="nombre" name="nombre" required placeholder="Ing. Juan Martínez" autocomplete="name"><small id="nombre-error"></small></div>
         <div style="margin-bottom:16px"><label class="flabel" for="empresa">Empresa o constructora</label><input class="finput" type="text" id="empresa" name="empresa" placeholder="Constructora ABC S.A. de C.V." autocomplete="organization"></div>
