@@ -1,0 +1,85 @@
+---
+interface Service {
+  title: string;
+  description: string;
+  imageSrc: string;
+  imageAlt?: string;
+}
+
+interface Props {
+  services?: readonly Service[];
+  heading?: string;
+  eyebrow?: string;
+}
+
+const DEFAULT_SERVICES: readonly Service[] = [
+  {
+    title: 'FABRICACIÓN DIRECTA DE EQUIPOS VIALES',
+    description:
+      'Diseñamos y construimos calderas termoplásticas, máquinas aplicadoras y remolques desde nuestra planta en Apodaca, Nuevo León. Ingeniería propia, sin intermediarios.',
+    imageSrc: '/TEPATE_Imagenes_Organizadas/03_Informacion_Empresa/fabrica-apodaca.webp',
+    imageAlt: 'Planta de fabricación TEPATE en Apodaca',
+  },
+  {
+    // REGLA DE NEGOCIO: título y descripción exactos por requerimiento del cliente.
+    title: 'TODOS LOS TRABAJOS DE PINTURA (TRÁFICO, EPÓXICA Y TERMOPLÁSTICA)',
+    description:
+      'NO FABRICAMOS pintura, solo somos aplicadores expertos. Aplicamos pintura de tráfico base agua y solvente, epóxica industrial y termoplástica en frío y caliente bajo norma SCT N-CMT-5-001-13.',
+    imageSrc: '/TEPATE_Imagenes_Organizadas/12_Pintura_Trafico/slide15_Pintura_Trafico_Base_Agua_img1.webp',
+    imageAlt: 'Aplicación profesional de pintura de tráfico',
+  },
+  {
+    title: 'SEÑALAMIENTO HORIZONTAL Y VERTICAL',
+    description:
+      'Suministro e instalación de señalamiento bajo norma SCT y ASTM: balizas, vialetas, tachones, postes delineadores y tableros reflejantes para obra pública y privada.',
+    imageSrc: '/TEPATE_Imagenes_Organizadas/25_Horizontal_Trafico_Agua/slide32_Horizontal_Trafico_Base_Agua_img1.webp',
+    imageAlt: 'Señalamiento horizontal en carretera',
+  },
+];
+
+const {
+  services = DEFAULT_SERVICES,
+  heading = 'Servicios profesionales',
+  eyebrow = 'Lo que hacemos',
+} = Astro.props;
+---
+
+<section class="bg-[#0A0A0A] py-20 md:py-28" aria-labelledby="services-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mb-12 md:mb-16">
+      <span class="inline-block text-xs font-bold uppercase tracking-[0.25em] text-yellow-400 mb-4">
+        {eyebrow}
+      </span>
+      <h2 id="services-heading" class="text-4xl md:text-5xl font-black text-gray-100 leading-tight">
+        {heading}
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      {
+        services.map((svc, idx) => (
+          <article class="group flex flex-col bg-[#121212] border border-gray-800 rounded-xl overflow-hidden hover:border-yellow-400/60 transition-colors">
+            <div class="relative aspect-[4/3] overflow-hidden bg-black">
+              <img
+                src={svc.imageSrc}
+                alt={svc.imageAlt ?? svc.title}
+                class="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="absolute top-4 left-4 inline-flex items-center justify-center w-10 h-10 rounded-full bg-yellow-400 text-gray-900 font-black text-sm">
+                {String(idx + 1).padStart(2, '0')}
+              </span>
+            </div>
+            <div class="flex flex-col gap-3 p-6 flex-1">
+              <h3 class="text-lg font-black text-white uppercase leading-snug tracking-tight">
+                {svc.title}
+              </h3>
+              <p class="text-sm text-gray-300 leading-relaxed">{svc.description}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

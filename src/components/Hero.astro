@@ -1,0 +1,83 @@
+---
+interface Props {
+  backgroundSrc?: string;
+  backgroundAlt?: string;
+  primaryCta?: { label: string; href: string };
+  secondaryCta?: { label: string; href: string; download?: boolean };
+  eyebrow?: string;
+}
+
+const {
+  backgroundSrc = '/proyectos_nuevos/termoplastica_macro_carretera.webp',
+  backgroundAlt = 'Aplicación de termoplástica en carretera por equipo TEPATE',
+  primaryCta = { label: 'Solicitar Cotización', href: '/contacto' },
+  secondaryCta = {
+    label: 'Descargar Catálogo PDF',
+    href: '/calderas-termoplasticas-tepate.pdf',
+    download: true,
+  },
+  eyebrow = '16 años · Norma SCT N-CMT-5-001-13 · ASTM',
+} = Astro.props;
+---
+
+<section
+  class="relative isolate min-h-[88vh] md:min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#0A0A0A]"
+  aria-label="Inicio"
+>
+  <img
+    src={backgroundSrc}
+    alt={backgroundAlt}
+    class="absolute inset-0 h-full w-full object-cover object-center -z-10"
+    loading="eager"
+    decoding="async"
+    fetchpriority="high"
+  />
+
+  <div class="absolute inset-0 bg-black/65" aria-hidden="true"></div>
+  <div
+    class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#0A0A0A]"
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 text-center">
+    <span
+      class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-yellow-400 mb-6"
+    >
+      <span class="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>
+      {eyebrow}
+    </span>
+
+    <h1 class="font-black text-gray-100 leading-[0.95] tracking-tight">
+      <span class="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+        INGENIERÍA VIAL TEPATE
+      </span>
+      <span class="block text-yellow-400 text-5xl sm:text-6xl md:text-7xl lg:text-8xl mt-3">
+        FÁBRICA DIRECTA
+      </span>
+    </h1>
+
+    <p class="mt-8 max-w-2xl mx-auto text-lg md:text-xl text-gray-300 leading-relaxed">
+      Calderas termoplásticas, máquinas aplicadoras, señalamiento horizontal y vertical.
+      Fabricación propia desde Apodaca, Nuevo León — para todo México.
+    </p>
+
+    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a
+        href={primaryCta.href}
+        class="inline-flex items-center justify-center gap-2 bg-yellow-400 text-gray-900 font-bold text-base px-8 py-4 rounded-md hover:bg-yellow-300 transition-colors shadow-lg shadow-yellow-400/20"
+      >
+        {primaryCta.label}
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
+      <a
+        href={secondaryCta.href}
+        download={secondaryCta.download ? '' : undefined}
+        class="inline-flex items-center justify-center gap-2 border-2 border-gray-300 text-gray-100 font-bold text-base px-8 py-4 rounded-md hover:border-yellow-400 hover:text-yellow-400 transition-colors"
+      >
+        {secondaryCta.label}
+      </a>
+    </div>
+  </div>
+</section>

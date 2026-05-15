@@ -1,103 +1,189 @@
 ---
-import { COMPANY, PRIMARY_NAV } from '@/data/navigation';
+import { COMPANY } from '@/data/navigation';
 
 const year = new Date().getFullYear();
+
+const NAV_LINKS = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Productos', href: '/productos' },
+  { label: 'Servicios', href: '/servicios' },
+  { label: 'Proyectos', href: '/proyectos' },
+  { label: 'Nosotros', href: '/nosotros' },
+  { label: 'Contacto', href: '/contacto' },
+];
+
+const PRODUCT_LINKS = [
+  { label: 'Calderas Termoplásticas', href: '/productos?cat=calderas' },
+  { label: 'Máquinas Aplicadoras', href: '/productos?cat=maquinas' },
+  { label: 'Dados y Zapatas', href: '/productos?cat=zapatas' },
+  { label: 'Señalamiento Horizontal', href: '/productos?cat=senalamiento' },
+  { label: 'Señalamiento Vertical', href: '/productos?cat=senalamiento' },
+  { label: 'Remolques', href: '/productos?cat=remolques' },
+];
 ---
 
-<footer>
-  <div class="f-grid">
-    <section aria-labelledby="footer-brand" class="fbrand-wrap">
-      <h2 id="footer-brand" class="fbrand">
-        <img src="/logo.webp" alt="Logotipo Ingeniería Vial TEPATE" width="56" height="56" class="fbrand-logo" />
-        <span>{COMPANY.shortName}</span>
-      </h2>
-      <p class="ftag">
+<footer class="bg-[#0A0A0A] border-t border-gray-800 text-gray-100" role="contentinfo">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start w-full py-12 md:py-16">
+    <section aria-labelledby="footer-brand" class="flex flex-col gap-4">
+      <a href="/" class="flex items-center gap-3" aria-label={`${COMPANY.shortName} — Inicio`}>
+        <img
+          src="/logo.webp"
+          alt={`Logotipo ${COMPANY.shortName}`}
+          width="64"
+          height="64"
+          class="h-14 w-auto scale-110"
+          loading="lazy"
+          decoding="async"
+        />
+        <span id="footer-brand" class="text-2xl font-black tracking-wider text-gray-100">
+          {COMPANY.shortName}
+        </span>
+      </a>
+      <p class="text-gray-300 text-sm leading-relaxed">
         {COMPANY.tagline}. Fabricación e instalación de equipos y señalamiento vial con cumplimiento normativo SCT.
       </p>
-      <span class="fnorm">SCT N-CMT-5-001-13</span>
-      <span class="fnorm" style="margin-left: 8px;">ASTM</span>
-      <div class="fsocial" aria-label="Redes sociales">
-        <a href="https://wa.me/528118959042" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <div class="flex flex-wrap gap-2 mt-1">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-yellow-400 border border-yellow-400/40 px-2 py-1 rounded">
+          SCT N-CMT-5-001-13
+        </span>
+        <span class="text-[10px] font-bold uppercase tracking-widest text-yellow-400 border border-yellow-400/40 px-2 py-1 rounded">
+          ASTM
+        </span>
+      </div>
+      <div class="flex gap-4 mt-3" aria-label="Redes sociales">
+        <a
+          href="https://wa.me/528118959042"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp TEPATE"
+          class="text-gray-300 hover:text-yellow-400 transition-colors"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
             <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.522 5.848L0 24l6.335-1.502A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.002-1.366l-.36-.213-3.761.892.952-3.653-.234-.374A9.818 9.818 0 1112 21.818z"/>
           </svg>
         </a>
-        <a href="https://www.facebook.com/profile.php?id=100063746240114" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <a
+          href="https://www.facebook.com/profile.php?id=100063746240114"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook TEPATE"
+          class="text-gray-300 hover:text-yellow-400 transition-colors"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
           </svg>
         </a>
-        <a href="#" aria-label="TikTok (próximamente)">
-          {/* TODO CLIENT: proporcionar URL de perfil TikTok */}
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <a
+          href="https://www.tiktok.com/@ingenieriavialtepate"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="TikTok TEPATE"
+          class="text-gray-300 hover:text-yellow-400 transition-colors"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.53V6.78a4.85 4.85 0 01-1.02-.09z"/>
           </svg>
         </a>
-        <a href="#" aria-label="Instagram (próximamente)">
-          {/* TODO CLIENT: proporcionar URL de perfil Instagram */}
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <a
+          href="https://www.instagram.com/ingenieriavialtepate"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram TEPATE"
+          class="text-gray-300 hover:text-yellow-400 transition-colors"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
           </svg>
         </a>
       </div>
     </section>
 
-    <nav aria-labelledby="footer-nav">
-      <h2 id="footer-nav" class="fct">Navegación</h2>
-      <ul class="flinks">
+    <nav aria-labelledby="footer-nav" class="flex flex-col gap-3">
+      <h3 id="footer-nav" class="text-sm font-black uppercase tracking-widest text-yellow-400 mb-1">
+        Navegación
+      </h3>
+      <ul class="flex flex-col gap-2">
         {
-          PRIMARY_NAV.map((link) => (
+          NAV_LINKS.map((l) => (
             <li>
-              <a href={link.href}>{link.label}</a>
+              <a href={l.href} class="text-gray-300 hover:text-yellow-400 transition-colors text-sm">
+                {l.label}
+              </a>
             </li>
           ))
         }
-        <li>
-          <a href="/aviso-privacidad">Aviso de Privacidad</a>
-        </li>
       </ul>
     </nav>
 
-    <section aria-labelledby="footer-products">
-      <h2 id="footer-products" class="fct">Productos</h2>
-      <ul class="flinks">
-        <li><a href="/productos?cat=calderas">Calderas Termoplásticas</a></li>
-        <li><a href="/productos?cat=maquinas">Máquinas Aplicadoras</a></li>
-        <li><a href="/productos?cat=senalamiento">Señalamiento</a></li>
-        <li><a href="/productos?cat=confinamiento">Confinamiento</a></li>
+    <nav aria-labelledby="footer-products" class="flex flex-col gap-3">
+      <h3 id="footer-products" class="text-sm font-black uppercase tracking-widest text-yellow-400 mb-1">
+        Productos
+      </h3>
+      <ul class="flex flex-col gap-2">
+        {
+          PRODUCT_LINKS.map((l) => (
+            <li>
+              <a href={l.href} class="text-gray-300 hover:text-yellow-400 transition-colors text-sm">
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
-    </section>
+    </nav>
 
-    <section aria-labelledby="footer-contact">
-      <h2 id="footer-contact" class="fct">Contacto</h2>
-      <ul class="flinks">
-        <li>
-          <a href={`tel:${COMPANY.phones[0]}`}>Tel. {COMPANY.phoneDisplay}</a>
+    <section aria-labelledby="footer-contact" class="flex flex-col gap-3 min-w-0">
+      <h3 id="footer-contact" class="text-sm font-black uppercase tracking-widest text-yellow-400 mb-1">
+        Contacto
+      </h3>
+      <ul class="flex flex-col gap-3 text-sm text-gray-300">
+        <li class="flex items-start gap-2">
+          <svg class="shrink-0 mt-0.5 text-yellow-400" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/>
+          </svg>
+          <a href={`tel:${COMPANY.phones[0]}`} class="hover:text-yellow-400 transition-colors">
+            {COMPANY.phoneDisplay}
+          </a>
         </li>
-        <li>
-          <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>
+        <li class="flex items-start gap-2">
+          <svg class="shrink-0 mt-0.5 text-yellow-400" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+          </svg>
+          <span>
+            Lun–Vie {COMPANY.hours.weekdays}<br/>
+            Sáb {COMPANY.hours.saturday}
+          </span>
         </li>
-        <li><span class="text-mist">L–V {COMPANY.hours.weekdays}</span></li>
-        <li><span class="text-mist">Sáb {COMPANY.hours.saturday}</span></li>
-        <li class="mt-2">
-          <address class="not-italic text-mist text-xs leading-relaxed normal-case tracking-normal">
-            {COMPANY.address.streetAddress}<br />
-            {COMPANY.address.addressLocality}, {COMPANY.address.addressRegion}
-          </address>
+        <li class="flex items-start gap-2 min-w-0">
+          <svg class="shrink-0 mt-0.5 text-yellow-400" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/>
+          </svg>
+          <a
+            href={`mailto:${COMPANY.email}`}
+            class="break-words hover:text-yellow-400 transition-colors min-w-0"
+          >
+            {COMPANY.email}
+          </a>
+        </li>
+        <li class="flex items-start gap-2">
+          <svg class="shrink-0 mt-0.5 text-yellow-400" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          <span>{COMPANY.address.addressLocality}, {COMPANY.address.addressRegion}</span>
         </li>
       </ul>
     </section>
   </div>
 
-  <div class="fbot">
-    <small class="fcp">
-      © {year} {COMPANY.legalName}. Todos los derechos reservados.
-    </small>
-    <div class="fnoms">
-      <span class="fnom">SCT</span>
-      <span class="fnom">ASTM</span>
-      <span class="fnom">ISO 9001</span>
+  <div class="border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="text-xs text-gray-300">
+        © {year} {COMPANY.legalName}. Todos los derechos reservados.
+      </p>
+      <a href="/aviso-privacidad" class="text-xs text-gray-300 hover:text-yellow-400 transition-colors">
+        Aviso de Privacidad
+      </a>
     </div>
   </div>
 </footer>
