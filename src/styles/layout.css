@@ -337,10 +337,10 @@ footer {
 }
 
 .ftag {
-  font-size: 16px;
+  font-size: 17px;
   color: var(--mist);
-  line-height: 1.7;
-  max-width: 320px;
+  line-height: 1.65;
+  max-width: 340px;
   margin-bottom: 20px;
 }
 
@@ -358,7 +358,7 @@ footer {
 
 .fct {
   font-family: var(--fm);
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--neon);
@@ -375,7 +375,7 @@ footer {
 .flinks a {
   font-family: var(--fd);
   font-weight: 700;
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.8;
   text-transform: uppercase;
   letter-spacing: 0.5px;
