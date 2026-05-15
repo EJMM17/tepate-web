@@ -55,6 +55,19 @@
   animation: blink 1.6s ease infinite;
 }
 
+.hero-fabrica {
+  display: block;
+  font-family: var(--fd);
+  font-weight: 900;
+  font-size: clamp(24px, 3.2vw, 36px);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--neon);
+  margin: 0 0 18px;
+  line-height: 1;
+  text-shadow: 0 0 24px rgba(225, 255, 0, 0.25);
+}
+
 .hero-h1 {
   font-family: var(--fd);
   font-weight: 900;
