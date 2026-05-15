@@ -47,7 +47,7 @@ const {
 <section class="bg-[#0A0A0A] py-20 md:py-28" aria-labelledby="services-heading">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="max-w-3xl mb-12 md:mb-16">
-      <span class="inline-block text-xs font-bold uppercase tracking-[0.25em] text-yellow-400 mb-4">
+      <span class="inline-block text-xs font-bold uppercase tracking-[0.25em] text-neon mb-4">
         {eyebrow}
       </span>
       <h2 id="services-heading" class="text-4xl md:text-5xl font-black text-gray-100 leading-tight">
@@ -58,7 +58,7 @@ const {
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
       {
         services.map((svc, idx) => (
-          <article class="group flex flex-col bg-[#121212] border border-gray-800 rounded-xl overflow-hidden hover:border-yellow-400/60 transition-colors">
+          <article class="group flex flex-col bg-[#121212] border border-gray-800 rounded-xl overflow-hidden hover:border-neon/60 transition-colors">
             <div class="relative aspect-[4/3] overflow-hidden bg-black">
               <img
                 src={svc.imageSrc}
@@ -67,7 +67,7 @@ const {
                 loading="lazy"
                 decoding="async"
               />
-              <span class="absolute top-4 left-4 inline-flex items-center justify-center w-10 h-10 rounded-full bg-yellow-400 text-gray-900 font-black text-sm">
+              <span class="absolute top-4 left-4 inline-flex items-center justify-center w-10 h-10 rounded-full bg-neon text-gray-900 font-black text-sm">
                 {String(idx + 1).padStart(2, '0')}
               </span>
             </div>

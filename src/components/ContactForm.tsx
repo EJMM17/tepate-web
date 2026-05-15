@@ -101,7 +101,7 @@ export default function ContactForm(): JSX.Element {
   };
 
   const inputBase =
-    'w-full bg-[#0A0A0A] border border-gray-800 text-gray-100 placeholder-gray-300/50 rounded-md px-4 py-3 text-base focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 transition-colors';
+    'w-full bg-[#0A0A0A] border border-gray-800 text-gray-100 placeholder-gray-300/50 rounded-md px-4 py-3 text-base focus:outline-none focus:border-neon focus:ring-2 focus:ring-neon/20 transition-colors';
 
   return (
     <form
@@ -211,7 +211,7 @@ export default function ContactForm(): JSX.Element {
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="w-full inline-flex items-center justify-center gap-2 bg-yellow-400 text-gray-900 font-black uppercase tracking-wide text-base px-6 py-4 rounded-md hover:bg-yellow-300 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="w-full inline-flex items-center justify-center gap-2 bg-neon text-gray-900 font-black uppercase tracking-wide text-base px-6 py-4 rounded-md hover:bg-neonDim transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {status === 'submitting' ? 'Enviando…' : 'Solicitar cotización'}
         {status !== 'submitting' && (
@@ -224,7 +224,7 @@ export default function ContactForm(): JSX.Element {
       {status === 'success' && (
         <p
           role="status"
-          className="text-sm text-yellow-400 bg-yellow-400/10 border border-yellow-400/30 rounded-md p-3"
+          className="text-sm text-neon bg-neon/10 border border-neon/30 rounded-md p-3"
         >
           ✓ Recibimos tu solicitud. Te contactamos en menos de 24 horas hábiles.
         </p>
@@ -237,7 +237,7 @@ export default function ContactForm(): JSX.Element {
 
       <p className="text-xs text-gray-300 leading-relaxed">
         Al enviar aceptas nuestro{' '}
-        <a href="/aviso-privacidad" className="text-yellow-400 underline hover:no-underline">
+        <a href="/aviso-privacidad" className="text-neon underline hover:no-underline">
           Aviso de Privacidad
         </a>
         . No compartimos tus datos.

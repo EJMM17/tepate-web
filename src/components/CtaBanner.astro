@@ -18,7 +18,7 @@ const {
 } = Astro.props;
 ---
 
-<section class="w-full bg-yellow-400" aria-label="Llamado a la acción">
+<section class="w-full bg-neon" aria-label="Llamado a la acción">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
       <div>
@@ -33,7 +33,7 @@ const {
       <div class="flex flex-col sm:flex-row lg:justify-end items-stretch sm:items-center gap-4">
         <a
           href={primaryCta.href}
-          class="inline-flex items-center justify-center gap-2 bg-gray-900 text-yellow-400 font-bold text-base px-7 py-4 rounded-md hover:bg-black transition-colors"
+          class="inline-flex items-center justify-center gap-2 bg-gray-900 text-neon font-bold text-base px-7 py-4 rounded-md hover:bg-black transition-colors"
         >
           {primaryCta.label}
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
@@ -43,7 +43,7 @@ const {
         <a
           href={secondaryCta.href}
           download={secondaryCta.download ? '' : undefined}
-          class="inline-flex items-center justify-center gap-2 border-2 border-gray-900 text-gray-900 font-bold text-base px-7 py-4 rounded-md hover:bg-gray-900 hover:text-yellow-400 transition-colors"
+          class="inline-flex items-center justify-center gap-2 border-2 border-gray-900 text-gray-900 font-bold text-base px-7 py-4 rounded-md hover:bg-gray-900 hover:text-neon transition-colors"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
             <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" />
