@@ -18,7 +18,7 @@ export const PRODUCTS: readonly Product[] = [
   },
   {
     id: 'cp-500',
-    model: 'Modelo CP-500',
+    model: 'Modelo CF-500 · Remolque Doble · 500 KG · IVT-302026',
     name: 'Caldera 500 kg',
     image: '/IVT-REM1024.webp',
     imageAlt: 'Caldera 500 kg',
@@ -32,7 +32,7 @@ export const PRODUCTS: readonly Product[] = [
   },
   {
     id: 'cp-1000',
-    model: 'Modelo CP-1000',
+    model: 'Modelo CF-1000 · Remolque Doble · 1,000 KG · IVT-302026',
     name: 'Caldera 1,000 kg',
     image: '/IVT-REM1025.webp',
     imageAlt: 'Caldera 1,000 kg',
@@ -48,7 +48,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'cp-2000',
     model: 'Modelo CP-2000',
     name: 'Caldera 2,000 kg',
-    image: '/TEPATE_Imagenes_Organizadas/01_Portada/slide01_Portada_2024_img1.webp',
+    image: '/IVT-REM1024.webp',
     imageAlt: 'Caldera 2,000 kg',
     category: 'calderas',
     specs: [
@@ -62,7 +62,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'rem-3-5',
     model: 'Opcional · REM-3.5',
     name: 'Remolque 3.5 ton',
-    image: '/TEPATE_Imagenes_Organizadas/01_Portada/slide01_Portada_2024_img2.webp',
+    image: '/IVT-REM1023.webp',
     imageAlt: 'Remolque 3.5 ton',
     category: 'calderas',
     specs: [
@@ -76,7 +76,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'rem-5-0',
     model: 'Opcional · REM-5.0',
     name: 'Remolque 5.0 ton',
-    image: '/TEPATE_Imagenes_Organizadas/03_Informacion_Empresa/slide03_Informacion_General_Empresa_img1.webp',
+    image: '/IVT-REM1025.webp',
     imageAlt: 'Remolque 5.0 ton',
     category: 'calderas',
     specs: [
@@ -170,10 +170,11 @@ export const PRODUCTS: readonly Product[] = [
     ],
   },
   {
+    // TODO CLIENT URGENTE: proporcionar fotos de zapatas 30 cm SIN productos de competidores visibles
     id: 'zp-30',
     model: 'ZP-30',
     name: 'Zapata 30 cm',
-    image: '/TEPATE_Imagenes_Organizadas/25_Horizontal_Trafico_Agua/slide32_Horizontal_Trafico_Base_Agua_img1.webp',
+    image: '/TEPATE_Imagenes_Organizadas/08_Maquinas_Aplicadoras/slide10_Maquinas_Aplicadoras_img1.webp',
     imageAlt: 'Zapata 30 cm',
     category: 'dados',
     specs: [
@@ -183,10 +184,11 @@ export const PRODUCTS: readonly Product[] = [
     ],
   },
   {
+    // TODO CLIENT URGENTE: proporcionar fotos de zapatas 40 cm SIN productos de competidores visibles
     id: 'zp-40',
     model: 'ZP-40',
     name: 'Zapata 40 cm',
-    image: '/TEPATE_Imagenes_Organizadas/25_Horizontal_Trafico_Agua/slide32_Horizontal_Trafico_Base_Agua_img2.webp',
+    image: '/TEPATE_Imagenes_Organizadas/08_Maquinas_Aplicadoras/slide10_Maquinas_Aplicadoras_img2.webp',
     imageAlt: 'Zapata 40 cm',
     category: 'dados',
     specs: [
@@ -196,10 +198,11 @@ export const PRODUCTS: readonly Product[] = [
     ],
   },
   {
+    // TODO CLIENT URGENTE: proporcionar fotos de zapatas 60 cm SIN productos de competidores visibles
     id: 'zp-60',
     model: 'ZP-60',
     name: 'Zapata 60 cm',
-    image: '/TEPATE_Imagenes_Organizadas/25_Horizontal_Trafico_Agua/slide32_Horizontal_Trafico_Base_Agua_img3.webp',
+    image: '/TEPATE_Imagenes_Organizadas/08_Maquinas_Aplicadoras/slide10_Maquinas_Aplicadoras_img3.webp',
     imageAlt: 'Zapata 60 cm',
     category: 'dados',
     specs: [
@@ -265,7 +268,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'sh-txdot',
     model: 'Norma US',
     name: 'Termoplástica City TxDOT',
-    image: '/TEPATE_Imagenes_Organizadas/03_Informacion_Empresa/slide03_Informacion_General_Empresa_img3.webp',
+    image: '/proyectos_nuevos/termoplastica_macro_carretera.webp',
     imageAlt: 'Termoplástica City TxDOT',
     category: 'senalamiento',
     specs: [
@@ -278,7 +281,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'sh-aashto-city',
     model: 'Norma US',
     name: 'Termoplástica City AASHTO',
-    image: '/TEPATE_Imagenes_Organizadas/10_Boyas_Vialetas/slide13_Boyas_Vialetas_Aplicacion_img1.webp',
+    image: '/proyectos_nuevos/cebra_diurna_equipo.webp',
     imageAlt: 'Termoplástica City AASHTO',
     category: 'senalamiento',
     specs: [
@@ -317,10 +320,11 @@ export const PRODUCTS: readonly Product[] = [
     ],
   },
   {
+    // TODO CLIENT: proporcionar imagen real de señalamiento informativo de servicio propio
     id: 'sv-sis',
     model: 'Tipo SIS/SIT',
     name: 'Informativo Servicio',
-    image: '/TEPATE_Imagenes_Organizadas/22_Senalamiento_Proteccion_Destino/slide27_Senalamiento_Proteccion_Destino_img1.webp',
+    image: '/TEPATE_Imagenes_Organizadas/24_Senalamiento_Vertical_SID15/slide31_Senalamiento_Vertical_Elevado_SID15_img5.webp',
     imageAlt: 'Señalamiento Informativo de Servicio SIS/SIT',
     category: 'senalamiento',
     specs: [
@@ -332,13 +336,14 @@ export const PRODUCTS: readonly Product[] = [
   },
   {
     id: 'sv-sid13',
-    model: 'Tipo SID-13',
+    model: 'Tipo SID-13 · SID-14 · SID-15',
     name: 'Vertical Elevado',
     image: '/TEPATE_Imagenes_Organizadas/24_Senalamiento_Vertical_SID15/slide31_Senalamiento_Vertical_Elevado_SID15_img2.webp',
-    imageAlt: 'Señalamiento Vertical Elevado SID-13',
+    imageAlt: 'Señalamiento Vertical Elevado SID-13, SID-14 y SID-15',
     category: 'senalamiento',
     specs: [
-      { label: 'Uso', value: 'Puentes y carreteras' },
+      { label: 'Tipos', value: 'SID-13, SID-14 y SID-15' },
+      { label: 'Uso', value: 'Puentes y carreteras de alto tránsito' },
       { label: 'Estructura', value: 'Acero' },
       { label: 'Lámina', value: 'Reflectiva diamante' },
       { label: 'Instalación', value: 'Con pluma' },
@@ -346,13 +351,13 @@ export const PRODUCTS: readonly Product[] = [
   },
   {
     id: 'sv-sid15',
-    model: 'Tipo SID-15',
-    name: 'Pórtico Elevado',
+    model: 'Tipo SID-15 · Puente',
+    name: 'Estructura Elevada Tipo Puente',
     image: '/TEPATE_Imagenes_Organizadas/24_Senalamiento_Vertical_SID15/slide31_Senalamiento_Vertical_Elevado_SID15_img1.webp',
-    imageAlt: 'Señalamiento Pórtico Elevado SID-15',
+    imageAlt: 'Estructura Elevada Tipo Puente SID-15',
     category: 'senalamiento',
     specs: [
-      { label: 'Uso', value: 'Pórticos de gran claro' },
+      { label: 'Uso', value: 'Pórticos de gran claro tipo puente' },
       { label: 'Sector', value: 'Parques industriales' },
       { label: 'Rotulado', value: 'Personalizado' },
       { label: 'Estructura', value: 'Bandera o doble' },
