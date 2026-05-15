@@ -451,8 +451,15 @@ footer {
 .fcp {
   font-family: var(--fm);
   font-size: 11px;
-  color: #444;
+  color: var(--mist);
   letter-spacing: 0.5px;
+}
+
+.fsocial a:focus-visible,
+.flinks a:focus-visible {
+  outline: 2px solid var(--neon);
+  outline-offset: 4px;
+  border-radius: 2px;
 }
 
 .fnoms {
