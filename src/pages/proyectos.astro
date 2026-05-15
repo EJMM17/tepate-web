@@ -234,6 +234,7 @@ const projects: Project[] = [
   const render = () => {
     if (!dialog || !lbImg || visibleCards.length === 0) return;
     const card = visibleCards[currentIndex];
+    if (!card) return;
     lbImg.src = card.dataset.img ?? '';
     lbImg.alt = card.dataset.alt ?? '';
     if (lbTag) lbTag.textContent = card.dataset.tag ?? '';
