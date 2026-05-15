@@ -73,8 +73,6 @@ body{
 }
 .proj-img { aspect-ratio: 16 / 9; }
 
-img { max-width: 100%; height: auto; display: block; }
-
 /* ── Animations ──────────────────────────────────────── */
 @keyframes stripe{from{background-position:0 0}to{background-position:56px 0}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
@@ -387,7 +385,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* ===== PRINT STYLES ===== */
 @media print {
-  .skip-link, .wa, .back-to-top, .ham, .mobile-menu, .nav-drop-trigger .chev {
+  .skip-link, .wa, .back-to-top {
     display: none !important;
   }
   body {
@@ -409,7 +407,7 @@ img { max-width: 100%; height: auto; display: block; }
   a[href^="mailto:"]::after {
     content: "" !important;
   }
-  nav, footer, .topbar {
+  header, footer {
     background: #fff !important;
     border-color: #ccc !important;
   }

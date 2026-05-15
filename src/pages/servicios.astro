@@ -410,10 +410,10 @@ const seo = buildSeo({
         const y = window.scrollY || window.pageYOffset;
         const threshold = 400;
         if (y > threshold && !shown) {
-          bar.classList.add('visible');
+          bar?.classList.add('visible');
           shown = true;
         } else if (y <= threshold && shown) {
-          bar.classList.remove('visible');
+          bar?.classList.remove('visible');
           shown = false;
         }
       }
