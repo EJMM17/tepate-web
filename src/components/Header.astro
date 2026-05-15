@@ -1,132 +1,147 @@
 ---
-import { PRIMARY_NAV, CATALOG_PDF, TOPBAR_ITEMS } from '@/data/navigation';
-import MobileNav from '@/components/MobileNav.tsx';
+interface NavItem {
+  label: string;
+  href: string;
+}
 
 interface Props {
   currentPath?: string;
+  navItems?: readonly NavItem[];
+  logoSrc?: string;
+  ctaHref?: string;
+  ctaLabel?: string;
 }
 
-const { currentPath = '/' } = Astro.props;
+const DEFAULT_NAV: readonly NavItem[] = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Productos', href: '/productos' },
+  { label: 'Servicios', href: '/servicios' },
+  { label: 'Proyectos', href: '/proyectos' },
+  { label: 'Nosotros', href: '/nosotros' },
+  { label: 'Contacto', href: '/contacto' },
+];
+
+const {
+  currentPath = '/',
+  navItems = DEFAULT_NAV,
+  logoSrc = '/logo.webp',
+  ctaHref = '/contacto',
+  ctaLabel = 'Cotizar',
+} = Astro.props;
 
 const isActive = (href: string): boolean =>
   href === '/' ? currentPath === '/' : currentPath.startsWith(href);
 ---
 
-<div
-  class="topbar"
-  role="region"
-  aria-label="Información de la empresa"
+<header
+  class="fixed top-0 inset-x-0 w-full z-50 backdrop-blur-md bg-black/80 border-b border-gray-800"
+  role="banner"
 >
-  {
-    TOPBAR_ITEMS.map((item, idx) => (
-      <>
-        {idx === 0 && (
-          <span class="dot" aria-hidden="true" />
-        )}
-        <span>{item}</span>
-        {idx < TOPBAR_ITEMS.length - 1 && (
-          <span class="sep" aria-hidden="true">·</span>
-        )}
-      </>
-    ))
-  }
-</div>
-
-<header class="sticky top-0 z-40" style="backdrop-filter: blur(20px) saturate(1.2); background: rgba(0,0,0,0.85); border-bottom: 1px solid #262626;">
-  <nav
-    aria-label="Principal"
-    class="max-w-screen-2xl mx-auto flex items-center justify-between px-6 md:px-12 h-[88px]"
-  >
-    <a href="/" class="flex items-center gap-3 shrink-0 px-2" aria-label="Inicio — Ingeniería Vial TEPATE">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-6">
+    <a
+      href="/"
+      class="flex items-center gap-3 shrink-0"
+      aria-label="Ingeniería Vial TEPATE — Inicio"
+    >
       <img
-        src="/logo.webp"
-        alt="Logotipo Ingeniería Vial TEPATE"
-        width="64"
-        height="64"
-        fetchpriority="high"
+        src={logoSrc}
+        alt="TEPATE"
+        width="56"
+        height="56"
+        class="h-12 w-auto scale-110 drop-shadow-[0_0_12px_rgba(251,191,36,0.25)]"
         decoding="async"
-        class="h-14 w-14 md:h-16 md:w-16"
+        loading="eager"
       />
-      <span class="hidden sm:block font-display font-black text-white text-2xl md:text-3xl tracking-wide uppercase">
+      <span class="hidden sm:inline-block text-gray-100 font-black tracking-wider text-lg">
         TEPATE
       </span>
     </a>
 
-    <ul class="hidden md:flex items-center gap-10 font-mono text-xs uppercase tracking-widest">
+    <nav aria-label="Navegación principal" class="hidden lg:flex items-center gap-8">
       {
-        PRIMARY_NAV.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              aria-current={isActive(link.href) ? 'page' : undefined}
-              class:list={[
-                'transition-colors duration-300 ease-brand hover:text-neon focus-visible:text-neon relative py-1',
-                isActive(link.href) ? 'text-neon' : 'text-mist',
-              ]}
-            >
-              {link.label}
-              {isActive(link.href) && (
-                <span class="absolute bottom-0 left-0 w-full h-[1px] bg-neon" />
-              )}
-            </a>
-          </li>
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            class:list={[
+              'text-sm font-semibold tracking-wide uppercase transition-colors',
+              isActive(item.href)
+                ? 'text-yellow-400'
+                : 'text-gray-100 hover:text-yellow-400',
+            ]}
+          >
+            {item.label}
+          </a>
         ))
       }
-      <li>
-        <a
-          href={CATALOG_PDF.href}
-          download
-          aria-label={CATALOG_PDF.ariaLabel}
-          class="inline-flex items-center gap-2 bg-neon text-black hover:bg-transparent hover:text-neon border-2 border-neon transition-all duration-300 ease-brand px-5 py-3 font-bold text-[11px] tracking-widest"
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-            <polyline points="7 10 12 15 17 10" />
-            <line x1="12" y1="15" x2="12" y2="3" />
-          </svg>
-          {CATALOG_PDF.label}
-        </a>
-      </li>
-      <li class="flex items-center gap-3 pl-3 border-l border-steel">
-        <a href="https://wa.me/528118959042" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="text-white hover:text-neon transition-colors p-2 inline-flex">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.522 5.848L0 24l6.335-1.502A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.002-1.366l-.36-.213-3.761.892.952-3.653-.234-.374A9.818 9.818 0 1112 21.818z"/>
-          </svg>
-        </a>
-        <a href="https://www.facebook.com/profile.php?id=100063746240114" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="text-white hover:text-neon transition-colors p-2 inline-flex">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-          </svg>
-        </a>
-        <a href="#" aria-label="TikTok (próximamente)" class="text-white hover:text-neon transition-colors p-2 inline-flex">
-          {/* TODO CLIENT: proporcionar URL de perfil TikTok */}
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.53V6.78a4.85 4.85 0 01-1.02-.09z"/>
-          </svg>
-        </a>
-        <a href="#" aria-label="Instagram (próximamente)" class="text-white hover:text-neon transition-colors p-2 inline-flex">
-          {/* TODO CLIENT: proporcionar URL de perfil Instagram */}
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-          </svg>
-        </a>
-      </li>
-    </ul>
+    </nav>
 
-    <button
-      type="button"
-      id="ham-btn"
-      class="md:hidden flex flex-col justify-center items-center gap-[6px] w-12 h-12 -mr-2 border border-steel hover:border-neon transition-colors"
-      aria-expanded="false"
-      aria-controls="mobile-menu"
-      aria-label="Abrir menú"
-    >
-      <span class="block w-6 h-[2px] bg-bone transition-colors" aria-hidden="true"></span>
-      <span class="block w-6 h-[2px] bg-bone transition-colors" aria-hidden="true"></span>
-      <span class="block w-6 h-[2px] bg-bone transition-colors" aria-hidden="true"></span>
-    </button>
-  </nav>
+    <div class="flex items-center gap-3">
+      <a
+        href={ctaHref}
+        class="hidden sm:inline-flex items-center gap-2 bg-yellow-400 text-gray-900 font-bold px-5 py-2.5 rounded-md hover:bg-yellow-300 transition-colors"
+      >
+        {ctaLabel}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
 
-  <MobileNav navItems={PRIMARY_NAV} catalogPdf={CATALOG_PDF} client:idle />
+      <button
+        type="button"
+        id="tp-mobile-toggle"
+        class="lg:hidden inline-flex items-center justify-center w-11 h-11 text-gray-100 hover:text-yellow-400"
+        aria-label="Abrir menú"
+        aria-controls="tp-mobile-menu"
+        aria-expanded="false"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="tp-mobile-menu"
+    class="lg:hidden hidden border-t border-gray-800 bg-black/95 backdrop-blur-md"
+  >
+    <nav aria-label="Navegación móvil" class="px-4 py-4 flex flex-col gap-1">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'px-3 py-3 rounded-md text-base font-semibold uppercase tracking-wide',
+              isActive(item.href)
+                ? 'text-yellow-400 bg-white/5'
+                : 'text-gray-100 hover:text-yellow-400 hover:bg-white/5',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a
+        href={ctaHref}
+        class="mt-2 inline-flex justify-center items-center bg-yellow-400 text-gray-900 font-bold px-5 py-3 rounded-md"
+      >
+        {ctaLabel}
+      </a>
+    </nav>
+  </div>
 </header>
+
+<div aria-hidden="true" class="h-20"></div>
+
+<script>
+  const toggle = document.getElementById('tp-mobile-toggle');
+  const menu = document.getElementById('tp-mobile-menu');
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      const open = menu.classList.toggle('hidden') === false;
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    });
+  }
+</script>

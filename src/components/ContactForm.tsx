@@ -1,377 +1,247 @@
-import { useState, useEffect, type ChangeEvent, type FormEvent } from 'react';
-import type { ContactFormErrors, ContactFormPayload, ContactFormState } from '@/types';
+import { useState, type ChangeEvent, type FormEvent } from 'react';
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PHONE_REGEX = /^\d{10}$/;
+type ProjectType =
+  | ''
+  | 'calderas'
+  | 'maquinas'
+  | 'zapatas'
+  | 'senalamiento-horizontal'
+  | 'senalamiento-vertical'
+  | 'pintura-aplicacion'
+  | 'remolques'
+  | 'otro';
 
-const PRODUCT_OPTIONS = [
-  { value: '', label: 'Selecciona una opción' },
-  { value: 'calderas', label: 'Calderas de Precalentado' },
+interface FormState {
+  name: string;
+  phone: string;
+  projectType: ProjectType;
+  message: string;
+}
+
+interface FormErrors {
+  name?: string;
+  phone?: string;
+  projectType?: string;
+  message?: string;
+}
+
+type SubmitStatus = 'idle' | 'submitting' | 'success' | 'error';
+
+const PROJECT_OPTIONS: ReadonlyArray<{ value: ProjectType; label: string }> = [
+  { value: '', label: 'Selecciona el tipo de proyecto…' },
+  { value: 'calderas', label: 'Calderas Termoplásticas' },
   { value: 'maquinas', label: 'Máquinas Aplicadoras' },
-  { value: 'dados', label: 'Dados y Zapatas' },
-  { value: 'horizontal', label: 'Señalamiento Horizontal' },
-  { value: 'vertical', label: 'Señalamiento Vertical' },
-  { value: 'confinamiento', label: 'Dispositivos de Confinamiento' },
-  { value: 'solar', label: 'Equipos con Panel Solar' },
-  { value: 'fabricacion', label: 'Servicio: Fabricación Termoplástica' },
-  { value: 'estudios', label: 'Servicio: Estudios de Ingeniería Vial' },
-  { value: 'confinamiento-svc', label: 'Servicio: Confinamiento Vial' },
+  { value: 'zapatas', label: 'Dados y Zapatas' },
+  { value: 'senalamiento-horizontal', label: 'Señalamiento Horizontal' },
+  { value: 'senalamiento-vertical', label: 'Señalamiento Vertical' },
+  { value: 'pintura-aplicacion', label: 'Aplicación de Pintura (tráfico/epóxica/termoplástica)' },
+  { value: 'remolques', label: 'Remolques' },
   { value: 'otro', label: 'Otro / No estoy seguro' },
 ];
 
-const CLIENT_TYPE_OPTIONS = [
-  { value: '', label: 'Selecciona una opción' },
-  { value: 'estatal', label: 'Gobierno Estatal' },
-  { value: 'municipal', label: 'Gobierno Municipal' },
-  { value: 'privada', label: 'Empresa Privada' },
-  { value: 'constructora', label: 'Constructora' },
-  { value: 'licitacion', label: 'Licitación en curso' },
-  { value: 'otro', label: 'Otro' },
-];
+const PHONE_REGEX = /^[\d\s()+-]{10,15}$/;
 
-function getInitialPayload(): ContactFormPayload {
-  return {
-    nombre: '',
-    empresa: '',
-    email: '',
-    telefono: '',
-    interes: '',
-    tipoCliente: '',
-    volumen: '',
-    ubicacion: '',
-    fecha: '',
-    mensaje: '',
-    consent: false,
-    _honeypot: '',
-  };
-}
+const INITIAL_STATE: FormState = {
+  name: '',
+  phone: '',
+  projectType: '',
+  message: '',
+};
 
-interface ContactFormProps {
-  endpoint?: string;
-  successMessage?: string;
-  prefillInterest?: string;
-  prefillMessage?: string;
-}
-
-const fieldClass = 'w-full bg-char border-2 border-steel text-bone placeholder-mist px-3 py-3 font-sans text-sm focus:border-neon focus:outline-none transition-colors duration-200 ease-brand aria-[invalid=true]:border-neon';
-const labelClass = 'block font-mono text-[11px] uppercase tracking-widest text-mist mb-2';
-
-function validate(payload: ContactFormPayload): ContactFormErrors {
-  const errors: ContactFormErrors = {};
-  if (!payload.nombre.trim()) errors.nombre = 'Este campo es obligatorio.';
-  if (!payload.empresa.trim()) errors.empresa = 'Este campo es obligatorio.';
-  if (!payload.email.trim()) errors.email = 'Este campo es obligatorio.';
-  else if (!EMAIL_REGEX.test(payload.email)) errors.email = 'Correo electrónico inválido.';
-  if (!payload.telefono.trim()) errors.telefono = 'Este campo es obligatorio.';
-  else if (!PHONE_REGEX.test(payload.telefono.replace(/\D/g, ''))) errors.telefono = 'Ingresa 10 dígitos.';
-  if (!payload.mensaje.trim()) errors.mensaje = 'Este campo es obligatorio.';
-  else if (payload.mensaje.trim().length < 20) errors.mensaje = 'Mínimo 20 caracteres.';
-  if (!payload.consent) errors.consent = 'Debes aceptar el aviso de privacidad.';
+function validate(state: FormState): FormErrors {
+  const errors: FormErrors = {};
+  if (state.name.trim().length < 2) errors.name = 'Ingresa tu nombre completo.';
+  if (!PHONE_REGEX.test(state.phone.trim())) errors.phone = 'Teléfono inválido (10 dígitos).';
+  if (!state.projectType) errors.projectType = 'Selecciona un tipo de proyecto.';
+  if (state.message.trim().length < 10) errors.message = 'Cuéntanos al menos 10 caracteres.';
   return errors;
 }
 
-export default function ContactForm({
-  endpoint,
-  successMessage = '¡Gracias! Hemos recibido tu solicitud. Un ingeniero te contactará en menos de 24 horas hábiles.',
-  prefillInterest,
-  prefillMessage,
-}: ContactFormProps): JSX.Element {
-  const [payload, setPayload] = useState<ContactFormPayload>(getInitialPayload());
-  const [state, setState] = useState<ContactFormState>({ status: 'idle' });
-  const errors = state.status === 'error' ? state.errors : {};
+async function fakeSubmit(payload: FormState): Promise<{ ok: boolean }> {
+  // TODO: integrar con endpoint real (Resend / Formspree / Edge Function).
+  await new Promise((res) => setTimeout(res, 900));
+  if (typeof window !== 'undefined') console.info('[ContactForm] payload', payload);
+  return { ok: true };
+}
 
-  // Leer URL params y prefill props al montar
-  useEffect(() => {
-    const url = new URL(window.location.href);
-    const urlInterest = url.searchParams.get('interes') ?? '';
-    const urlProduct = url.searchParams.get('producto') ?? '';
-    const urlService = url.searchParams.get('servicio') ?? '';
-    const urlMessage = url.searchParams.get('mensaje') ?? '';
+export default function ContactForm(): JSX.Element {
+  const [state, setState] = useState<FormState>(INITIAL_STATE);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [status, setStatus] = useState<SubmitStatus>('idle');
 
-    let interest = prefillInterest || urlInterest || '';
-    let message = prefillMessage || urlMessage || '';
-
-    // Si viene un producto específico, construir mensaje
-    if (urlProduct && !message) {
-      message = `Solicito cotización para el producto: ${urlProduct}. `;
-    }
-    if (urlService && !message) {
-      message = `Solicito cotización para el servicio: ${urlService}. `;
-    }
-
-    setPayload((prev) => ({
-      ...prev,
-      interes: interest || prev.interes,
-      mensaje: message || prev.mensaje,
-    }));
-  }, [prefillInterest, prefillMessage]);
-
-  const update =
-    <K extends keyof ContactFormPayload>(key: K) =>
-    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>): void => {
-      const value =
-        (key === 'consent' ? (e.target as HTMLInputElement).checked : e.target.value) as ContactFormPayload[K];
-      setPayload((prev) => ({ ...prev, [key]: value }));
-    };
-
-  const submit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
-    if (payload._honeypot) {
-      setState({ status: 'success' });
-      setPayload(getInitialPayload());
-      return;
-    }
-    const found = validate(payload);
-    if (Object.keys(found).length > 0) {
-      setState({ status: 'error', errors: found, summary: 'Corrige los campos marcados para enviar el formulario.' });
-      return;
-    }
-    setState({ status: 'submitting' });
-    const target = endpoint ?? import.meta.env.PUBLIC_CONTACT_ENDPOINT;
-    if (typeof target !== 'string' || target.length === 0) {
-      const body = encodeURIComponent(
-        `Nombre: ${payload.nombre}\nEmpresa: ${payload.empresa}\nEmail: ${payload.email}\nTeléfono: ${payload.telefono}\nInterés: ${payload.interes}\nTipo de cliente: ${payload.tipoCliente}\nVolumen estimado: ${payload.volumen}\nUbicación: ${payload.ubicacion}\nFecha estimada: ${payload.fecha}\n\n${payload.mensaje}`
-      );
-      window.location.href = `mailto:ventas_tepate@outlook.com?subject=Solicitud%20de%20cotización%20web&body=${body}`;
-      setState({ status: 'success' });
-      setPayload(getInitialPayload());
-      return;
-    }
-    try {
-      const res = await fetch(target, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      setState({ status: 'success' });
-      setPayload(getInitialPayload());
-    } catch {
-      setState({ status: 'error', errors: {}, summary: 'No pudimos enviar tu mensaje. Intenta de nuevo o llámanos.' });
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ): void => {
+    const { name, value } = e.target;
+    setState((prev) => ({ ...prev, [name]: value }) as FormState);
+    if (errors[name as keyof FormErrors]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
   };
 
-  if (state.status === 'success') {
-    return (
-      <div role="status" aria-live="polite" className="bg-char border-2 border-neon text-neon p-6 font-mono text-sm uppercase tracking-widest">
-        {successMessage}
-      </div>
-    );
-  }
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault();
+    const v = validate(state);
+    if (Object.keys(v).length > 0) {
+      setErrors(v);
+      return;
+    }
+    setStatus('submitting');
+    try {
+      const res = await fakeSubmit(state);
+      if (res.ok) {
+        setStatus('success');
+        setState(INITIAL_STATE);
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
+  };
+
+  const inputBase =
+    'w-full bg-[#0A0A0A] border border-gray-800 text-gray-100 placeholder-gray-300/50 rounded-md px-4 py-3 text-base focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 transition-colors';
 
   return (
-    <form onSubmit={submit} noValidate className="grid grid-cols-1 sm:grid-cols-2 gap-5" aria-describedby="form-summary">
-      {/* Honeypot */}
-      <div className="sm:col-span-2 sr-only" aria-hidden="true">
-        <label>
-          Deja en blanco
-          <input type="text" tabIndex={-1} autoComplete="off" value={payload._honeypot} onChange={update('_honeypot')} />
+    <form
+      onSubmit={handleSubmit}
+      noValidate
+      className="bg-[#121212] border border-gray-800 rounded-2xl p-6 sm:p-8 flex flex-col gap-5"
+      aria-label="Formulario de cotización TEPATE"
+    >
+      <div className="flex flex-col gap-2">
+        <label htmlFor="cf-name" className="text-sm font-bold uppercase tracking-wide text-gray-100">
+          Nombre completo *
         </label>
-      </div>
-
-      {/* Nombre */}
-      <div>
-        <label className={labelClass} htmlFor="cf-nombre">Nombre *</label>
         <input
-          id="cf-nombre"
-          name="nombre"
+          id="cf-name"
+          name="name"
           type="text"
           autoComplete="name"
-          className={fieldClass}
-          value={payload.nombre}
-          onChange={update('nombre')}
-          aria-invalid={!!errors.nombre}
-          aria-describedby={errors.nombre ? 'cf-nombre-err' : undefined}
-          required
+          value={state.name}
+          onChange={handleChange}
+          className={inputBase}
+          placeholder="Ej. María González"
+          aria-invalid={Boolean(errors.name)}
+          aria-describedby={errors.name ? 'cf-name-err' : undefined}
         />
-        <p id="cf-nombre-err" className="text-neon text-xs mt-1 font-mono">{errors.nombre}</p>
+        {errors.name && (
+          <span id="cf-name-err" className="text-xs text-red-400">
+            {errors.name}
+          </span>
+        )}
       </div>
 
-      {/* Empresa */}
-      <div>
-        <label className={labelClass} htmlFor="cf-empresa">Empresa *</label>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="cf-phone" className="text-sm font-bold uppercase tracking-wide text-gray-100">
+          Teléfono *
+        </label>
         <input
-          id="cf-empresa"
-          name="empresa"
-          type="text"
-          autoComplete="organization"
-          className={fieldClass}
-          value={payload.empresa}
-          onChange={update('empresa')}
-          aria-invalid={!!errors.empresa}
-          aria-describedby={errors.empresa ? 'cf-empresa-err' : undefined}
-          required
-        />
-        <p id="cf-empresa-err" className="text-neon text-xs mt-1 font-mono">{errors.empresa}</p>
-      </div>
-
-      {/* Email */}
-      <div>
-        <label className={labelClass} htmlFor="cf-email">Correo *</label>
-        <input
-          id="cf-email"
-          name="email"
-          type="email"
-          autoComplete="email"
-          inputMode="email"
-          className={fieldClass}
-          value={payload.email}
-          onChange={update('email')}
-          aria-invalid={!!errors.email}
-          aria-describedby={errors.email ? 'cf-email-err' : undefined}
-          required
-        />
-        <p id="cf-email-err" className="text-neon text-xs mt-1 font-mono">{errors.email}</p>
-      </div>
-
-      {/* Teléfono */}
-      <div>
-        <label className={labelClass} htmlFor="cf-telefono">Teléfono *</label>
-        <input
-          id="cf-telefono"
-          name="telefono"
+          id="cf-phone"
+          name="phone"
           type="tel"
-          autoComplete="tel-national"
           inputMode="tel"
-          className={fieldClass}
-          value={payload.telefono}
-          onChange={update('telefono')}
-          aria-invalid={!!errors.telefono}
-          aria-describedby={errors.telefono ? 'cf-telefono-err' : undefined}
-          required
+          autoComplete="tel"
+          value={state.phone}
+          onChange={handleChange}
+          className={inputBase}
+          placeholder="(81) 1234 5678"
+          aria-invalid={Boolean(errors.phone)}
+          aria-describedby={errors.phone ? 'cf-phone-err' : undefined}
         />
-        <p id="cf-telefono-err" className="text-neon text-xs mt-1 font-mono">{errors.telefono}</p>
+        {errors.phone && (
+          <span id="cf-phone-err" className="text-xs text-red-400">
+            {errors.phone}
+          </span>
+        )}
       </div>
 
-      {/* Interés */}
-      <div>
-        <label className={labelClass} htmlFor="cf-interes">¿Qué te interesa cotizar?</label>
-        <select
-          id="cf-interes"
-          name="interes"
-          className={fieldClass}
-          style={{ appearance: 'none', backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23E1FF00' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 12px center', paddingRight: '36px' }}
-          value={payload.interes}
-          onChange={update('interes')}
+      <div className="flex flex-col gap-2">
+        <label
+          htmlFor="cf-project"
+          className="text-sm font-bold uppercase tracking-wide text-gray-100"
         >
-          {PRODUCT_OPTIONS.map((opt) => (
-            <option key={opt.value} value={opt.value}>{opt.label}</option>
+          Tipo de proyecto *
+        </label>
+        <select
+          id="cf-project"
+          name="projectType"
+          value={state.projectType}
+          onChange={handleChange}
+          className={inputBase}
+          aria-invalid={Boolean(errors.projectType)}
+          aria-describedby={errors.projectType ? 'cf-project-err' : undefined}
+        >
+          {PROJECT_OPTIONS.map((opt) => (
+            <option key={opt.value} value={opt.value} className="bg-[#0A0A0A] text-gray-100">
+              {opt.label}
+            </option>
           ))}
         </select>
+        {errors.projectType && (
+          <span id="cf-project-err" className="text-xs text-red-400">
+            {errors.projectType}
+          </span>
+        )}
       </div>
 
-      {/* Tipo de cliente */}
-      <div>
-        <label className={labelClass} htmlFor="cf-tipo">Tipo de cliente</label>
-        <select
-          id="cf-tipo"
-          name="tipoCliente"
-          className={fieldClass}
-          style={{ appearance: 'none', backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23E1FF00' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 12px center', paddingRight: '36px' }}
-          value={payload.tipoCliente}
-          onChange={update('tipoCliente')}
-        >
-          {CLIENT_TYPE_OPTIONS.map((opt) => (
-            <option key={opt.value} value={opt.value}>{opt.label}</option>
-          ))}
-        </select>
-      </div>
-
-      {/* Ubicación */}
-      <div>
-        <label className={labelClass} htmlFor="cf-ubicacion">Ubicación del proyecto</label>
-        <input
-          id="cf-ubicacion"
-          name="ubicacion"
-          type="text"
-          placeholder="Estado / Municipio"
-          className={fieldClass}
-          value={payload.ubicacion}
-          onChange={update('ubicacion')}
-        />
-      </div>
-
-      {/* Fecha estimada */}
-      <div>
-        <label className={labelClass} htmlFor="cf-fecha">Fecha estimada de entrega</label>
-        <input
-          id="cf-fecha"
-          name="fecha"
-          type="text"
-          placeholder="Ej: Q4 2025, Enero 2026, Urgente"
-          className={fieldClass}
-          value={payload.fecha}
-          onChange={update('fecha')}
-        />
-      </div>
-
-      {/* Volumen */}
-      <div className="sm:col-span-2">
-        <label className={labelClass} htmlFor="cf-volumen">Volumen o cantidad estimada</label>
-        <input
-          id="cf-volumen"
-          name="volumen"
-          type="text"
-          placeholder="Ej: 2 calderas CP-1000, 5 km de carretera, 50 señales, etc."
-          className={fieldClass}
-          value={payload.volumen}
-          onChange={update('volumen')}
-        />
-      </div>
-
-      {/* Mensaje */}
-      <div className="sm:col-span-2">
-        <label className={labelClass} htmlFor="cf-mensaje">Mensaje *</label>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="cf-message" className="text-sm font-bold uppercase tracking-wide text-gray-100">
+          Mensaje *
+        </label>
         <textarea
-          id="cf-mensaje"
-          name="mensaje"
+          id="cf-message"
+          name="message"
           rows={5}
-          className={fieldClass}
-          value={payload.mensaje}
-          onChange={update('mensaje')}
-          aria-invalid={!!errors.mensaje}
-          aria-describedby={errors.mensaje ? 'cf-mensaje-err' : undefined}
-          required
+          value={state.message}
+          onChange={handleChange}
+          className={`${inputBase} resize-y min-h-[120px]`}
+          placeholder="Cuéntanos volumen estimado, ubicación de obra y plazos."
+          aria-invalid={Boolean(errors.message)}
+          aria-describedby={errors.message ? 'cf-message-err' : undefined}
         />
-        <p id="cf-mensaje-err" className="text-neon text-xs mt-1 font-mono">{errors.mensaje}</p>
+        {errors.message && (
+          <span id="cf-message-err" className="text-xs text-red-400">
+            {errors.message}
+          </span>
+        )}
       </div>
 
-      {/* Consentimiento */}
-      <label className="sm:col-span-2 flex items-start gap-3 text-bone text-sm">
-        <input
-          type="checkbox"
-          checked={payload.consent}
-          onChange={update('consent')}
-          aria-invalid={!!errors.consent}
-          className="mt-1 w-4 h-4 accent-neon"
-          required
-        />
-        <span>
-          Acepto el <a href="/aviso-privacidad" className="text-neon underline">aviso de privacidad</a>.
-        </span>
-      </label>
-      {errors.consent && <p className="sm:col-span-2 text-neon text-xs font-mono -mt-3">{errors.consent}</p>}
-
-      {/* Error summary */}
-      {state.status === 'error' && state.summary && (
-        <div
-          id="form-summary"
-          role="alert"
-          aria-live="polite"
-          className="sm:col-span-2 bg-char border-2 border-neon text-neon p-4 font-mono text-xs uppercase tracking-widest"
-        >
-          {state.summary}
-        </div>
-      )}
-
-      {/* Submit */}
       <button
         type="submit"
-        disabled={state.status === 'submitting'}
-        className="sm:col-span-2 bg-neon text-black font-bold uppercase tracking-widest font-mono text-sm py-4 hover:bg-neonDim disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 ease-brand rounded-btn"
+        disabled={status === 'submitting'}
+        className="w-full inline-flex items-center justify-center gap-2 bg-yellow-400 text-gray-900 font-black uppercase tracking-wide text-base px-6 py-4 rounded-md hover:bg-yellow-300 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        {state.status === 'submitting' ? 'Enviando…' : 'Solicitar cotización →'}
+        {status === 'submitting' ? 'Enviando…' : 'Solicitar cotización'}
+        {status !== 'submitting' && (
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        )}
       </button>
+
+      {status === 'success' && (
+        <p
+          role="status"
+          className="text-sm text-yellow-400 bg-yellow-400/10 border border-yellow-400/30 rounded-md p-3"
+        >
+          ✓ Recibimos tu solicitud. Te contactamos en menos de 24 horas hábiles.
+        </p>
+      )}
+      {status === 'error' && (
+        <p role="alert" className="text-sm text-red-400 bg-red-400/10 border border-red-400/30 rounded-md p-3">
+          Ocurrió un error al enviar. Intenta nuevamente o escríbenos por WhatsApp.
+        </p>
+      )}
+
+      <p className="text-xs text-gray-300 leading-relaxed">
+        Al enviar aceptas nuestro{' '}
+        <a href="/aviso-privacidad" className="text-yellow-400 underline hover:no-underline">
+          Aviso de Privacidad
+        </a>
+        . No compartimos tus datos.
+      </p>
     </form>
   );
 }

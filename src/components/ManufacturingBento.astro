@@ -1,0 +1,130 @@
+---
+interface BentoImage {
+  src: string;
+  alt: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  paragraphs?: readonly string[];
+  bullets?: readonly string[];
+  images?: readonly [BentoImage, BentoImage, BentoImage];
+  ctaHref?: string;
+  ctaLabel?: string;
+}
+
+const DEFAULT_IMAGES: readonly [BentoImage, BentoImage, BentoImage] = [
+  {
+    src: '/TEPATE_Imagenes_Organizadas/03_Informacion_Empresa/fabrica-apodaca.webp',
+    alt: 'Planta TEPATE en Apodaca, Nuevo León',
+  },
+  { src: '/IVT-REM1024.webp', alt: 'Caldera termoplástica sobre remolque doble' },
+  {
+    src: '/TEPATE_Imagenes_Organizadas/08_Maquinas_Aplicadoras/slide10_Maquinas_Aplicadoras_img1.webp',
+    alt: 'Máquina aplicadora termoplástica',
+  },
+];
+
+const {
+  eyebrow = 'Fabricantes directos',
+  title = 'Diseñamos, fabricamos y entregamos.',
+  paragraphs = [
+    'Toda nuestra línea industrial nace en planta propia: calderas, máquinas aplicadoras, dados, zapatas y remolques. Cada equipo se prueba antes de salir a obra.',
+    'Trabajamos sobre pedido — adaptamos cilindraje, capacidad y configuración hidráulica al proyecto del cliente. Sin intermediarios, sin sobreprecio.',
+  ],
+  bullets = [
+    'Componentes Kohler, Parker y Vickers',
+    'Cumplimiento SCT N-CMT-5-001-13 y ASTM',
+    'Garantía de fábrica y soporte técnico',
+    'Envíos a los 32 estados de México',
+  ],
+  images = DEFAULT_IMAGES,
+  ctaHref = '/productos',
+  ctaLabel = 'Ver catálogo de fabricación',
+} = Astro.props;
+
+const [imgLg, imgSm1, imgSm2] = images;
+---
+
+<section class="bg-[#0A0A0A] py-20 md:py-28" aria-labelledby="manufacturing-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      <div class="flex flex-col">
+        <span class="inline-block text-xs font-bold uppercase tracking-[0.25em] text-yellow-400 mb-4">
+          {eyebrow}
+        </span>
+        <h2
+          id="manufacturing-heading"
+          class="text-4xl md:text-5xl font-black text-gray-100 leading-tight tracking-tight"
+        >
+          {title}
+        </h2>
+        <div class="mt-6 space-y-4">
+          {paragraphs.map((p) => <p class="text-base md:text-lg text-gray-300 leading-relaxed">{p}</p>)}
+        </div>
+        <ul class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {
+            bullets.map((b) => (
+              <li class="flex items-start gap-3 text-gray-100">
+                <svg
+                  class="shrink-0 mt-0.5 text-yellow-400"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12l5 5L20 7" />
+                </svg>
+                <span class="text-sm md:text-base">{b}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <a
+          href={ctaHref}
+          class="mt-10 inline-flex items-center gap-2 self-start bg-yellow-400 text-gray-900 font-bold px-6 py-3 rounded-md hover:bg-yellow-300 transition-colors"
+        >
+          {ctaLabel}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-2 grid-rows-2 gap-3 sm:gap-4 h-[480px] md:h-[560px]">
+        <div class="row-span-2 relative overflow-hidden rounded-2xl border border-gray-800 group">
+          <img
+            src={imgLg.src}
+            alt={imgLg.alt}
+            class="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+        </div>
+        <div class="relative overflow-hidden rounded-2xl border border-gray-800 group">
+          <img
+            src={imgSm1.src}
+            alt={imgSm1.alt}
+            class="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="relative overflow-hidden rounded-2xl border border-gray-800 group">
+          <img
+            src={imgSm2.src}
+            alt={imgSm2.alt}
+            class="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
