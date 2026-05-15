@@ -358,7 +358,7 @@ footer {
 
 .fct {
   font-family: var(--fm);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--neon);
@@ -369,13 +369,14 @@ footer {
 .flinks {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
 .flinks a {
   font-family: var(--fd);
   font-weight: 600;
   font-size: 14px;
+  line-height: 1.8;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   color: var(--mist);
@@ -383,6 +384,24 @@ footer {
   transition: color 0.3s;
   position: relative;
   width: fit-content;
+  padding-top: 4px;
+}
+
+.fsocial {
+  display: flex;
+  gap: 14px;
+  margin-top: 24px;
+  align-items: center;
+}
+
+.fsocial a {
+  color: var(--white);
+  display: inline-flex;
+  transition: color 0.3s;
+}
+
+.fsocial a:hover {
+  color: var(--neon);
 }
 
 .flinks a::after {
