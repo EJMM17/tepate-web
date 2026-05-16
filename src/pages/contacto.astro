@@ -57,9 +57,9 @@ const seo = buildSeo({
           <div>
             <div class="clabel">Ubicación</div>
             <div class="cval">
-              {COMPANY.address.streetAddress}, N.L.<br />
-              Área Metropolitana de Monterrey<br />
-              C.P. {COMPANY.address.postalCode} · {COMPANY.address.addressCountry}
+              {COMPANY.address.streetAddress}<br />
+              {COMPANY.address.addressLocality}, {COMPANY.address.addressRegion}<br />
+              C.P. {COMPANY.address.postalCode}
             </div>
           </div>
         </div>
@@ -114,6 +114,33 @@ const seo = buildSeo({
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="pcat" style="padding-top:0">
+    <div style="max-width:1100px;margin:0 auto;padding:0 1.5rem 3rem">
+      <div class="sec-tag" style="margin-bottom:16px">Cómo llegarnos</div>
+      <div style="border:1px solid var(--steel);overflow:hidden;aspect-ratio:16/6;min-height:320px">
+        <iframe
+          title="Ubicación TEPATE — Calle La Fragua #193, Col. Chulavista, Guadalupe, N.L."
+          src="https://maps.google.com/maps?q=Calle+La+Fragua+193+Col.+Chulavista+Guadalupe+Nuevo+Leon+Mexico&output=embed"
+          width="100%"
+          height="100%"
+          style="border:0;display:block"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+      <p style="font-size:12px;color:var(--mist);margin-top:8px;font-family:var(--font-mono)">
+        Calle La Fragua #193 / Río La Silla, Col. Chulavista, Guadalupe, N.L. ·
+        <a
+          href="https://maps.google.com/maps?q=Calle+La+Fragua+193+Col.+Chulavista+Guadalupe+Nuevo+Leon+Mexico"
+          target="_blank"
+          rel="noopener noreferrer"
+          style="color:var(--neon);text-decoration:none"
+        >Abrir en Google Maps ↗</a>
+      </p>
     </div>
   </section>
 </Layout>
