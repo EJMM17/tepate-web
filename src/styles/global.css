@@ -151,6 +151,17 @@
   will-change: transform, opacity;
 }
 
+/* Initial hidden state — only when JS is loaded (gsap-init class added by animations.ts).
+   Without JS, elements are visible by default. Prevents FOUC from GSAP immediateRender. */
+.gsap-init .reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+}
+.gsap-init .reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
 /* ── Hero Word Mask (for split-type) ─────────────────── */
 .hero-h1 .word {
   overflow: hidden;
