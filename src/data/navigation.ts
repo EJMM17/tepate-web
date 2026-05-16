@@ -30,10 +30,10 @@ export const COMPANY = {
   phoneDisplay: '(81) 8453-2875',
   email: 'facturacion_tepate@outlook.com',
   address: {
-    streetAddress: 'Apodaca y Guadalupe',
-    addressLocality: 'Monterrey',
+    streetAddress: 'Calle La Fragua #193 / Río La Silla, Col. Chulavista',
+    addressLocality: 'Guadalupe',
     addressRegion: 'Nuevo León',
-    postalCode: '66000',
+    postalCode: '67130',
     addressCountry: 'MX',
   },
   hours: {
