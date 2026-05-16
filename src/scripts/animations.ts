@@ -197,37 +197,48 @@ function initHeroReveal() {
 
 /* ── Scroll Reveals (global) ─────────────────────────── */
 export function initScrollReveals() {
+  // Mark document so CSS can hide elements before GSAP animates (prevents FOUC)
+  document.documentElement.classList.add('gsap-init');
+
   // Generic fade-up reveal for sections
   gsap.utils.toArray<HTMLElement>('.reveal-up').forEach((el) => {
-    gsap.from(el, {
-      y: 40,
-      opacity: 0,
-      duration: 0.7,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 88%',
-        toggleActions: 'play none none none',
-      },
-    });
+    gsap.fromTo(
+      el,
+      { y: 40, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.7,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 92%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
   });
 
   // Stagger children reveals
   gsap.utils.toArray<HTMLElement>('.reveal-stagger').forEach((container) => {
-    const children = container.children;
+    const children = Array.from(container.children) as HTMLElement[];
     if (!children.length) return;
-    gsap.from(children, {
-      y: 30,
-      opacity: 0,
-      duration: 0.6,
-      stagger: 0.06,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: container,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      },
-    });
+    gsap.fromTo(
+      children,
+      { y: 30, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        stagger: 0.06,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: container,
+          start: 'top 92%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
   });
 
   // Counter animation for stats
