@@ -40,10 +40,10 @@ export function initPreloader() {
   const preloader = document.getElementById('preloader');
   if (!preloader) return;
 
-  // Safety fallback: force hide after 1.8s no matter what
+  // Safety fallback: force hide after 1s no matter what
   const safetyTimeout = setTimeout(() => {
     forceHidePreloader(preloader);
-  }, 1800);
+  }, 1000);
 
   function forceHidePreloader(el: HTMLElement) {
     clearTimeout(safetyTimeout);
@@ -91,86 +91,84 @@ export function initPreloader() {
 
 /* ── Hero Typography Reveal ──────────────────────────── */
 function initHeroReveal() {
+  const heroFabrica = document.querySelector('.hero-fabrica');
   const heroH1 = document.querySelector('.hero-h1');
   const heroSub = document.querySelector('.hero-sub');
   const heroEyebrow = document.querySelector('.eyebrow');
   const heroActions = document.querySelector('.hero-actions');
   const heroVisual = document.querySelector('.hero-visual');
+  const heroSocial = document.querySelector('.hero-social');
 
-  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-  let hasAnimated = false;
+  // Collect all hero elements for safety fallback
+  const allHeroEls = [heroFabrica, heroH1, heroSub, heroEyebrow, heroActions, heroVisual, heroSocial].filter(Boolean) as HTMLElement[];
+
+  // Safety: force all hero elements visible after 2s no matter what
+  const heroSafety = setTimeout(() => {
+    allHeroEls.forEach((el) => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+    if (heroActions) {
+      Array.from(heroActions.children).forEach((child) => {
+        (child as HTMLElement).style.opacity = '1';
+        (child as HTMLElement).style.transform = 'none';
+      });
+    }
+  }, 2000);
+
+  const tl = gsap.timeline({
+    defaults: { ease: 'power3.out' },
+    onComplete: () => {
+      clearTimeout(heroSafety);
+      // Clear GSAP inline styles so CSS takes over cleanly
+      allHeroEls.forEach((el) => gsap.set(el, { clearProps: 'all' }));
+      if (heroActions) {
+        gsap.set(heroActions.children, { clearProps: 'all' });
+      }
+    },
+  });
 
   if (heroEyebrow) {
-    hasAnimated = true;
-    tl.from(heroEyebrow, {
-      y: 16,
-      opacity: 0,
-      duration: 0.5,
-    });
+    tl.from(heroEyebrow, { y: 16, opacity: 0, duration: 0.5 });
+  }
+
+  if (heroFabrica) {
+    tl.from(heroFabrica, { y: 20, opacity: 0, duration: 0.5 }, '-=0.2');
   }
 
   if (heroH1) {
-    hasAnimated = true;
     try {
       const split = new SplitType(heroH1 as HTMLElement, { types: 'lines,words' });
       tl.from(
         split.words || [],
-        {
-          y: '40%',
-          opacity: 0,
-          duration: 0.7,
-          stagger: 0.02,
-          skewY: 2,
-        },
+        { y: '40%', opacity: 0, duration: 0.7, stagger: 0.02, skewY: 2 },
         '-=0.25'
       );
     } catch {
-      // Fallback if SplitType fails
-      tl.from(heroH1, {
-        y: 30,
-        opacity: 0,
-        duration: 0.6,
-      }, '-=0.25');
+      tl.from(heroH1, { y: 30, opacity: 0, duration: 0.6 }, '-=0.25');
     }
   }
 
   if (heroSub) {
-    hasAnimated = true;
-    tl.from(
-      heroSub,
-      {
-        y: 20,
-        opacity: 0,
-        duration: 0.6,
-      },
-      '-=0.35'
-    );
+    tl.from(heroSub, { y: 20, opacity: 0, duration: 0.6 }, '-=0.35');
   }
 
   if (heroActions) {
-    hasAnimated = true;
     tl.from(
       heroActions.children,
-      {
-        y: 16,
-        opacity: 0,
-        duration: 0.5,
-        stagger: 0.06,
-      },
+      { y: 16, opacity: 0, duration: 0.5, stagger: 0.06 },
       '-=0.3'
     );
   }
 
+  if (heroSocial) {
+    tl.from(heroSocial, { y: 10, opacity: 0, duration: 0.4 }, '-=0.2');
+  }
+
   if (heroVisual) {
-    hasAnimated = true;
     tl.from(
       heroVisual,
-      {
-        scale: 1.05,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power2.out',
-      },
+      { scale: 1.05, opacity: 0, duration: 0.8, ease: 'power2.out' },
       0
     );
   }
@@ -192,7 +190,7 @@ function initHeroReveal() {
     }
   }
 
-  return hasAnimated;
+  return true;
 }
 
 /* ── Scroll Reveals (global) ─────────────────────────── */
@@ -339,6 +337,8 @@ export function initScrollMarquee() {
   const marquees = document.querySelectorAll<HTMLElement>('.prod-ticker-track, .marquee-content');
 
   marquees.forEach((marquee) => {
+    // Use CSS custom property to control animation speed instead of GSAP timeScale
+    // (timeScale is only valid on GSAP Tween/Timeline instances, not DOM elements)
     ScrollTrigger.create({
       trigger: marquee,
       start: 'top bottom',
@@ -346,10 +346,7 @@ export function initScrollMarquee() {
       onUpdate: (self) => {
         const velocity = Math.abs(self.getVelocity()) / 1000;
         const speed = gsap.utils.clamp(0.5, 3, 1 + velocity * 0.5);
-        gsap.to(marquee, {
-          timeScale: speed,
-          duration: 0.3,
-        });
+        marquee.style.setProperty('--marquee-speed', `${20 / speed}s`);
       },
     });
   });

@@ -3,10 +3,14 @@
    Header & Footer are self-contained Tailwind components.
    ═══════════════════════════════════════════════════════════ */
 
+:root {
+  --sticky-cta-h: 0px;
+}
+
 /* ── WHATSAPP FLOAT ─────────────────────────────────── */
 .wa {
   position: fixed;
-  bottom: 24px;
+  bottom: calc(24px + var(--sticky-cta-h));
   right: 24px;
   width: 56px;
   height: 56px;
@@ -18,7 +22,11 @@
   z-index: 998;
   text-decoration: none;
   border: 2px solid var(--neon);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .wa:hover {
@@ -28,17 +36,30 @@
   box-shadow: 0 0 30px rgba(225, 255, 0, 0.2);
 }
 
-.wa svg { width: 24px; height: 24px; fill: currentColor; }
+.wa svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
 
 @media (min-width: 640px) {
-  .wa { bottom: 32px; right: 32px; width: 64px; height: 64px; }
-  .wa svg { width: 28px; height: 28px; }
+  .wa {
+    bottom: calc(32px + var(--sticky-cta-h));
+    right: 32px;
+    width: 64px;
+    height: 64px;
+  }
+
+  .wa svg {
+    width: 28px;
+    height: 28px;
+  }
 }
 
 /* ── BACK TO TOP ────────────────────────────────────── */
 .back-to-top {
   position: fixed;
-  bottom: 100px;
+  bottom: calc(100px + var(--sticky-cta-h));
   right: 24px;
   width: 56px;
   height: 56px;
@@ -53,7 +74,13 @@
   opacity: 0;
   pointer-events: none;
   transform: translateY(20px);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: var(--fm);
   font-size: 20px;
 }
@@ -72,5 +99,10 @@
 }
 
 @media (min-width: 640px) {
-  .back-to-top { bottom: 112px; right: 32px; width: 64px; height: 64px; }
+  .back-to-top {
+    bottom: calc(112px + var(--sticky-cta-h));
+    right: 32px;
+    width: 64px;
+    height: 64px;
+  }
 }

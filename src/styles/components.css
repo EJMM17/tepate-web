@@ -132,35 +132,17 @@
   display: flex;
   gap: 100px;
   padding-right: 100px;
-  animation: marquee 40s linear infinite;
+  --marquee-speed: 80s;
+  animation: marquee var(--marquee-speed) linear infinite;
   white-space: nowrap;
   align-items: center;
   width: max-content;
 }
 
 .marquee-item {
-  font-family: var(--fd);
-  font-weight: 900;
-  font-size: 20px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--steel);
   display: flex;
   align-items: center;
-  gap: 20px;
-  transition: color 0.3s;
   flex-shrink: 0;
-  white-space: nowrap;
-}
-
-.marquee-item:hover {
-  color: var(--neon);
-}
-
-.marquee-item svg {
-  width: 36px;
-  height: 36px;
-  fill: currentColor;
 }
 
 .brand-logo {
@@ -168,13 +150,13 @@
   height: 36px;
   width: auto;
   object-fit: contain;
-  filter: grayscale(100%) opacity(0.6);
+  filter: brightness(0) invert(1) opacity(.38);
   transition: filter 0.3s ease, transform 0.3s ease;
   flex-shrink: 0;
 }
 
 .marquee-item:hover .brand-logo {
-  filter: grayscale(0%) opacity(1);
+  filter: brightness(0) invert(1) opacity(1);
   transform: scale(1.05);
 }
 

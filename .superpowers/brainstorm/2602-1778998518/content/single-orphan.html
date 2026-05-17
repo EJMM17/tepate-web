@@ -1,0 +1,86 @@
+<style>
+  .demo-block { margin-bottom: 2rem; }
+  .demo-label { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #888; margin-bottom: .6rem; }
+
+  .mock-card {
+    background: #1e2535;
+    border: 1px solid #2d3650;
+    border-radius: 8px;
+    height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .73rem;
+    color: #8899bb;
+    font-weight: 600;
+  }
+  .mock-card.orp { border-color: #5b7cf6; background: #1c2650; color: #8eb0ff; }
+
+  .mini-row { display: flex; gap: 8px; margin-bottom: 8px; }
+  .mini-row .mock-card { flex: 0 0 calc(33.33% - 6px); }
+  .mini-row.ctr { justify-content: center; }
+
+  .split-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .opt-card {
+    background: #141927;
+    border: 2px solid #2d3650;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color .2s;
+  }
+  .opt-card:hover { border-color: #5b7cf6; }
+  .opt-card.selected { border-color: #5b7cf6 !important; }
+  .opt-header {
+    padding: .55rem .9rem;
+    background: #1a2035;
+    border-bottom: 1px solid #2d3650;
+    display: flex; align-items: center; gap: .5rem;
+  }
+  .opt-letter {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: #2d3b6e; color: #8eb0ff;
+    font-size: .7rem; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .opt-header h3 { margin: 0; font-size: .85rem; color: #c8d5f0; }
+  .opt-body { padding: .85rem .9rem; }
+  .opt-desc { font-size: .72rem; color: #778; margin-top: .6rem; line-height: 1.45; }
+</style>
+
+<h2>Caso especial: 1 sola carta huérfana</h2>
+<p class="subtitle">Cuando queda exactamente 1 carta, centrarla deja 2/3 del ancho vacío. ¿Cómo prefieres que se vea?</p>
+
+<div class="split-2">
+
+  <!-- A1: centered small (1/3 width) -->
+  <div class="opt-card" data-choice="a1" onclick="toggleSelect(this)">
+    <div class="opt-header">
+      <div class="opt-letter">A</div>
+      <h3>Centrada — mismo tamaño</h3>
+    </div>
+    <div class="opt-body">
+      <div class="mini-row"><div class="mock-card">1</div><div class="mock-card">2</div><div class="mock-card">3</div></div>
+      <div class="mini-row"><div class="mock-card">4</div><div class="mock-card">5</div><div class="mock-card">6</div></div>
+      <div class="mini-row ctr"><div class="mock-card orp">7</div></div>
+      <p class="opt-desc">Mantiene el tamaño 1/3 y la centra. Muy consistente en tamaño, pero deja mucho espacio vacío a los lados.</p>
+    </div>
+  </div>
+
+  <!-- A2: expanded full width -->
+  <div class="opt-card" data-choice="a2" onclick="toggleSelect(this)">
+    <div class="opt-header">
+      <div class="opt-letter">B</div>
+      <h3>Expandida — ancho completo</h3>
+    </div>
+    <div class="opt-body">
+      <div class="mini-row"><div class="mock-card">1</div><div class="mock-card">2</div><div class="mock-card">3</div></div>
+      <div class="mini-row"><div class="mock-card">4</div><div class="mock-card">5</div><div class="mock-card">6</div></div>
+      <div class="mini-row" style="flex: 1">
+        <div class="mock-card orp" style="flex: 1">7</div>
+      </div>
+      <p class="opt-desc">La carta única ocupa el 100% del ancho. Rompe la uniformidad de tamaño pero elimina el vacío y se ve intencional.</p>
+    </div>
+  </div>
+
+</div>

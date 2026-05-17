@@ -4,6 +4,36 @@ import ContactForm from '@/components/ContactForm.tsx';
 import { buildSeo, buildLocalBusinessJsonLd } from '@/lib/seo';
 import { COMPANY } from '@/data/navigation';
 
+const brands = [
+  // Clientes principales
+  { src: '/TEPATE_Marcas/Principales_Clientes/Mercedes_Benz.png',               alt: 'Mercedes-Benz' },
+  { src: '/TEPATE_Marcas/Principales_Clientes/OMA_Aeropuertos.png',              alt: 'OMA Aeropuertos' },
+  { src: '/TEPATE_Marcas/Principales_Clientes/ICA_transparent.png',              alt: 'ICA' },
+  { src: '/TEPATE_Marcas/Principales_Clientes/Stiva_transparent.png',            alt: 'Stiva' },
+  { src: '/TEPATE_Marcas/Principales_Clientes/Vitro_transparent.png',            alt: 'Vitro' },
+  { src: '/TEPATE_Marcas/Principales_Clientes/FRISA_transparent.png',            alt: 'FRISA' },
+  { src: '/TEPATE_Marcas/Principales_Clientes/Solvay.png',                       alt: 'Solvay' },
+  { src: '/TEPATE_Marcas/Principales_Clientes/Grupo_Calidra_transparent.png',    alt: 'Grupo Calidra' },
+  { src: '/TEPATE_Marcas/Principales_Clientes/GP_Construccion_transparent.png',  alt: 'GP Construcción' },
+  { src: '/TEPATE_Marcas/Principales_Clientes/IDEI_Construyendo_Mexico.webp',    alt: 'IDEI' },
+  { src: '/TEPATE_Marcas/Principales_Clientes/Daewoo_transparent.png',           alt: 'Daewoo' },
+  { src: '/TEPATE_Marcas/Principales_Clientes/Nutrioli_transparent.png',         alt: 'Nutrioli' },
+  { src: '/TEPATE_Marcas/Principales_Clientes/Gruma.png',                        alt: 'Gruma' },
+  // Proveedores
+  { src: '/TEPATE_Marcas/Laminas_Senalamiento/3M.webp',                          alt: '3M' },
+  { src: '/TEPATE_Marcas/Laminas_Senalamiento/Avery_Dennison_transparent.png',   alt: 'Avery Dennison' },
+  { src: '/TEPATE_Marcas/Laminas_Senalamiento/Ennis_Flint_transparent.png',      alt: 'Ennis-Flint' },
+  { src: '/TEPATE_Marcas/Laminas_Senalamiento/Sherwin_Williams.png',             alt: 'Sherwin Williams' },
+  { src: '/TEPATE_Marcas/Materiales_Termoplasticos/SWARCO_Road_Marking_transparent.png', alt: 'Swarco' },
+  { src: '/TEPATE_Marcas/Materiales_Termoplasticos/Crown_Technology_transparent.png',    alt: 'Crown Technology' },
+  { src: '/TEPATE_Marcas/Materiales_Termoplasticos/Dynakrom_transparent.png',    alt: 'Dynakrom' },
+  { src: '/TEPATE_Marcas/Materiales_Termoplasticos/Comex_Termoplastico.webp',    alt: 'Comex' },
+  { src: '/TEPATE_Marcas/Componentes_Calderas/Kohler_motores_transparent.png',   alt: 'Kohler' },
+  { src: '/TEPATE_Marcas/Componentes_Calderas/Continental_transparent.png',      alt: 'Continental' },
+  { src: '/TEPATE_Marcas/Componentes_Calderas/Parker_Hannifin_transparent.png',  alt: 'Parker Hannifin' },
+  { src: '/TEPATE_Marcas/Componentes_Calderas/Vickers_hidraulica_transparent.png', alt: 'Vickers' },
+] as const;
+
 const seo = buildSeo({
   title: 'INGENIERÍA VIAL TEPATE — Fomentando la Cultura Vial y sus Valores',
   description:
@@ -20,12 +50,7 @@ const seo = buildSeo({
        ═══════════════════════════════════════════════════════════ -->
   <section class="hero" aria-label="Inicio">
     <div class="hero-left">
-      <span class="eyebrow">
-        <span class="dot"></span>
-        16 años · SCT N-CMT-5-001-13 · ASTM
-      </span>
-
-      <span class="hero-fabrica">FABRICACIÓN</span>
+      <span class="hero-fabrica">FABRICACIÓN DIRECTA</span>
 
       <h1 class="hero-h1">
         <span class="line">Forjamos la</span>
@@ -53,20 +78,7 @@ const seo = buildSeo({
         </a>
       </div>
 
-      <div class="hero-social" aria-label="Redes sociales" style="display:flex;gap:16px;margin-top:28px;align-items:center;">
-        <a href="https://wa.me/528118959042" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" style="color:#fff;display:inline-flex;padding:8px;transition:color .2s;" onmouseover="this.style.color='#E1FF00'" onmouseout="this.style.color='#fff'">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.522 5.848L0 24l6.335-1.502A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.002-1.366l-.36-.213-3.761.892.952-3.653-.234-.374A9.818 9.818 0 1112 21.818z"/></svg>
-        </a>
-        <a href="https://www.facebook.com/profile.php?id=100063746240114" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="color:#fff;display:inline-flex;padding:8px;transition:color .2s;" onmouseover="this.style.color='#E1FF00'" onmouseout="this.style.color='#fff'">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        </a>
-        <a href="#" aria-label="TikTok (próximamente)" style="color:#fff;display:inline-flex;padding:8px;transition:color .2s;" onmouseover="this.style.color='#E1FF00'" onmouseout="this.style.color='#fff'">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.53V6.78a4.85 4.85 0 01-1.02-.09z"/></svg>
-        </a>
-        <a href="#" aria-label="Instagram (próximamente)" style="color:#fff;display:inline-flex;padding:8px;transition:color .2s;" onmouseover="this.style.color='#E1FF00'" onmouseout="this.style.color='#fff'">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-        </a>
-      </div>
+
 
 	    </div>
 
@@ -93,26 +105,29 @@ const seo = buildSeo({
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════
-       MARQUEE — Product categories ticker
+       MARQUEE — Brand logos
        ═══════════════════════════════════════════════════════════ -->
-  <div class="prod-ticker" aria-hidden="true">
-    <div class="prod-ticker-track">
-      <span>Calderas Termoplásticas</span><span class="ptick-sep">◆</span>
-      <span>Máquinas Aplicadoras</span><span class="ptick-sep">◆</span>
-      <span>Dados y Zapatas</span><span class="ptick-sep">◆</span>
-      <span>Señalamiento Horizontal</span><span class="ptick-sep">◆</span>
-      <span>Señalamiento Vertical</span><span class="ptick-sep">◆</span>
-      <span>Dispositivos de Confinamiento</span><span class="ptick-sep">◆</span>
-      <span>Equipos con Panel Solar</span><span class="ptick-sep">◆</span>
-      <span>Calderas Termoplásticas</span><span class="ptick-sep">◆</span>
-      <span>Máquinas Aplicadoras</span><span class="ptick-sep">◆</span>
-      <span>Dados y Zapatas</span><span class="ptick-sep">◆</span>
-      <span>Señalamiento Horizontal</span><span class="ptick-sep">◆</span>
-      <span>Señalamiento Vertical</span><span class="ptick-sep">◆</span>
-      <span>Dispositivos de Confinamiento</span><span class="ptick-sep">◆</span>
-      <span>Equipos con Panel Solar</span><span class="ptick-sep">◆</span>
+  <section style="padding:0;background:var(--black)">
+    <div class="sec-tag reveal-up" style="justify-content:center;margin-top:clamp(32px,6vw,64px);margin-bottom:0">
+      Marcas que confían en nosotros
     </div>
-  </div>
+    <div class="marquee-wrapper reveal-up">
+      <div class="marquee-content">
+        {brands.map((b) => (
+          <div class="marquee-item">
+            <img src={b.src} alt={b.alt} class="brand-logo" loading="lazy" width="120" height="60" />
+          </div>
+        ))}
+        <div aria-hidden="true" style="display:contents">
+          {brands.map((b) => (
+            <div class="marquee-item">
+              <img src={b.src} alt="" class="brand-logo" loading="lazy" width="120" height="60" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ═══════════════════════════════════════════════════════════
        BENTO GRID — Product lines showcase
@@ -160,27 +175,9 @@ const seo = buildSeo({
         <span class="pbc-link">Ver →</span>
       </a>
 
-      <!-- 03 — DADOS Y ZAPATAS -->
-      <a href="/productos?cat=dados" class="pbc">
-        <span class="pbc-num">03</span>
-        <div class="pbc-ico">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
-            <line x1="2" y1="12" x2="22" y2="12"/>
-            <line x1="5" y1="8" x2="5" y2="16"/>
-            <line x1="9" y1="8" x2="9" y2="16"/>
-            <line x1="13" y1="8" x2="13" y2="16"/>
-            <line x1="17" y1="8" x2="17" y2="16"/>
-            <line x1="21" y1="8" x2="21" y2="16"/>
-          </svg>
-        </div>
-        <p class="pbc-name">Dados y Zapatas</p>
-        <span class="pbc-tags">10 · 15 · 20 · 30 · 40 · 60 cm</span>
-        <span class="pbc-link">Ver →</span>
-      </a>
-
-      <!-- 04 — SEÑALAMIENTO HORIZONTAL -->
+      <!-- 03 — SEÑALAMIENTO HORIZONTAL -->
       <a href="/productos?cat=senalamiento" class="pbc">
-        <span class="pbc-num">04</span>
+        <span class="pbc-num">03</span>
         <div class="pbc-ico">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
             <line x1="3" y1="6" x2="21" y2="6"/>
@@ -193,9 +190,9 @@ const seo = buildSeo({
         <span class="pbc-link">Ver →</span>
       </a>
 
-      <!-- 05 — SEÑALAMIENTO VERTICAL -->
+      <!-- 04 — SEÑALAMIENTO VERTICAL -->
       <a href="/productos?cat=senalamiento" class="pbc">
-        <span class="pbc-num">05</span>
+        <span class="pbc-num">04</span>
         <div class="pbc-ico">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
             <path d="M12 2l10 10-10 10L2 12z"/>
@@ -208,9 +205,9 @@ const seo = buildSeo({
         <span class="pbc-link">Ver →</span>
       </a>
 
-      <!-- 06 — CONFINAMIENTO -->
+      <!-- 05 — CONFINAMIENTO -->
       <a href="/productos?cat=confinamiento" class="pbc">
-        <span class="pbc-num">06</span>
+        <span class="pbc-num">05</span>
         <div class="pbc-ico">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
             <rect x="2" y="10" width="20" height="4"/>
@@ -225,9 +222,9 @@ const seo = buildSeo({
         <span class="pbc-link">Ver →</span>
       </a>
 
-      <!-- 07 — EQUIPOS SOLAR -->
+      <!-- 06 — EQUIPOS SOLAR -->
       <a href="/productos?cat=solar" class="pbc">
-        <span class="pbc-num">07</span>
+        <span class="pbc-num">06</span>
         <div class="pbc-ico">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
             <rect x="3" y="3" width="7" height="7"/>
@@ -310,7 +307,7 @@ const seo = buildSeo({
   <section class="why-editorial" aria-labelledby="why-heading">
     <div class="why-visual reveal-up">
       <div class="why-img-wrap">
-        <img src="/TEPATE_Imagenes_Organizadas/03_Informacion_Empresa/fabrica-apodaca.webp" alt="Planta de fabricación TEPATE en Apodaca" loading="lazy" class="parallax-img" />
+        <img src="/TEPATE_Imagenes_Organizadas/03_Informacion_Empresa/slide03_Informacion_General_Empresa_img1.webp" alt="Planta de fabricación TEPATE en Apodaca" loading="lazy" class="parallax-img" />
       </div>
       <div class="why-img-caption">
         <span class="trophy-badge">Planta Apodaca, NL</span>

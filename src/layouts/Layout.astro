@@ -108,6 +108,17 @@ const FONTS_HREF =
         window.addEventListener('scroll', () => btn.classList.toggle('visible', window.scrollY > 300));
         btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
       }
+
+      // Keep floating buttons above sticky CTA bar when it's visible
+      const stickyCta = document.querySelector('.sticky-cta');
+      if (stickyCta) {
+        const updateOffset = () => {
+          const h = stickyCta.classList.contains('visible') ? stickyCta.offsetHeight : 0;
+          document.documentElement.style.setProperty('--sticky-cta-h', `${h}px`);
+        };
+        new MutationObserver(updateOffset).observe(stickyCta, { attributes: true, attributeFilter: ['class'] });
+        updateOffset();
+      }
     </script>
 
     <script>

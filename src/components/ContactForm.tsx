@@ -211,9 +211,9 @@ export default function ContactForm(): JSX.Element {
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="w-full inline-flex items-center justify-center gap-2 bg-yellow-400 text-gray-900 font-black uppercase tracking-wide text-base px-6 py-4 rounded-md hover:bg-yellow-300 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="btn-primary w-full disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        {status === 'submitting' ? 'Enviando…' : 'Solicitar cotización'}
+        {status === 'submitting' ? 'ENVIANDO…' : 'COTIZAR AHORA'}
         {status !== 'submitting' && (
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} aria-hidden="true">
             <path d="M5 12h14M12 5l7 7-7 7" />

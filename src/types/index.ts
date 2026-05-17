@@ -1,7 +1,6 @@
 export type ProductCategory =
   | 'calderas'
   | 'maquinas'
-  | 'dados'
   | 'confinamiento'
   | 'solar'
   | 'senalamiento';

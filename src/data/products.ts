@@ -48,7 +48,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'cp-2000',
     model: 'Modelo CP-2000',
     name: 'Caldera 2,000 kg',
-    image: '/IVT-REM1024.webp',
+    image: '/02_Equipo_Termoplastico/Equipo_Caldera_Termoplastica_Kohler.webp',
     imageAlt: 'Caldera 2,000 kg',
     category: 'calderas',
     specs: [
@@ -58,40 +58,12 @@ export const PRODUCTS: readonly Product[] = [
       { label: 'Remolque', value: 'Apta para remolque 5.0 ton' },
     ],
   },
-  {
-    id: 'rem-3-5',
-    model: 'Opcional · REM-3.5',
-    name: 'Remolque 3.5 ton',
-    image: '/IVT-REM1023.webp',
-    imageAlt: 'Remolque 3.5 ton',
-    category: 'calderas',
-    specs: [
-      { label: 'Capacidad', value: '3,500 kg' },
-      { label: 'Ejes', value: 'Doble eje · Frenos hidráulicos' },
-      { label: 'Plataforma', value: 'Antiderrapante' },
-      { label: 'Compatible', value: 'CP-400 a CP-1000' },
-    ],
-  },
-  {
-    id: 'rem-5-0',
-    model: 'Opcional · REM-5.0',
-    name: 'Remolque 5.0 ton',
-    image: '/IVT-REM1025.webp',
-    imageAlt: 'Remolque 5.0 ton',
-    category: 'calderas',
-    specs: [
-      { label: 'Capacidad', value: '5,000 kg' },
-      { label: 'Ejes', value: 'Doble eje reforzado' },
-      { label: 'Nivelación', value: 'Sistema de nivelación' },
-      { label: 'Compatible', value: 'CP-2000' },
-    ],
-  },
   // 02 MAQUINAS APLICADORAS
   {
     id: 'ma-200',
     model: 'Modelo MA-200',
     name: 'Aplicadora 200 kg',
-    image: '/TEPATE_Imagenes_Organizadas/08_Maquinas_Aplicadoras/slide10_Maquinas_Aplicadoras_img1.webp',
+    image: '/03_Trabajos_Senalizacion/Trabajo_Cruce_Peatonal_Nocturno_Maquina.webp',
     imageAlt: 'Aplicadora 200 kg',
     category: 'maquinas',
     specs: [
@@ -105,7 +77,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'ma-250',
     model: 'Modelo MA-250',
     name: 'Aplicadora 250 kg',
-    image: '/TEPATE_Imagenes_Organizadas/08_Maquinas_Aplicadoras/slide10_Maquinas_Aplicadoras_img2.webp',
+    image: '/03_Trabajos_Senalizacion/Trabajo_Marcaje_Nocturno_Maquina.webp',
     imageAlt: 'Aplicadora 250 kg',
     category: 'maquinas',
     specs: [
@@ -119,7 +91,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'ma-300',
     model: 'Modelo MA-300',
     name: 'Aplicadora 300 kg',
-    image: '/TEPATE_Imagenes_Organizadas/08_Maquinas_Aplicadoras/slide10_Maquinas_Aplicadoras_img3.webp',
+    image: '/02_Equipo_Termoplastico/Equipo_Maquina_Aplicacion_Termoplastica.webp',
     imageAlt: 'Aplicadora 300 kg',
     category: 'maquinas',
     specs: [
@@ -129,97 +101,12 @@ export const PRODUCTS: readonly Product[] = [
       { label: 'Aplicación', value: 'Continua' },
     ],
   },
-  // 03 DADOS Y ZAPATAS
-  {
-    // TODO CLIENT: proporcionar foto real de zapata 10 cm
-    id: 'zp-10',
-    model: 'ZP-10',
-    name: 'Zapata 10 cm',
-    image: '/proyectos_nuevos/cebra_diurna_equipo.webp',
-    imageAlt: 'Zapata 10 cm aplicada en línea termoplástica',
-    category: 'dados',
-    specs: [
-      { label: 'Ancho', value: '10 cm' },
-      { label: 'Uso', value: 'Para líneas de detalle' },
-      { label: 'Aplicación', value: 'Extrusión directa' },
-    ],
-  },
-  {
-    // TODO CLIENT: proporcionar foto real de zapata 15 cm
-    id: 'zp-15',
-    model: 'ZP-15',
-    name: 'Zapata 15 cm',
-    image: '/proyectos_nuevos/cebra_nocturna_residencial.webp',
-    imageAlt: 'Zapata 15 cm aplicada en línea termoplástica',
-    category: 'dados',
-    specs: [
-      { label: 'Ancho', value: '15 cm' },
-      { label: 'Uso', value: 'Líneas urbanas estándar' },
-      { label: 'Flujo', value: 'Constante' },
-    ],
-  },
-  {
-    // TODO CLIENT: proporcionar foto real de zapata 20 cm
-    id: 'zp-20',
-    model: 'ZP-20',
-    name: 'Zapata 20 cm',
-    image: '/proyectos_nuevos/cebra_nocturna_fraccionamiento.webp',
-    imageAlt: 'Zapata 20 cm aplicada en línea termoplástica',
-    category: 'dados',
-    specs: [
-      { label: 'Ancho', value: '20 cm' },
-      { label: 'Uso', value: 'Carriles y guarniciones' },
-      { label: 'Aplicación', value: 'Uniforme' },
-    ],
-  },
-  {
-    // TODO CLIENT URGENTE: proporcionar fotos de zapatas 30 cm SIN productos de competidores visibles
-    id: 'zp-30',
-    model: 'ZP-30',
-    name: 'Zapata 30 cm',
-    image: '/proyectos_nuevos/termoplastica_macro_carretera.webp',
-    imageAlt: 'Zapata 30 cm aplicada en franja termoplástica carretera',
-    category: 'dados',
-    specs: [
-      { label: 'Ancho', value: '30 cm' },
-      { label: 'Uso', value: 'Franjas principales' },
-      { label: 'Corte', value: 'Preciso' },
-    ],
-  },
-  {
-    // TODO CLIENT URGENTE: proporcionar fotos de zapatas 40 cm SIN productos de competidores visibles
-    id: 'zp-40',
-    model: 'ZP-40',
-    name: 'Zapata 40 cm',
-    image: '/TEPATE_Imagenes_Organizadas/25_Horizontal_Trafico_Agua/slide32_Horizontal_Trafico_Base_Agua_img1.webp',
-    imageAlt: 'Zapata 40 cm aplicada en cruce peatonal',
-    category: 'dados',
-    specs: [
-      { label: 'Ancho', value: '40 cm' },
-      { label: 'Uso', value: 'Cruces peatonales' },
-      { label: 'Material', value: 'Acero reforzado' },
-    ],
-  },
-  {
-    // TODO CLIENT URGENTE: proporcionar fotos de zapatas 60 cm SIN productos de competidores visibles
-    id: 'zp-60',
-    model: 'ZP-60',
-    name: 'Zapata 60 cm',
-    image: '/TEPATE_Imagenes_Organizadas/25_Horizontal_Trafico_Agua/slide32_Horizontal_Trafico_Base_Agua_img2.webp',
-    imageAlt: 'Zapata 60 cm aplicada en franja principal',
-    category: 'dados',
-    specs: [
-      { label: 'Ancho', value: '60 cm' },
-      { label: 'Volumen', value: 'Alto volumen' },
-      { label: 'Durabilidad', value: 'Alta' },
-    ],
-  },
   // 04 SEÑALAMIENTO HORIZONTAL
   {
     id: 'sh-urbana',
     model: 'Norma MX',
     name: 'Termoplástica Urbana',
-    image: '/TEPATE_Imagenes_Organizadas/12_Pintura_Trafico/slide15_Pintura_Trafico_Base_Agua_img1.webp',
+    image: '/03_Trabajos_Senalizacion/Trabajo_Marcaje_Calle_Flechas.webp',
     imageAlt: 'Termoplástica Urbana',
     category: 'senalamiento',
     specs: [
@@ -232,7 +119,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'sh-city-county',
     model: 'Norma US',
     name: 'Termoplástica City County',
-    image: '/TEPATE_Imagenes_Organizadas/12_Pintura_Trafico/slide15_Pintura_Trafico_Base_Agua_img2.webp',
+    image: '/03_Trabajos_Senalizacion/Trabajo_Colocacion_Marcaje_Carretera.webp',
     imageAlt: 'Termoplástica City County',
     category: 'senalamiento',
     specs: [
@@ -258,7 +145,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'sh-aashto',
     model: 'Norma MX',
     name: 'Termoplástica AASHTO MX',
-    image: '/TEPATE_Imagenes_Organizadas/25_Horizontal_Trafico_Agua/slide32_Horizontal_Trafico_Base_Agua_img5.webp',
+    image: '/03_Trabajos_Senalizacion/Trabajo_Marcaje_Amarillo_Textura.webp',
     imageAlt: 'Termoplástica AASHTO MX',
     category: 'senalamiento',
     specs: [
@@ -271,7 +158,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'sh-txdot',
     model: 'Norma US',
     name: 'Termoplástica City TxDOT',
-    image: '/proyectos_nuevos/termoplastica_macro_carretera.webp',
+    image: '/03_Trabajos_Senalizacion/Trabajo_Marcaje_Amarillo_Detalle.webp',
     imageAlt: 'Termoplástica City TxDOT',
     category: 'senalamiento',
     specs: [
@@ -284,7 +171,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'sh-aashto-city',
     model: 'Norma US',
     name: 'Termoplástica City AASHTO',
-    image: '/proyectos_nuevos/cebra_diurna_equipo.webp',
+    image: '/03_Trabajos_Senalizacion/Trabajo_Cruce_Peatonal_Amarillo_Calle.webp',
     imageAlt: 'Termoplástica City AASHTO',
     category: 'senalamiento',
     specs: [
@@ -298,7 +185,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'sv-sr',
     model: 'Tipo SR',
     name: 'Restrictivo',
-    image: '/TEPATE_Imagenes_Organizadas/19_Senalamiento_Restrictivo_SR/slide24_Senalamiento_Restrictivo_Tipo_SR_img1.webp',
+    image: '/01_Senales_Viales/Senial_ALTO_Alfonso_Salinas_Garza.webp',
     imageAlt: 'Señalamiento Restrictivo SR',
     category: 'senalamiento',
     specs: [
@@ -312,7 +199,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'sv-sp',
     model: 'Tipo SP',
     name: 'Preventivo',
-    image: '/TEPATE_Imagenes_Organizadas/20_Senalamiento_Preventivo_SP/slide25_Senalamiento_Preventivo_Tipo_SP_img1.webp',
+    image: '/01_Senales_Viales/Senial_STOP_Cross_Traffic.webp',
     imageAlt: 'Señalamiento Preventivo SP',
     category: 'senalamiento',
     specs: [
@@ -327,7 +214,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'sv-sis',
     model: 'Tipo SIS/SIT',
     name: 'Informativo Servicio',
-    image: '/TEPATE_Imagenes_Organizadas/22_Senalamiento_Proteccion_Destino/slide27_Senalamiento_Proteccion_Destino_img1.webp',
+    image: '/01_Senales_Viales/Senial_Zona_Escolar_Precaucion_Panoramica.webp',
     imageAlt: 'Señalamiento Informativo de Servicio SIS/SIT',
     category: 'senalamiento',
     specs: [
@@ -341,7 +228,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'sv-sid13',
     model: 'Tableros SID-13 · SID-14 · SID-15',
     name: 'Vertical Elevado SID',
-    image: '/TEPATE_Imagenes_Organizadas/24_Senalamiento_Vertical_SID15/slide31_Senalamiento_Vertical_Elevado_SID15_img2.webp',
+    image: '/TEPATE_Imagenes_Organizadas/24_Senalamiento_Vertical_SID15/slide31_Senalamiento_Vertical_Elevado_SID15_img4.webp',
     imageAlt: 'Tableros SID-13, SID-14 y SID-15 — estructuras de montaje en acero estructural',
     category: 'senalamiento',
     specs: [
@@ -356,7 +243,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'sv-sid15',
     model: 'Tipo SID-15 · Puente',
     name: 'Estructura Elevada Tipo Puente',
-    image: '/TEPATE_Imagenes_Organizadas/24_Senalamiento_Vertical_SID15/slide31_Senalamiento_Vertical_Elevado_SID15_img1.webp',
+    image: '/TEPATE_Imagenes_Organizadas/24_Senalamiento_Vertical_SID15/slide31_Senalamiento_Vertical_Elevado_SID15_img5.webp',
     imageAlt: 'Estructura Elevada Tipo Puente SID-15',
     category: 'senalamiento',
     specs: [
@@ -370,7 +257,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'sv-colonial',
     model: 'Especial',
     name: 'Bajo Colonial',
-    image: '/TEPATE_Imagenes_Organizadas/20_Senalamiento_Preventivo_SP/slide25_Senalamiento_Preventivo_Tipo_SP_img4.webp',
+    image: '/01_Senales_Viales/Senial_Calle_Andador_31.webp',
     imageAlt: 'Señalamiento Bajo Colonial',
     category: 'senalamiento',
     specs: [
@@ -385,7 +272,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'bv-01',
     model: 'BV-01',
     name: 'Boyas y Vialetas',
-    image: '/TEPATE_Imagenes_Organizadas/10_Boyas_Vialetas/slide12_Boyas_Vialetas_Descripcion_img1.webp',
+    image: '/proyectos_nuevos/boyas_carretera_atardecer_2.webp',
     imageAlt: 'Boyas y Vialetas',
     category: 'confinamiento',
     specs: [
@@ -399,7 +286,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'ta-01',
     model: 'TA-01',
     name: 'Tachuelas de Aluminio',
-    image: '/TEPATE_Imagenes_Organizadas/24_Senalamiento_Vertical_SID15/slide31_Senalamiento_Vertical_Elevado_SID15_img3.webp',
+    image: '/03_Trabajos_Senalizacion/Trabajo_Instalacion_Tachon_Reflectivo.webp',
     imageAlt: 'Tachuelas de Aluminio',
     category: 'confinamiento',
     specs: [
@@ -413,7 +300,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'df-01',
     model: 'DF-01',
     name: 'Delineador Flexible',
-    image: '/TEPATE_Imagenes_Organizadas/24_Senalamiento_Vertical_SID15/slide31_Senalamiento_Vertical_Elevado_SID15_img4.webp',
+    image: '/03_Trabajos_Senalizacion/Trabajo_Colocacion_Tachones_Carretera.webp',
     imageAlt: 'Delineador Flexible',
     category: 'confinamiento',
     specs: [
@@ -427,7 +314,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'er-183',
     model: 'ER-183',
     name: 'Bordo Easy Rider',
-    image: '/TEPATE_Imagenes_Organizadas/24_Senalamiento_Vertical_SID15/slide31_Senalamiento_Vertical_Elevado_SID15_img5.webp',
+    image: '/03_Trabajos_Senalizacion/Trabajo_Instalacion_Reductores_Velocidad.webp',
     imageAlt: 'Bordo Easy Rider',
     category: 'confinamiento',
     specs: [
@@ -441,7 +328,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'tt-01',
     model: 'TT-01',
     name: 'Trafitambos',
-    image: '/TEPATE_Imagenes_Organizadas/24_Senalamiento_Vertical_SID15/slide31_Senalamiento_Vertical_Elevado_SID15_img8.png',
+    image: '/03_Trabajos_Senalizacion/Trabajo_Carretera_Nocturno_Tachones.webp',
     imageAlt: 'Trafitambos',
     category: 'confinamiento',
     specs: [
@@ -455,7 +342,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'br-01',
     model: 'BR-01',
     name: 'Barreras Viales',
-    image: '/TEPATE_Imagenes_Organizadas/22_Senalamiento_Proteccion_Destino/slide27_Senalamiento_Proteccion_Destino_img2.webp',
+    image: '/03_Trabajos_Senalizacion/Trabajo_Instalacion_Bollardos.webp',
     imageAlt: 'Barreras Viales',
     category: 'confinamiento',
     specs: [
@@ -470,7 +357,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'sd-alto',
     model: 'SD-ALTO',
     name: 'ALTO Solar Destellante',
-    image: '/TEPATE_Imagenes_Organizadas/16_Senalamiento_Escolar/slide21_Senalamiento_Preventivo_Digital_Escolar_img1.webp',
+    image: '/01_Senales_Viales/Senial_ALTO_Solar_Luces.webp',
     imageAlt: 'ALTO Solar Destellante',
     category: 'solar',
     specs: [
@@ -484,7 +371,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'sd-curva',
     model: 'SD-CURVA',
     name: 'Curva Solar Destellante',
-    image: '/TEPATE_Imagenes_Organizadas/16_Senalamiento_Escolar/slide21_Senalamiento_Preventivo_Digital_Escolar_img2.webp',
+    image: '/01_Senales_Viales/Senial_ALTO_Solar_Reversa.webp',
     imageAlt: 'Curva Solar Destellante',
     category: 'solar',
     specs: [
@@ -498,7 +385,7 @@ export const PRODUCTS: readonly Product[] = [
     id: 'sd-esc',
     model: 'SD-ESC',
     name: 'Escolar Solar Digital',
-    image: '/TEPATE_Imagenes_Organizadas/16_Senalamiento_Escolar/slide21_Senalamiento_Preventivo_Digital_Escolar_img5.webp',
+    image: '/01_Senales_Viales/Senial_Zona_Escolar_Solar_Lateral.webp',
     imageAlt: 'Escolar Solar Digital',
     category: 'solar',
     specs: [
@@ -513,9 +400,8 @@ export const PRODUCTS: readonly Product[] = [
 export const PRODUCT_CATEGORIES = [
   { id: 'calderas', num: '01', label: 'Calderas de Precalentado', heading: 'CALDERAS DE\nPRECALENTADO', desc: 'Calderas diseñadas sobre pedido del cliente según la capacidad de su equipo de movilidad. 100% hidráulicas, con doble cilindraje disponible. Componentes Kohler, Continental, Parker y Vickers. Disponibles como unidades individuales o montadas sobre remolque de 3.5 o 5.0 toneladas.' },
   { id: 'maquinas', num: '02', label: 'Máquinas Aplicadoras', heading: 'MÁQUINAS\nAPLICADORAS', desc: 'Máquinas aplicadoras para pintura termoplástica en extrusión directa sobre pavimento o concreto hidráulico. Operación manual con tanque integrado de propano, ideales para trabajos urbanos, estacionamientos y zonas de precisión.' },
-  { id: 'dados', num: '03', label: 'Dados y Zapatas', heading: 'DADOS Y\nZAPATAS', desc: 'Dados exclusivos para pintura termoplástica en aplicación de extrusión directa en pavimento o concreto hidráulico. Disponibles en seis anchos para cubrir desde líneas de ciclovía hasta franjas principales de carretera.' },
-  { id: 'horizontal', num: '04', label: 'Señalamiento Horizontal', heading: 'SEÑALAMIENTO\nHORIZONTAL', desc: 'Aplicación de pintura termoplástica y base agua para carreteras, vialidades urbanas, estacionamientos y aeropuertos. Seis acabados disponibles según normativa aplicable. Trabajamos con Ennis-Flint, Swarco, Crown Technology, Dynakrom, Voller y Comex.' },
-  { id: 'vertical', num: '05', label: 'Señalamiento Vertical', heading: 'SEÑALAMIENTO\nVERTICAL', desc: 'Fabricación e instalación de señalamiento vertical bajo y elevado. Catálogo completo SR (restrictivo), SP (preventivo) y SIS (informativo de servicio). Películas reflectivas 3M y Avery Dennison en grado Ingeniería, Alta Intensidad y Diamante.' },
-  { id: 'confinamiento', num: '06', label: 'Dispositivos de Confinamiento', heading: 'DISPOSITIVOS\nDE CONFINAMIENTO', desc: 'Boyas, vialetas, tachuelas, delineadores flexibles, bordos reductores, señales de protección de obra, conos viales, barreras plásticas (water-filled), trafitambos y lámparas de destello para delimitación, protección de obra e isletas. Productos diseñados para resistir impacto vehicular y alta reflectividad nocturna.' },
-  { id: 'solar', num: '07', label: 'Equipos con Panel Solar', heading: 'EQUIPOS CON\nPANEL SOLAR', desc: 'Señalamientos destellantes con panel fotovoltaico autónomo. Ideales para zonas escolares, cruces peligrosos y curvas de alta siniestralidad. Operación autónoma 24/7 sin conexión a red eléctrica.' },
+  { id: 'horizontal', num: '03', label: 'Señalamiento Horizontal', heading: 'SEÑALAMIENTO\nHORIZONTAL', desc: 'Aplicación de pintura termoplástica y base agua para carreteras, vialidades urbanas, estacionamientos y aeropuertos. Seis acabados disponibles según normativa aplicable. Trabajamos con Ennis-Flint, Swarco, Crown Technology, Dynakrom, Voller y Comex.' },
+  { id: 'vertical', num: '04', label: 'Señalamiento Vertical', heading: 'SEÑALAMIENTO\nVERTICAL', desc: 'Fabricación e instalación de señalamiento vertical bajo y elevado. Catálogo completo SR (restrictivo), SP (preventivo) y SIS (informativo de servicio). Películas reflectivas 3M y Avery Dennison en grado Ingeniería, Alta Intensidad y Diamante.' },
+  { id: 'confinamiento', num: '05', label: 'Dispositivos de Confinamiento', heading: 'DISPOSITIVOS\nDE CONFINAMIENTO', desc: 'Boyas, vialetas, tachuelas, delineadores flexibles, bordos reductores, señales de protección de obra, conos viales, barreras plásticas (water-filled), trafitambos y lámparas de destello para delimitación, protección de obra e isletas. Productos diseñados para resistir impacto vehicular y alta reflectividad nocturna.' },
+  { id: 'solar', num: '06', label: 'Equipos con Panel Solar', heading: 'EQUIPOS CON\nPANEL SOLAR', desc: 'Señalamientos destellantes con panel fotovoltaico autónomo. Ideales para zonas escolares, cruces peligrosos y curvas de alta siniestralidad. Operación autónoma 24/7 sin conexión a red eléctrica.' },
 ] as const;

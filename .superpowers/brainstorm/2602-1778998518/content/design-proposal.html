@@ -1,0 +1,234 @@
+<style>
+  /* ── shared tokens ── */
+  :root {
+    --steel: #3a3f52;
+    --coal: #1a1e2a;
+    --char: #1e2535;
+    --neon: #39ff14;
+    --white: #f0f2f8;
+    --bone: #b8c0d4;
+    --mist: #7a8499;
+    --black: #0d0f17;
+    --asphalt: #141927;
+  }
+
+  .demo-wrap { margin-bottom: 2.5rem; }
+  .demo-title {
+    font-size: .72rem; font-weight: 800; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--mist); margin-bottom: .5rem;
+    display: flex; align-items: center; gap: .5rem;
+  }
+  .badge {
+    font-size: .62rem; padding: 2px 7px; border-radius: 3px;
+    font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  }
+  .badge-before { background: #3d1a1a; color: #e05c5c; }
+  .badge-after  { background: #1a3a1a; color: var(--neon); }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: .5rem; }
+
+  /* ─── BEFORE: grid with steel background ─── */
+  .before-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--steel);
+    border: 1px solid var(--steel);
+  }
+  .before-card {
+    background: var(--coal);
+    height: 60px; display: flex; align-items: center; justify-content: center;
+    font-size: .7rem; color: var(--mist); font-family: monospace;
+  }
+  /* shows the problem: empty cell = full steel area */
+
+  /* ─── AFTER: flexbox centered ─── */
+  .after-grid {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    border: 1px solid var(--steel);
+  }
+  .after-card {
+    flex: 0 0 calc(100%/3);
+    height: 60px; display: flex; align-items: center; justify-content: center;
+    font-size: .7rem; color: var(--mist); font-family: monospace;
+    background: var(--coal);
+    border-right: 1px solid var(--steel);
+    border-bottom: 1px solid var(--steel);
+    box-sizing: border-box;
+  }
+
+  /* ─── proj-grid before ─── */
+  .proj-before {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  }
+  .proj-before-card {
+    background: var(--coal); border: 1px solid var(--steel);
+    border-bottom: 3px solid var(--steel);
+    height: 60px; display: flex; align-items: center; justify-content: center;
+    font-size: .7rem; color: var(--mist); font-family: monospace;
+  }
+
+  /* ─── proj-grid after ─── */
+  .proj-after {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+  }
+  .proj-after-card {
+    flex: 0 0 calc(33.333% - 7px);
+    background: var(--coal); border: 1px solid var(--steel);
+    border-bottom: 3px solid var(--steel);
+    height: 60px; display: flex; align-items: center; justify-content: center;
+    font-size: .7rem; color: var(--mist); font-family: monospace;
+    box-sizing: border-box;
+  }
+
+  .problem-highlight {
+    background: rgba(224,92,92,.15); border: 1px dashed #e05c5c33;
+    border-radius: 4px; padding: .3rem .5rem;
+    font-size: .68rem; color: #e05c5c; margin-top: .35rem;
+  }
+  .fix-highlight {
+    background: rgba(57,255,20,.07); border: 1px dashed rgba(57,255,20,.2);
+    border-radius: 4px; padding: .3rem .5rem;
+    font-size: .68rem; color: var(--neon); margin-top: .35rem;
+  }
+
+  .section-h { font-size: .8rem; color: var(--bone); margin: 1.5rem 0 .4rem; font-weight: 700; }
+
+  .change-table { width: 100%; border-collapse: collapse; font-size: .72rem; margin-top: .5rem; }
+  .change-table th {
+    text-align: left; padding: 6px 10px;
+    background: var(--char); color: var(--mist); font-weight: 700;
+    border-bottom: 1px solid var(--steel); letter-spacing: .05em; text-transform: uppercase; font-size: .65rem;
+  }
+  .change-table td {
+    padding: 7px 10px; border-bottom: 1px solid rgba(255,255,255,.05); color: var(--bone);
+    vertical-align: top;
+  }
+  .change-table tr:last-child td { border-bottom: none; }
+  code { font-family: monospace; font-size: .85em; color: #8eb0ff; background: rgba(94,141,255,.1); padding: 1px 5px; border-radius: 3px; }
+  del { color: #e05c5c; text-decoration: line-through; }
+  ins { color: var(--neon); text-decoration: none; }
+</style>
+
+<h2>Diseño propuesto — Orphan Centering</h2>
+<p class="subtitle">Flexbox con <code>justify-content: center</code> en los 3 grids. Abajo: antes vs después para cada caso.</p>
+
+<!-- ══ SPEC-GRID / CLIENTS ══ -->
+<p class="section-h">1. spec-grid (Productos) &amp; clients (Clientes/Proveedores) — 8 items, 3 col, 2 huérfanas</p>
+
+<div class="split">
+  <div>
+    <div class="demo-title"><span class="badge badge-before">Antes</span> display:grid — celda vacía = área steel</div>
+    <div class="before-grid">
+      <div class="before-card">1</div>
+      <div class="before-card">2</div>
+      <div class="before-card">3</div>
+      <div class="before-card">4</div>
+      <div class="before-card">5</div>
+      <div class="before-card">6</div>
+      <div class="before-card">7</div>
+      <div class="before-card">8</div>
+      <!-- empty cell 9 shows steel bg – the problem -->
+    </div>
+    <p class="problem-highlight">La celda vacía en la última fila muestra el fondo <em>steel</em> — un rectángulo gris que rompe la estética.</p>
+  </div>
+  <div>
+    <div class="demo-title"><span class="badge badge-after">Después</span> display:flex + justify-content:center</div>
+    <div class="after-grid">
+      <div class="after-card">1</div>
+      <div class="after-card">2</div>
+      <div class="after-card">3</div>
+      <div class="after-card">4</div>
+      <div class="after-card">5</div>
+      <div class="after-card">6</div>
+      <div class="after-card" style="flex:0 0 calc(100%/3)">7</div>
+      <div class="after-card" style="flex:0 0 calc(100%/3)">8</div>
+    </div>
+    <p class="fix-highlight">Las 2 huérfanas se centran. No hay celdas vacías, el espacio lateral muestra el fondo oscuro de la sección — limpio y simétrico.</p>
+  </div>
+</div>
+
+<!-- 1 orphan -->
+<p class="section-h">Edge case — 1 sola huérfana (ej. 7 items en 3 col)</p>
+<div class="split">
+  <div>
+    <div class="demo-title"><span class="badge badge-before">Antes</span></div>
+    <div class="before-grid">
+      <div class="before-card">1</div><div class="before-card">2</div><div class="before-card">3</div>
+      <div class="before-card">4</div><div class="before-card">5</div><div class="before-card">6</div>
+      <div class="before-card">7</div>
+    </div>
+  </div>
+  <div>
+    <div class="demo-title"><span class="badge badge-after">Después</span></div>
+    <div class="after-grid">
+      <div class="after-card">1</div><div class="after-card">2</div><div class="after-card">3</div>
+      <div class="after-card">4</div><div class="after-card">5</div><div class="after-card">6</div>
+      <div class="after-card" style="flex:0 0 calc(100%/3)">7</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROJ-GRID ══ -->
+<p class="section-h">2. proj-grid (Proyectos) — 32 items, 3 col, 2 huérfanas</p>
+<div class="split">
+  <div>
+    <div class="demo-title"><span class="badge badge-before">Antes</span> grid — huérfanas a la izquierda</div>
+    <div class="proj-before">
+      <div class="proj-before-card">30</div>
+      <div class="proj-before-card">31</div>
+      <div class="proj-before-card">32</div>
+      <div class="proj-before-card" style="border-bottom-color:var(--steel)">33</div>
+      <div class="proj-before-card" style="border-bottom-color:var(--steel)">34</div>
+    </div>
+  </div>
+  <div>
+    <div class="demo-title"><span class="badge badge-after">Después</span> flex + gap — huérfanas centradas</div>
+    <div class="proj-after">
+      <div class="proj-after-card">30</div>
+      <div class="proj-after-card">31</div>
+      <div class="proj-after-card">32</div>
+      <div class="proj-after-card" style="border-bottom-color:var(--steel)">33</div>
+      <div class="proj-after-card" style="border-bottom-color:var(--steel)">34</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SUMMARY TABLE ══ -->
+<p class="section-h">Cambios en CSS — resumen</p>
+<table class="change-table">
+  <thead>
+    <tr>
+      <th>Grid</th>
+      <th>Qué cambia</th>
+      <th>Por qué</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>.spec-grid</code></td>
+      <td>
+        <del>display:grid + gap:1px + background:steel</del><br>
+        <ins>display:flex + flex-wrap:wrap + justify-content:center + border:1px steel</ins><br>
+        Cards: + <code>border-right</code> + <code>border-bottom</code>
+      </td>
+      <td>Elimina celdas vacías con fondo steel; centra huérfanas automáticamente</td>
+    </tr>
+    <tr>
+      <td><code>.clients</code></td>
+      <td>
+        <del>display:grid + gap:1px + background:steel</del><br>
+        <ins>display:flex + flex-wrap:wrap + justify-content:center</ins><br>
+        Cards: + <code>border-right</code> + <code>border-bottom</code>
+      </td>
+      <td>Misma razón; el borde neon superior se mantiene intacto</td>
+    </tr>
+    <tr>
+      <td><code>.proj-grid</code></td>
+      <td>
+        <del>display:grid</del><br>
+        <ins>display:flex + flex-wrap:wrap + justify-content:center + gap:16px</ins><br>
+        Cards: + ancho fijo por breakpoint
+      </td>
+      <td>El gap de 16px ya aísla las cards; solo se añade centrado</td>
+    </tr>
+  </tbody>
+</table>

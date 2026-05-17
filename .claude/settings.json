@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm init *)",
+      "Bash(npm install *)",
+      "Bash(node take-screenshots.mjs)",
+      "Skill(superpowers:finishing-a-development-branch)",
+      "Skill(superpowers:finishing-a-development-branch:*)",
+      "Bash(git stash *)",
+      "Bash(git pull *)",
+      "Bash(git merge *)",
+      "Bash(git branch *)",
+      "Bash(Get-ChildItem -Path \"e:\\\\GitHubProyectos\\\\tepate-web\\\\src\\\\pages\" -Filter \"*.astro\")",
+      "Bash(Select-Object FullName)",
+      "Read(//c/Users/emman/.claude/plugins/cache/claude-plugins-official/superpowers/5.1.0/skills/brainstorming/**)",
+      "Read(//c/Users/emman/.claude/plugins/cache/claude-plugins-official/superpowers/5.1.0/**)",
+      "Read(//c/Users/emman/.claude/plugins/cache/claude-plugins-official/superpowers/**)",
+      "Bash(bash \"C:/Users/emman/.claude/plugins/cache/claude-plugins-official/superpowers/5.1.0/skills/brainstorming/scripts/start-server.sh\" --project-dir \"e:/GitHubProyectos/tepate-web\")",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git commit *)",
+      "mcp__plugin_serena_serena__replace_content",
+      "mcp__plugin_serena_serena__activate_project",
+      "mcp__plugin_serena_serena__read_file"
+    ]
+  }
+}

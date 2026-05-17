@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx astro *)",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "Bash(npx playwright *)",
+      "Skill(superpowers:brainstorming)",
+      "Skill(superpowers:brainstorming:*)",
+      "Bash(node -e ' *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Mercedes-Benz_Logo_2010.svg/200px-Mercedes-Benz_Logo_2010.svg.png\" -A \"Mozilla/5.0\")",
+      "Bash(curl -L -s -o /dev/null -w \"%{http_code} %{url_effective}\" \"https://logo.clearbit.com/mercedes-benz.com\" -A \"Mozilla/5.0\")",
+      "Bash(curl -L -s -o /dev/null -w \"%{http_code} %{url_effective}\" \"https://www.solvay.com/favicon.ico\" -A \"Mozilla/5.0\")",
+      "Bash(curl -L -s -o /dev/null -w \"%{http_code} %{url_effective}\" \"https://www.gruma.com/favicon.ico\" -A \"Mozilla/5.0\")",
+      "Bash(curl -L -s -o /dev/null -w \"%{http_code}\" \"https://cdn.simpleicons.org/mercedesbenz\" -A \"Mozilla/5.0\")",
+      "Bash(curl -L -s -o /dev/null -w \"%{http_code}\" \"https://cdn.simpleicons.org/3m\" -A \"Mozilla/5.0\")",
+      "Bash(curl -L -s -o /dev/null -w \"%{http_code}\" \"https://cdn.simpleicons.org/sherwinwilliams\" -A \"Mozilla/5.0\")",
+      "Bash(curl -L -s -o /dev/null -w \"%{http_code}\" \"https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/mercedesbenz.svg\" -A \"Mozilla/5.0\")",
+      "WebSearch",
+      "WebFetch(domain:companieslogo.com)",
+      "WebFetch(domain:seeklogo.com)",
+      "Bash(npm run *)",
+      "Bash(node -e \"require\\('sharp'\\); console.log\\('sharp OK'\\)\")",
+      "Bash(node scripts/remove-white-bg.mjs)",
+      "Bash(node scripts/remove-bg-floodfill.mjs)",
+      "Bash(node --input-type=module)"
+    ]
+  }
+}

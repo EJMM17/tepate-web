@@ -37,15 +37,35 @@ const seo = buildSeo({
 });
 
 const clients = [
-  'Mercedes-Benz', 'OMA · Aeropuerto Monterrey', 'ICA', 'Stiva', 'Vitro', 'FRISA',
-  'Solvay', 'Grupo Calidra', 'Corporación Sierra Madre', 'Chipinque',
-  'Constructora Maíz Mier', 'Tenere', 'KORA Desarrollos', 'Panel Rey', 'Vidusa',
-  'Galvasid', 'Daewoo', 'Nutrioli', 'Gruma', 'Comex',
+  { name: 'Mercedes-Benz',    logo: '/TEPATE_Marcas/Principales_Clientes/Mercedes_Benz.png' },
+  { name: 'OMA Aeropuertos',  logo: '/TEPATE_Marcas/Principales_Clientes/OMA_Aeropuertos.png' },
+  { name: 'ICA',              logo: '/TEPATE_Marcas/Principales_Clientes/ICA_transparent.png' },
+  { name: 'Stiva',            logo: '/TEPATE_Marcas/Principales_Clientes/Stiva_transparent.png' },
+  { name: 'Vitro',            logo: '/TEPATE_Marcas/Principales_Clientes/Vitro_transparent.png' },
+  { name: 'FRISA',            logo: '/TEPATE_Marcas/Principales_Clientes/FRISA_transparent.png' },
+  { name: 'Solvay',           logo: '/TEPATE_Marcas/Principales_Clientes/Solvay.png' },
+  { name: 'Grupo Calidra',    logo: '/TEPATE_Marcas/Principales_Clientes/Grupo_Calidra_transparent.png' },
+  { name: 'GP Construcción',  logo: '/TEPATE_Marcas/Principales_Clientes/GP_Construccion_transparent.png' },
+  { name: 'IDEI',             logo: '/TEPATE_Marcas/Principales_Clientes/IDEI_Construyendo_Mexico.webp' },
+  { name: 'Daewoo',           logo: '/TEPATE_Marcas/Principales_Clientes/Daewoo_transparent.png' },
+  { name: 'Nutrioli',         logo: '/TEPATE_Marcas/Principales_Clientes/Nutrioli_transparent.png' },
+  { name: 'Gruma',            logo: '/TEPATE_Marcas/Principales_Clientes/Gruma.png' },
+  { name: 'Comex',            logo: '/TEPATE_Marcas/Materiales_Termoplasticos/Comex_Termoplastico.webp' },
 ];
 
 const suppliers = [
-  '3M', 'Avery Dennison', 'Ennis-Flint', 'Swarco', 'Crown Technology', 'Sherwin Williams',
-  'Dynakrom', 'Voller', 'Comex', 'Kohler', 'Continental', 'Parker', 'Vickers', 'GNR', 'IDEI',
+  { name: '3M',               logo: '/TEPATE_Marcas/Laminas_Senalamiento/3M.webp' },
+  { name: 'Avery Dennison',   logo: '/TEPATE_Marcas/Laminas_Senalamiento/Avery_Dennison_transparent.png' },
+  { name: 'Ennis-Flint',      logo: '/TEPATE_Marcas/Laminas_Senalamiento/Ennis_Flint_transparent.png' },
+  { name: 'Sherwin Williams', logo: '/TEPATE_Marcas/Laminas_Senalamiento/Sherwin_Williams.png' },
+  { name: 'Swarco',           logo: '/TEPATE_Marcas/Materiales_Termoplasticos/SWARCO_Road_Marking_transparent.png' },
+  { name: 'Crown Technology', logo: '/TEPATE_Marcas/Materiales_Termoplasticos/Crown_Technology_transparent.png' },
+  { name: 'Dynakrom',         logo: '/TEPATE_Marcas/Materiales_Termoplasticos/Dynakrom_transparent.png' },
+  { name: 'Comex',            logo: '/TEPATE_Marcas/Materiales_Termoplasticos/Comex_Termoplastico.webp' },
+  { name: 'Kohler',           logo: '/TEPATE_Marcas/Componentes_Calderas/Kohler_motores_transparent.png' },
+  { name: 'Continental',      logo: '/TEPATE_Marcas/Componentes_Calderas/Continental_transparent.png' },
+  { name: 'Parker Hannifin',  logo: '/TEPATE_Marcas/Componentes_Calderas/Parker_Hannifin_transparent.png' },
+  { name: 'Vickers',          logo: '/TEPATE_Marcas/Componentes_Calderas/Vickers_hidraulica_transparent.png' },
 ];
 ---
 
@@ -183,8 +203,10 @@ const suppliers = [
       </p>
     </div>
     <div class="clients">
-      {clients.map((name) => (
-        <div class="client"><div class="client-name">{name}</div></div>
+      {clients.map(({ name, logo }) => (
+        <div class="client">
+          <img src={logo} alt={name} title={name} class="brand-logo-grid" loading="lazy" />
+        </div>
       ))}
     </div>
   </section>
@@ -203,8 +225,10 @@ const suppliers = [
       </p>
     </div>
     <div class="clients">
-      {suppliers.map((name) => (
-        <div class="client"><div class="client-name">{name}</div></div>
+      {suppliers.map(({ name, logo }) => (
+        <div class="client">
+          <img src={logo} alt={name} title={name} class="brand-logo-grid" loading="lazy" />
+        </div>
       ))}
     </div>
   </section>

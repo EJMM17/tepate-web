@@ -1,0 +1,179 @@
+<style>
+  .demo-section { margin-bottom: 2rem; }
+  .demo-label { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #888; margin-bottom: .5rem; }
+
+  /* ---- shared card style ---- */
+  .mock-card {
+    background: #1e2535;
+    border: 1px solid #2d3650;
+    border-radius: 8px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .75rem;
+    color: #8899bb;
+    font-weight: 600;
+  }
+  .mock-card.orphan { border-color: #e05c5c; color: #e05c5c; background: #2b1a1a; }
+
+  /* ---- Problem ---- */
+  .grid-problem {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  /* ---- A: Centered orphans ---- */
+  .grid-a {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    /* orphan logic handled via justify-items on last row */
+  }
+  /* simulate centering: wrapping the last row in a flex row */
+  .grid-a-wrap { display: flex; flex-direction: column; gap: 10px; }
+  .grid-a-row { display: flex; gap: 10px; }
+  .grid-a-row.centered { justify-content: center; }
+  .grid-a-row .mock-card { flex: 0 0 calc(33.33% - 7px); }
+
+  /* ---- B: Stretch/fill orphans ---- */
+  .grid-b { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .span2 { grid-column: span 2; }
+  /* last single item spans all 3 */
+  .span3 { grid-column: span 3; }
+
+  /* ---- C: Dense auto-flow ---- */
+  .grid-c { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; grid-auto-flow: dense; }
+  /* items with varying sizes fill gaps */
+
+  .split-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 1.5rem; }
+  .approach-card {
+    background: #141927;
+    border: 2px solid #2d3650;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color .2s;
+  }
+  .approach-card:hover { border-color: #5b7cf6; }
+  .approach-card.selected { border-color: #5b7cf6 !important; }
+  .approach-header {
+    padding: .6rem .9rem;
+    background: #1a2035;
+    border-bottom: 1px solid #2d3650;
+    display: flex; align-items: center; gap: .5rem;
+  }
+  .approach-letter {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: #2d3b6e;
+    color: #8eb0ff;
+    font-size: .7rem;
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .approach-header h3 { margin: 0; font-size: .85rem; color: #c8d5f0; }
+  .approach-body { padding: .75rem; }
+  .approach-desc { font-size: .72rem; color: #778; margin-top: .5rem; line-height: 1.4; }
+
+  /* mini grids inside approach cards */
+  .mini-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+  .mini-card {
+    background: #1e2535;
+    border: 1px solid #2d3650;
+    border-radius: 5px;
+    height: 36px;
+  }
+  .mini-card.orp { border-color: #5b7cf6; background: #1c2650; }
+
+  /* centered orphan */
+  .mini-row { display: flex; gap: 5px; margin-bottom: 5px; }
+  .mini-row.ctr { justify-content: center; }
+  .mini-row .mini-card { flex: 0 0 calc(33.33% - 4px); }
+
+  /* stretched orphan: 1 leftover spans full; 2 leftover span 1.5 each */
+  .span-full { grid-column: span 3; }
+  .span-half { grid-column: span 1; }
+</style>
+
+<h2>¿Cómo deben comportarse las cartas huérfanas?</h2>
+<p class="subtitle">Cuando el número de items no es múltiplo de 3, la última fila queda incompleta. Elige el tratamiento que mejor encaje con la estética del sitio.</p>
+
+<!-- current problem -->
+<div class="demo-section">
+  <div class="demo-label">Problema actual — 8 items en 3 columnas → 2 cartas "huérfanas"</div>
+  <div class="grid-problem">
+    <div class="mock-card">1</div>
+    <div class="mock-card">2</div>
+    <div class="mock-card">3</div>
+    <div class="mock-card">4</div>
+    <div class="mock-card">5</div>
+    <div class="mock-card">6</div>
+    <div class="mock-card orphan">7 ← huérfana</div>
+    <div class="mock-card orphan">8 ← huérfana</div>
+  </div>
+</div>
+
+<!-- 3 approaches -->
+<div class="split-3">
+
+  <!-- A: Centered -->
+  <div class="approach-card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="approach-header">
+      <div class="approach-letter">A</div>
+      <h3>Centradas</h3>
+    </div>
+    <div class="approach-body">
+      <div class="mini-row"><div class="mini-card"></div><div class="mini-card"></div><div class="mini-card"></div></div>
+      <div class="mini-row"><div class="mini-card"></div><div class="mini-card"></div><div class="mini-card"></div></div>
+      <div class="mini-row ctr"><div class="mini-card orp"></div><div class="mini-card orp"></div></div>
+      <p class="approach-desc">Las cartas sobrantes se centran en la última fila. Limpio, simétrico, con aire a los lados. Funciona bien con 1 o 2 huérfanas.</p>
+    </div>
+  </div>
+
+  <!-- B: Stretch -->
+  <div class="approach-card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="approach-header">
+      <div class="approach-letter">B</div>
+      <h3>Expandidas</h3>
+    </div>
+    <div class="approach-body">
+      <div class="mini-grid" style="margin-bottom:5px">
+        <div class="mini-card"></div>
+        <div class="mini-card"></div>
+        <div class="mini-card"></div>
+      </div>
+      <div class="mini-grid" style="margin-bottom:5px">
+        <div class="mini-card"></div>
+        <div class="mini-card"></div>
+        <div class="mini-card"></div>
+      </div>
+      <!-- 2 orphans span 1.5 each -->
+      <div class="mini-grid">
+        <div class="mini-card orp" style="grid-column:span 2"></div>
+        <div class="mini-card orp" style="grid-column:span 1; display:none"></div>
+        <div class="mini-card orp" style="grid-column:span 1"></div>
+      </div>
+      <p class="approach-desc">Las huérfanas se ensanchan para llenar el espacio disponible. Mayor consistencia de ancho en la vista. Puede verse diferente al resto si hay 1 sola.</p>
+    </div>
+  </div>
+
+  <!-- C: Max-width cap + center -->
+  <div class="approach-card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="approach-header">
+      <div class="approach-letter">C</div>
+      <h3>Ancho máximo</h3>
+    </div>
+    <div class="approach-body">
+      <div class="mini-row"><div class="mini-card"></div><div class="mini-card"></div><div class="mini-card"></div></div>
+      <div class="mini-row"><div class="mini-card"></div><div class="mini-card"></div><div class="mini-card"></div></div>
+      <!-- orphans centered with max-width = 1 col -->
+      <div class="mini-row ctr" style="justify-content:center">
+        <div class="mini-card orp" style="flex-basis: calc(33.33% - 4px); max-width: calc(33.33% - 4px)"></div>
+        <div class="mini-card orp" style="flex-basis: calc(33.33% - 4px); max-width: calc(33.33% - 4px)"></div>
+      </div>
+      <p class="approach-desc">Igual que A pero con un ancho máximo igual al de las otras cartas. Totalmente uniforme en tamaño. La solución más conservadora y consistente.</p>
+    </div>
+  </div>
+</div>
