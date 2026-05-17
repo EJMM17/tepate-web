@@ -245,13 +245,30 @@ const suppliers = [
         coordinamos la fabricación y logística para todo el territorio nacional.
       </p>
     </div>
-    <div id="map" style="height:min(450px,60vw);min-height:260px;width:100%;border:1px solid var(--steel);background:var(--coal);"></div>
-    <div style="margin-top:20px;font-family:var(--fm);font-size:12px;color:var(--mist);">
-      <p>
-        <b>Dirección:</b> Apodaca, Nuevo León, México.<br />
-        Atención previa cita para revisión de equipos y proyectos.
-      </p>
+    <div style="border:1px solid var(--steel);overflow:hidden;aspect-ratio:16/6;min-height:260px;">
+      <iframe
+        title="Ubicación TEPATE — Calle La Fragua #193, Col. Chulavista, Guadalupe, N.L."
+        src="https://maps.google.com/maps?q=Calle+La+Fragua+193+Col.+Chulavista+Guadalupe+Nuevo+Leon+Mexico&output=embed"
+        width="100%"
+        height="100%"
+        style="border:0;display:block"
+        loading="lazy"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
     </div>
+    <p style="font-size:12px;color:var(--mist);margin-top:8px;font-family:var(--fm)">
+      Calle La Fragua #193 / Río La Silla, Col. Chulavista, Guadalupe, N.L. ·
+      <a
+        href="https://maps.google.com/maps?q=Calle+La+Fragua+193+Col.+Chulavista+Guadalupe+Nuevo+Leon+Mexico"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="color:var(--neon);text-decoration:none"
+      >Abrir en Google Maps ↗</a>
+    </p>
+    <p style="font-size:11px;color:var(--mist);margin-top:4px;font-family:var(--fm)">
+      Atención previa cita para revisión de equipos y proyectos.
+    </p>
   </section>
 
   <!-- PRESENTACIÓN INSTITUCIONAL -->
@@ -298,23 +315,3 @@ const suppliers = [
   </section>
 </Layout>
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" slot="head" />
-
-<script>
-  if (typeof window !== 'undefined') {
-    // @ts-expect-error — external CDN module, no types available
-    import('https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.esm.js').then(({ default: L }) => {
-      const map = L.map('map').setView([25.7786, -100.1979], 14);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors',
-      }).addTo(map);
-      L.marker([25.7786, -100.1979])
-        .addTo(map)
-        .bindPopup('<b>TEPATE · Ingeniería Vial</b><br>Apodaca, Nuevo León')
-        .openPopup();
-    }).catch(() => {
-      const el = document.getElementById('map');
-      if (el) el.innerHTML = '<p style="padding:20px;color:var(--mist);font-family:var(--fm);font-size:12px">Mapa no disponible. Nos encontramos en Apodaca, Nuevo León, México.</p>';
-    });
-  }
-</script>
