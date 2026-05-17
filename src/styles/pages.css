@@ -270,13 +270,11 @@
 .mvv-p{font-size:13px;color:var(--mist);line-height:1.7}
 
 /* Project full card (proyectos.html) - Flex Layout (centers orphan cards) */
-.proj-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-  margin: 40px auto 0;
-  max-width: 1200px;
+.proj-grid{
+  display:flex;flex-wrap:wrap;justify-content:center;
+  gap:16px;
+  margin:40px auto 0;
+  max-width:1200px;
 }
 .proj {
   background: var(--coal);
@@ -293,12 +291,8 @@
   text-align: left;
   appearance: none;
 }
-@media(min-width: 768px) {
-  .proj { flex: 0 0 calc((100% - 16px) / 2); }
-}
-@media(min-width: 1200px) {
-  .proj { flex: 0 0 calc((100% - 32px) / 3); }
-}
+@media(min-width:768px){.proj{flex:0 0 calc((100% - 16px) / 2)}}
+@media(min-width:1200px){.proj{flex:0 0 calc((100% - 32px) / 3)}}
 .proj:focus-visible {
   outline: 2px solid var(--neon);
   outline-offset: 3px;
