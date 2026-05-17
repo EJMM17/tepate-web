@@ -21,7 +21,7 @@
 .ph-inner{position:relative;z-index:1;max-width:1200px;margin:0 auto}
 .ph-crumb{
   font-family:var(--fm);font-size:10px;letter-spacing:2px;text-transform:uppercase;
-  color:var(--mist);margin-bottom:32px;
+  color:var(--mist);margin-bottom:20px;
 }
 .ph-crumb a{color:var(--neon);text-decoration:none;border-bottom:1px solid var(--steel)}
 .ph-crumb a:hover{border-bottom-color:var(--neon)}
