@@ -191,7 +191,8 @@
 /* ── Brand / client logos grid (nosotros) ───────────────── */
 .clients{
   display:flex;flex-wrap:wrap;justify-content:center;
-  border-left:1px solid var(--steel);border-bottom:1px solid var(--steel);border-top:2px solid var(--neon);
+  border-left:1px solid var(--steel);border-bottom:1px solid var(--steel);
+  border-top:2px solid var(--neon);
   margin:40px auto 0;max-width:1200px;
 }
 
