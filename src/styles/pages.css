@@ -190,13 +190,10 @@
 
 /* ── Brand / client logos grid (nosotros) ───────────────── */
 .clients{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:1px;background:var(--steel);
-  border:1px solid var(--steel);border-top:2px solid var(--neon);
+  display:flex;flex-wrap:wrap;justify-content:center;
+  border-left:1px solid var(--steel);border-bottom:1px solid var(--steel);border-top:2px solid var(--neon);
   margin:40px auto 0;max-width:1200px;
 }
-@media(min-width:640px){.clients{grid-template-columns:repeat(4,1fr)}}
-@media(min-width:1024px){.clients{grid-template-columns:repeat(5,1fr)}}
 
 .client{
   background:var(--coal);
@@ -204,6 +201,9 @@
   min-height:96px;padding:20px 18px;
   position:relative;overflow:hidden;
   transition:background .25s ease;
+  flex:0 0 calc(100% / 3);
+  border-right:1px solid var(--steel);
+  border-top:1px solid var(--steel);
 }
 
 /* Neon sweep from left on hover */
@@ -239,6 +239,8 @@
   filter:brightness(0) invert(1) opacity(.92);
   transform:scale(1.1);
 }
+@media(min-width:640px){.clients > .client{flex:0 0 25%}}
+@media(min-width:1024px){.clients > .client{flex:0 0 20%}}
 
 /* Mission/Vision/Values grid */
 .mvv{
