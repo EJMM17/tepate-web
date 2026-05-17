@@ -15,23 +15,6 @@ const seo = buildSeo({
   ]),
 });
 
-const brands = [
-  { src: '/TEPATE_Marcas/Principales_Clientes/GP_Construccion.webp', alt: 'GP Construcción', name: 'GP CONSTRUCCIÓN' },
-  { src: '/TEPATE_Marcas/Principales_Clientes/IDEI_Construyendo_Mexico.webp', alt: 'IDEI', name: 'IDEI' },
-  { src: '/TEPATE_Marcas/Laminas_Senalamiento/3M.webp', alt: '3M', name: '3M' },
-  { src: '/TEPATE_Marcas/Laminas_Senalamiento/Avery_Dennison.webp', alt: 'Avery Dennison', name: 'AVERY DENNISON' },
-  { src: '/TEPATE_Marcas/Laminas_Senalamiento/Ennis_Flint.webp', alt: 'Ennis-Flint', name: 'ENNIS-FLINT' },
-  { src: '/TEPATE_Marcas/Materiales_Termoplasticos/Dynakrom.webp', alt: 'Dynakrom', name: 'DYNAKROM' },
-  { src: '/TEPATE_Marcas/Materiales_Termoplasticos/SWARCO_Road_Marking.webp', alt: 'SWARCO', name: 'SWARCO' },
-  { src: '/TEPATE_Marcas/Materiales_Termoplasticos/Crown_Technology.webp', alt: 'Crown Technology', name: 'CROWN TECHNOLOGY' },
-  { src: '/TEPATE_Marcas/Materiales_Termoplasticos/Voller.webp', alt: 'Voller', name: 'VOLLER' },
-  { src: '/TEPATE_Marcas/Materiales_Termoplasticos/Comex_Termoplastico.webp', alt: 'Comex', name: 'COMEX' },
-  { src: '/TEPATE_Marcas/Componentes_Calderas/Kohler_motores.webp', alt: 'Kohler', name: 'KOHLER' },
-  { src: '/TEPATE_Marcas/Componentes_Calderas/Continental.webp', alt: 'Continental', name: 'CONTINENTAL' },
-  { src: '/TEPATE_Marcas/Componentes_Calderas/Vickers_hidraulica.webp', alt: 'Vickers', name: 'VICKERS' },
-  { src: '/TEPATE_Marcas/Componentes_Calderas/Parker_Hannifin.webp', alt: 'Parker Hannifin', name: 'PARKER HANNIFIN' },
-] as const;
-
 interface Project {
   img: string;
   alt: string;
@@ -86,30 +69,6 @@ const projects: Project[] = [
         Más de 500 proyectos ejecutados exitosamente. Carreteras federales, aeropuertos, parques
         industriales, vialidades urbanas y obras municipales en todo el noreste de México.
       </p>
-    </div>
-  </section>
-
-  <section style="padding:0;background:var(--black)">
-    <div class="sec-tag reveal-up" style="justify-content:center;margin-top:clamp(32px,6vw,64px);margin-bottom:0">
-      Marcas que confían en nosotros
-    </div>
-    <div class="marquee-wrapper reveal-up">
-      <div class="marquee-content">
-        {brands.map((b) => (
-          <div class="marquee-item">
-            <img src={b.src} alt={b.alt} class="brand-logo" loading="lazy" width="120" height="60" />
-            {b.name}
-          </div>
-        ))}
-        <div aria-hidden="true" style="display:contents">
-          {brands.map((b) => (
-            <div class="marquee-item">
-              <img src={b.src} alt="" class="brand-logo" loading="lazy" width="120" height="60" />
-              {b.name}
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   </section>
 

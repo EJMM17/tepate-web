@@ -11,6 +11,10 @@ import SplitType from 'split-type';
 gsap.registerPlugin(ScrollTrigger);
 
 let lenisInstance: Lenis | null = null;
+let cursorRafId: number = 0;
+let grainRafId: number = 0;
+let grainIntervalId: ReturnType<typeof setInterval> | null = null;
+let grainResizeHandler: (() => void) | null = null;
 
 /* ── Smooth Scroll (Lenis) ───────────────────────────── */
 export function initSmoothScroll() {
@@ -320,9 +324,9 @@ export function initCustomCursor() {
     cursorX += (mouseX - cursorX) * 0.12;
     cursorY += (mouseY - cursorY) * 0.12;
     gsap.set(cursor, { x: cursorX, y: cursorY });
-    requestAnimationFrame(animateCursor);
+    cursorRafId = requestAnimationFrame(animateCursor);
   }
-  animateCursor();
+  cursorRafId = requestAnimationFrame(animateCursor);
 
   // Hover states
   const interactives = document.querySelectorAll('a, button, .magnetic, [data-cursor]');
@@ -385,7 +389,8 @@ export function initGrainOverlay() {
     canvas.height = window.innerHeight;
   }
   resize();
-  window.addEventListener('resize', resize);
+  grainResizeHandler = resize;
+  window.addEventListener('resize', grainResizeHandler);
 
   // Use smaller canvas and scale up for performance
   const grainSize = 128;
@@ -410,16 +415,24 @@ export function initGrainOverlay() {
   }
 
   updateGrain();
-  setInterval(updateGrain, 100); // update grain texture every 100ms
+  grainIntervalId = setInterval(updateGrain, 100);
 
-  // Render loop
   function render() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = ctx.createPattern(grainCanvas, 'repeat')!;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    requestAnimationFrame(render);
+    grainRafId = requestAnimationFrame(render);
   }
-  render();
+  grainRafId = requestAnimationFrame(render);
+}
+
+/* ── Cleanup ─────────────────────────────────────────── */
+export function destroyAnimations() {
+  if (cursorRafId) cancelAnimationFrame(cursorRafId);
+  if (grainRafId) cancelAnimationFrame(grainRafId);
+  if (grainIntervalId) clearInterval(grainIntervalId);
+  if (grainResizeHandler) window.removeEventListener('resize', grainResizeHandler);
+  ScrollTrigger.getAll().forEach((t) => t.kill());
 }
 
 /* ── Initialize Everything ───────────────────────────── */
@@ -432,4 +445,5 @@ export function initAnimations() {
   initScrollMarquee();
   initImageParallax();
   initGrainOverlay();
+  window.addEventListener('pagehide', destroyAnimations, { once: true });
 }
