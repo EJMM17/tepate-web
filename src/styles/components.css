@@ -772,18 +772,3 @@ textarea.finput { height: 140px; resize: vertical; }
   color: var(--neon);
 }
 
-/* ── MAP ────────────────────────────────────────────── */
-#map {
-  filter: grayscale(0.3) contrast(1.15);
-  cursor: crosshair;
-}
-
-.leaflet-popup-content-wrapper, .leaflet-popup-tip {
-  background: var(--white) !important;
-  border-radius: 0 !important;
-  border: 1px solid var(--black);
-}
-
-.leaflet-container a {
-  color: var(--neon) !important;
-}
