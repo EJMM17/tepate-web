@@ -10,6 +10,8 @@ import SplitType from 'split-type';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 let lenisInstance: Lenis | null = null;
 let cursorRafId: number = 0;
 let grainRafId: number = 0;
@@ -18,6 +20,7 @@ let grainResizeHandler: (() => void) | null = null;
 
 /* ── Smooth Scroll (Lenis) ───────────────────────────── */
 export function initSmoothScroll() {
+  if (prefersReducedMotion) return null;
   lenisInstance = new Lenis({
     duration: 1.2,
     easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -245,6 +248,7 @@ export function initScrollReveals() {
 
   // Counter animation for stats
   gsap.utils.toArray<HTMLElement>('.trust-n[data-value]').forEach((stat) => {
+    if (prefersReducedMotion) return;
     const target = parseInt(stat.dataset.value || '0', 10);
     if (!target || isNaN(target)) return;
 
