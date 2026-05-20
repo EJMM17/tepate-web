@@ -35,7 +35,7 @@
       ]
     }
   ],
-  "redirects": [{"source": "/index.html", "destination": "/", "permanent": true}],
+  "redirects": [{"source": "https://tepate.com.mx/:match*", "destination": "https://www.tepate.com.mx/:match*", "permanent": true}, {"source": "/index.html", "destination": "/", "permanent": true}],
   "rewrites": [{"source": "/(.*)\\.html", "destination": "/$1.html"}],
   "cleanUrls": false,
   "trailingSlash": false

@@ -2,6 +2,7 @@ import type { NavLink } from '@/types';
 
 export const PRIMARY_NAV: readonly NavLink[] = [
   { label: 'Inicio', href: '/' },
+  { label: 'Productos', href: '/productos' },
   { label: 'Proyectos', href: '/proyectos' },
   { label: 'Nosotros', href: '/nosotros' },
   { label: 'Contacto', href: '/contacto' },
@@ -25,10 +26,15 @@ export const COMPANY = {
   legalName: 'Ingeniería Vial TEPATE, S.A. de C.V.',
   shortName: 'TEPATE',
   tagline: 'Fomentando la Cultura Vial y sus Valores',
-  url: 'https://tepate.com.mx',
+  url: 'https://www.tepate.com.mx',
+  phoneMain: '528184532875',
+  phoneWhatsapp: '528118959042',
+  phoneMainDisplay: '(81) 8453-2875',
+  phoneWhatsappDisplay: '+52 811 895 9042',
   phones: ['+528184532875', '+528118959042'] as const,
   phoneDisplay: '(81) 8453-2875',
-  email: 'facturacion_tepate@outlook.com',
+  email: 'cotizaciones@tepate.com.mx',
+  fallbackEmail: 'facturacion_tepate@outlook.com',
   address: {
     streetAddress: 'Calle La Fragua #193 / Río La Silla, Col. Chulavista',
     addressLocality: 'Guadalupe',

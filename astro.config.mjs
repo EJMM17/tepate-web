@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://tepate.com.mx',
+  site: 'https://www.tepate.com.mx',
   output: 'static',
   compressHTML: true,
   prefetch: {
