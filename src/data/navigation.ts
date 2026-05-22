@@ -8,10 +8,9 @@ export const PRIMARY_NAV: readonly NavLink[] = [
 ] as const;
 
 export const CATALOG_PDF: NavLink = {
-  label: 'Catálogo PDF',
-  href: '/calderas-termoplasticas-tepate.pdf',
-  download: true,
-  ariaLabel: 'Descargar catálogo PDF',
+  label: 'Solicitar catálogo',
+  href: '/contacto?interes=calderas&servicio=Cat%C3%A1logo%20de%20calderas%20termopl%C3%A1sticas',
+  ariaLabel: 'Solicitar catálogo de calderas termoplásticas',
 };
 
 export const TOPBAR_ITEMS: readonly string[] = [

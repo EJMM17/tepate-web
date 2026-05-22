@@ -1,7 +1,30 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import { buildSeo, buildBreadcrumbJsonLd } from '@/lib/seo';
+import { buildSeo, buildBreadcrumbJsonLd, buildFaqJsonLd } from '@/lib/seo';
 import { COMPANY } from '@/data/navigation';
+
+const serviceFaqs = [
+  {
+    question: '¿Qué información necesitan para cotizar una obra?',
+    answer:
+      'Producto o servicio requerido, ubicación, volumen estimado, fecha objetivo y, si aplica, bases de licitación o planos del proyecto.',
+  },
+  {
+    question: '¿Atienden obra pública y privada?',
+    answer:
+      'Sí. TEPATE atiende dependencias estatales, municipios, constructoras, parques industriales, aeropuertos e iniciativa privada.',
+  },
+  {
+    question: '¿Realizan instalación en campo?',
+    answer:
+      'Sí. Además de fabricar equipos y señalamiento, ejecutamos instalación, aplicación, supervisión y soporte técnico en obra.',
+  },
+  {
+    question: '¿Pueden emitir propuesta técnica y económica?',
+    answer:
+      'Sí. Preparamos cotizaciones formales con alcance técnico, condiciones comerciales y tiempos de entrega para revisión del comprador.',
+  },
+] as const;
 
 const seo = buildSeo({
   title: 'Servicios — Ingeniería Vial TEPATE',
@@ -22,6 +45,7 @@ const seo = buildSeo({
         { '@type': 'ListItem', position: 5, item: { '@type': 'Service', name: 'Confinamiento Vial', description: 'Suministro e instalación de dispositivos de protección, delimitación y confinamiento de obra.', provider: { '@type': 'Organization', name: COMPANY.legalName }, serviceType: 'Seguridad Vial y Confinamiento' } },
       ],
     },
+    buildFaqJsonLd(serviceFaqs),
     buildBreadcrumbJsonLd([
       { name: 'Inicio', url: COMPANY.url },
       { name: 'Servicios', url: `${COMPANY.url}/servicios` },
@@ -365,6 +389,30 @@ const seo = buildSeo({
         <a href="/contacto" class="btn-dark">Contactar Ahora</a>
         <span class="cta-aside">Atención en todo México</span>
       </div>
+    </div>
+  </section>
+
+  <section class="pcat" id="faq-servicios">
+    <div class="pcat-head reveal-up">
+      <div>
+        <div class="pcat-num">Preguntas frecuentes</div>
+        <h2 class="pcat-h2">SERVICIO<br />Y ALCANCE</h2>
+      </div>
+      <p class="pcat-desc">
+        Información práctica para compradores, residentes de obra, áreas de adquisiciones y
+        equipos técnicos que necesitan una cotización formal.
+      </p>
+    </div>
+    <div class="duo reveal-stagger">
+      {serviceFaqs.map((faq) => (
+        <div class="duo-panel">
+          <div class="duo-label">FAQ</div>
+          <div class="duo-title">{faq.question}</div>
+          <div class="duo-body">
+            <p>{faq.answer}</p>
+          </div>
+        </div>
+      ))}
     </div>
   </section>
 

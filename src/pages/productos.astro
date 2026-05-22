@@ -1,9 +1,37 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import { buildSeo, buildBreadcrumbJsonLd } from '@/lib/seo';
+import { buildSeo, buildBreadcrumbJsonLd, buildFaqJsonLd } from '@/lib/seo';
 import { COMPANY } from '@/data/navigation';
 import { PRODUCTS, PRODUCT_CATEGORIES } from '@/data/products';
 import ProductModal from '@/components/ProductModal';
+
+const productFaqs = [
+  {
+    question: '¿Fabrican equipos sobre pedido?',
+    answer:
+      'Sí. TEPATE fabrica calderas, máquinas aplicadoras y componentes según capacidad, sistema de movilidad y requerimientos de operación del cliente.',
+  },
+  {
+    question: '¿Entregan en todo México?',
+    answer:
+      'Sí. Coordinamos fabricación, logística y entrega para proyectos públicos y privados en los 32 estados de México.',
+  },
+  {
+    question: '¿Los productos cumplen normativa vial?',
+    answer:
+      'Trabajamos con especificaciones SCT, ASTM, AASHTO y TxDOT según el tipo de producto, material reflectivo y alcance del proyecto.',
+  },
+  {
+    question: '¿Pueden cotizar para licitaciones?',
+    answer:
+      'Sí. Atendemos bases de licitación, fichas técnicas, volúmenes, ubicación de obra y tiempos de entrega para propuestas formales.',
+  },
+] as const;
+
+const productAnchor = (productId: string, category: string): string => {
+  if (category !== 'senalamiento') return category;
+  return productId.startsWith('sv-') ? 'vertical' : 'horizontal';
+};
 
 const seo = buildSeo({
   title: 'Productos — Ingeniería Vial TEPATE',
@@ -30,6 +58,26 @@ const seo = buildSeo({
         { '@type': 'ListItem', position: 6, name: 'Equipos Solares Viales', url: `${COMPANY.url}/productos#solar` },
       ],
     },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Catálogo comercial TEPATE',
+      itemListElement: PRODUCTS.map((product, idx) => ({
+        '@type': 'ListItem',
+        position: idx + 1,
+        item: {
+          '@type': 'Product',
+          name: product.name,
+          model: product.model,
+          image: `${COMPANY.url}${product.image}`,
+          description: product.description ?? product.specs.map((spec) => `${spec.label}: ${spec.value}`).join('. '),
+          brand: { '@type': 'Brand', name: 'TEPATE' },
+          manufacturer: { '@type': 'Organization', name: COMPANY.legalName },
+          url: `${COMPANY.url}/productos#${productAnchor(product.id, product.category)}`,
+        },
+      })),
+    },
+    buildFaqJsonLd(productFaqs),
     buildBreadcrumbJsonLd([
       { name: 'Inicio', url: COMPANY.url },
       { name: 'Productos', url: `${COMPANY.url}/productos` },
@@ -88,7 +136,7 @@ const seo = buildSeo({
                   ))}
                 </ul>
                 <div class="spec-cta">
-                  <a href={`/contacto?producto=${encodeURIComponent(product.name)}&interes=${product.category === 'senalamiento' ? 'horizontal' : product.category}`}>Cotizar →</a>
+                  <a href={`/contacto?producto=${encodeURIComponent(product.name)}&interes=${productAnchor(product.id, product.category)}`}>Cotizar →</a>
                   <a href={`https://wa.me/528118959042?text=${encodeURIComponent(`Hola, solicito información sobre ${product.name}`)}`} target="_blank" rel="noopener noreferrer">WhatsApp</a>
                 </div>
               </div>
@@ -98,20 +146,18 @@ const seo = buildSeo({
         {cat.id === 'calderas' && (
           <div style="margin-top:40px;display:flex;flex-wrap:wrap;gap:12px;">
             <a
-              href="/ficha-tecnica-IVT302710-04.pdf"
-              download
+              href="/contacto?interes=calderas&servicio=Ficha%20t%C3%A9cnica%20IVT302710-04"
               class="inline-flex items-center gap-2 bg-neon text-black font-mono text-xs font-bold uppercase tracking-widest px-4 py-2.5 no-underline"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Ficha Técnica IVT302710-04
+              Solicitar Ficha Técnica IVT302710-04
             </a>
             <a
-              href="/calderas-termoplasticas-tepate.pdf"
-              download
+              href="/contacto?interes=calderas&servicio=Cat%C3%A1logo%20de%20calderas%20termopl%C3%A1sticas"
               class="inline-flex items-center gap-2 border border-neon text-neon font-mono text-xs font-bold uppercase tracking-widest px-4 py-2.5 no-underline"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Catálogo Calderas Termoplásticas
+              Solicitar Catálogo Calderas Termoplásticas
             </a>
           </div>
         )}
@@ -135,6 +181,30 @@ const seo = buildSeo({
     </div>
   </section>
 
+  <section class="pcat" id="faq-productos">
+    <div class="pcat-head reveal-up">
+      <div>
+        <div class="pcat-num">Preguntas frecuentes</div>
+        <h2 class="pcat-h2">COTIZACIÓN<br />Y ENTREGA</h2>
+      </div>
+      <p class="pcat-desc">
+        Respuestas rápidas para compras, obra pública, licitaciones y proyectos privados que
+        requieren especificación técnica antes de cotizar.
+      </p>
+    </div>
+    <div class="duo reveal-stagger">
+      {productFaqs.map((faq) => (
+        <div class="duo-panel">
+          <div class="duo-label">FAQ</div>
+          <div class="duo-title">{faq.question}</div>
+          <div class="duo-body">
+            <p>{faq.answer}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
   <ProductModal products={PRODUCTS} client:idle />
 
   <!-- Sticky CTA Bar -->
@@ -150,6 +220,39 @@ const seo = buildSeo({
   </div>
 
   <script>
+    (function() {
+      const legacyCategoryMap: Record<string, string> = {
+        calderas: 'calderas',
+        maquinas: 'maquinas',
+        senalamiento: 'horizontal',
+        horizontal: 'horizontal',
+        vertical: 'vertical',
+        confinamiento: 'confinamiento',
+        solar: 'solar',
+      };
+
+      function getTargetId() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash) return hash;
+        const legacyCat = new URLSearchParams(window.location.search).get('cat') || '';
+        return legacyCategoryMap[legacyCat] || '';
+      }
+
+      function scrollToCategory() {
+        const targetId = getTargetId();
+        if (!targetId) return;
+        const target = document.getElementById(targetId);
+        if (!target) return;
+        window.requestAnimationFrame(() => {
+          window.setTimeout(() => target.scrollIntoView({ block: 'start' }), 80);
+        });
+      }
+
+      window.addEventListener('load', scrollToCategory, { once: true });
+      window.addEventListener('hashchange', scrollToCategory);
+      scrollToCategory();
+    })();
+
     (function() {
       const bar = document.getElementById('sticky-cta');
       if (!bar) return;

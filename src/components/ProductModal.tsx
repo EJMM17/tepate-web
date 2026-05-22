@@ -8,6 +8,11 @@ interface ProductModalProps {
 const FALLBACK_DESC =
   'Producto fabricado por Ingeniería Vial Tepate. Solicita ficha técnica y cotización personalizada.';
 
+const getProductInterest = (product: Product): string => {
+  if (product.category !== 'senalamiento') return product.category;
+  return product.id.startsWith('sv-') ? 'vertical' : 'horizontal';
+};
+
 export default function ProductModal({ products }: ProductModalProps): JSX.Element {
   const [selected, setSelected] = useState<Product | null>(null);
   const closeRef = useRef<HTMLButtonElement | null>(null);
@@ -19,10 +24,11 @@ export default function ProductModal({ products }: ProductModalProps): JSX.Eleme
   useEffect(() => {
     const productMap = new Map(products.map((p) => [p.id, p]));
     const triggers = document.querySelectorAll<HTMLElement>('[data-product-id]');
-    const handlers: Array<[HTMLElement, () => void]> = [];
+    const handlers: Array<[HTMLElement, EventListener]> = [];
 
     triggers.forEach((trigger) => {
-      const handler = (): void => {
+      const handler: EventListener = (event): void => {
+        if ((event.target as HTMLElement).closest('a, button')) return;
         const product = productMap.get(trigger.dataset.productId ?? '');
         if (product) {
           prevFocusRef.current = trigger;
@@ -52,6 +58,24 @@ export default function ProductModal({ products }: ProductModalProps): JSX.Eleme
     if (!open) return;
     const handleKey = (e: KeyboardEvent): void => {
       if (e.key === 'Escape') setSelected(null);
+      if (e.key !== 'Tab') return;
+
+      const modal = overlayRef.current?.querySelector<HTMLElement>('[data-modal-panel]');
+      if (!modal) return;
+      const focusable = Array.from(
+        modal.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'),
+      ).filter((el) => !el.hasAttribute('disabled'));
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (!first || !last) return;
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener('keydown', handleKey);
     return () => document.removeEventListener('keydown', handleKey);
@@ -62,8 +86,13 @@ export default function ProductModal({ products }: ProductModalProps): JSX.Eleme
   const getCotizarUrl = (product: Product): string => {
     const params = new URLSearchParams();
     params.set('producto', product.name);
-    params.set('interes', product.category === 'senalamiento' ? 'horizontal' : product.category);
+    params.set('interes', getProductInterest(product));
     return `/contacto?${params.toString()}`;
+  };
+
+  const getWhatsappUrl = (product: Product): string => {
+    const text = `Hola, solicito información y cotización sobre ${product.name} (${product.model}).`;
+    return `https://wa.me/528118959042?text=${encodeURIComponent(text)}`;
   };
 
   return (
@@ -80,6 +109,7 @@ export default function ProductModal({ products }: ProductModalProps): JSX.Eleme
       className={`fixed inset-0 z-[9999] flex items-center justify-center bg-black/85 backdrop-blur-sm transition-opacity duration-300 ease-brand ${open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
     >
       <div
+        data-modal-panel
         className={`relative bg-coal border border-neon w-[92%] md:w-[90%] max-w-[800px] max-h-[90vh] overflow-y-auto p-5 md:p-10 transition-transform duration-300 ease-brand ${open ? 'translate-y-0' : 'translate-y-5'}`}
       >
         <button
@@ -133,7 +163,7 @@ export default function ProductModal({ products }: ProductModalProps): JSX.Eleme
                 Cotizar este producto
               </a>
               <a
-                href="https://wa.me/528118959042"
+                href={getWhatsappUrl(selected)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 border border-neon text-neon font-mono text-xs font-bold uppercase tracking-widest px-5 py-3 no-underline hover:bg-neon hover:text-black transition-colors"
