@@ -55,7 +55,7 @@ const FONTS_HREF =
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" as="style" href={FONTS_HREF} />
-    <link rel="stylesheet" media="print" href={FONTS_HREF} onload="this.media='all'" />
+    <link rel="stylesheet" media="print" href={FONTS_HREF} onload="this.setAttribute('media','all')" />
     <noscript><link rel="stylesheet" href={FONTS_HREF} /></noscript>
 
     {
@@ -113,7 +113,7 @@ const FONTS_HREF =
       const stickyCta = document.querySelector('.sticky-cta');
       if (stickyCta) {
         const updateOffset = () => {
-          const h = stickyCta.classList.contains('visible') ? stickyCta.offsetHeight : 0;
+          const h = stickyCta.classList.contains('visible') ? (stickyCta as HTMLElement).offsetHeight : 0;
           document.documentElement.style.setProperty('--sticky-cta-h', `${h}px`);
         };
         new MutationObserver(updateOffset).observe(stickyCta, { attributes: true, attributeFilter: ['class'] });
@@ -122,10 +122,21 @@ const FONTS_HREF =
     </script>
 
     <script>
-      import { initAnimations } from '@/scripts/animations';
       import { initAnalytics } from '@/scripts/analytics';
+
       initAnalytics();
-      initAnimations();
+
+      const skipRichMotion =
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+        window.matchMedia('(pointer: coarse)').matches ||
+        window.location.pathname.startsWith('/contacto');
+
+      if (skipRichMotion) {
+        document.body.classList.add('loaded');
+        document.getElementById('preloader')?.remove();
+      } else {
+        import('@/scripts/animations').then(({ initAnimations }) => initAnimations());
+      }
     </script>
   </body>
 </html>

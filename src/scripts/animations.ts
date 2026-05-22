@@ -18,6 +18,10 @@ let grainResizeHandler: (() => void) | null = null;
 
 /* ── Smooth Scroll (Lenis) ───────────────────────────── */
 export function initSmoothScroll() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.matchMedia('(pointer: coarse)').matches) {
+    return null;
+  }
+
   lenisInstance = new Lenis({
     duration: 1.2,
     easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -300,6 +304,7 @@ export function initMagneticButtons() {
 /* ── Custom Cursor ───────────────────────────────────── */
 export function initCustomCursor() {
   if (window.matchMedia('(pointer: coarse)').matches) return;
+  document.body.classList.add('rich-motion');
 
   const cursor = document.createElement('div');
   cursor.className = 'custom-cursor';
@@ -376,6 +381,8 @@ export function initImageParallax() {
 
 /* ── Grain Overlay (optimized) ───────────────────────── */
 export function initGrainOverlay() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.matchMedia('(pointer: coarse)').matches) return;
+
   const canvas = document.createElement('canvas');
   canvas.className = 'grain-overlay';
   document.body.appendChild(canvas);
@@ -428,6 +435,10 @@ export function initGrainOverlay() {
 
 /* ── Cleanup ─────────────────────────────────────────── */
 export function destroyAnimations() {
+  document.body.classList.remove('rich-motion');
+  document.querySelector('.custom-cursor')?.remove();
+  document.querySelector('.custom-cursor-dot')?.remove();
+  document.querySelector('.grain-overlay')?.remove();
   if (cursorRafId) cancelAnimationFrame(cursorRafId);
   if (grainRafId) cancelAnimationFrame(grainRafId);
   if (grainIntervalId) clearInterval(grainIntervalId);
@@ -437,6 +448,16 @@ export function destroyAnimations() {
 
 /* ── Initialize Everything ───────────────────────────── */
 export function initAnimations() {
+  if (
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+    window.matchMedia('(pointer: coarse)').matches ||
+    window.location.pathname.startsWith('/contacto')
+  ) {
+    document.body.classList.add('loaded');
+    document.getElementById('preloader')?.remove();
+    return;
+  }
+
   initSmoothScroll();
   initPreloader();
   initScrollReveals();

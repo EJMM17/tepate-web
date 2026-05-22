@@ -6,9 +6,9 @@
 
 ## Project Overview
 
-This is the corporate website for **Ingeniería Vial TEPATE, S.A. de C.V.**. It is a static multi-page site for a Mexican B2B road-safety manufacturer/installer. All user-facing content is in Spanish (Mexico), and the visual system is intentionally industrial/brutalist: black surfaces, neon accents, square corners, and monospace details.
+This is the corporate website for **Ingeniería Vial TEPATE, S.A. de C.V.**. It is a static multi-page Astro site for a Mexican B2B road-safety manufacturer/installer. All user-facing content is in Spanish (Mexico), and the visual system is intentionally industrial/brutalist: black surfaces, neon accents, square corners, and monospace details.
 
-The site is not a SPA. Navigation between pages is a full request. Keep changes aligned with the existing HTML-first architecture.
+The site is not a SPA. Navigation between pages is a full request. Keep changes aligned with the Astro static architecture and avoid client-side routing.
 
 ---
 
@@ -16,16 +16,18 @@ The site is not a SPA. Navigation between pages is a full request. Keep changes 
 
 | Layer | Technology | Version |
 |-------|-----------|---------|
-| Build tool | Vite | 6.2.0 |
+| Framework / build tool | Astro | 5.x |
+| Bundler | Vite | via Astro |
 | CSS framework | Tailwind CSS | 4.1.14 (via `@tailwindcss/vite`) |
 | Language | TypeScript | 5.7.3 |
+| UI islands | React | 18.x (`ContactForm`, `ProductModal`) |
 | Runtime target | ES2022 / ESNext modules | — |
 | Package manager | npm | — |
 | Node engine | 20.x | — |
 | Deployment | Vercel | — |
 | Analytics | Vercel Analytics (`@vercel/analytics`) | 2.0.1 |
 
-**No frontend framework** (React, Vue, etc.) is used. All interactivity is implemented with vanilla TypeScript DOM APIs.
+React is used only for isolated Astro islands. Do not convert the site into a React SPA.
 
 ---
 
@@ -33,10 +35,11 @@ The site is not a SPA. Navigation between pages is a full request. Keep changes 
 
 Key files and folders:
 
-- [index.html](index.html), [productos.html](productos.html), [servicios.html](servicios.html), [proyectos.html](proyectos.html), [nosotros.html](nosotros.html), [contacto.html](contacto.html), [aviso-privacidad.html](aviso-privacidad.html), [404.html](404.html)
-- [src/main.ts](src/main.ts) for bootstrapping the shared UI behavior
+- [src/pages/](src/pages) for static routes (`index.astro`, `productos.astro`, `servicios.astro`, etc.)
+- [src/layouts/Layout.astro](src/layouts/Layout.astro) for shared head/chrome/scripts
+- [src/components/](src/components) for Astro components and React islands
 - [src/scripts/](src/scripts) for isolated DOM modules
-- [src/index.css](src/index.css) as the only stylesheet entry point; it now imports modular styles from [src/styles/](src/styles)
+- [src/styles/global.css](src/styles/global.css) as the stylesheet entry point; it imports modular styles from [src/styles/](src/styles)
 - [public/](public) for static assets served from `/`
 - [vercel.json](vercel.json) for edge headers, CSP, and cache rules
 - [AUDIT_REPORT.md](AUDIT_REPORT.md) for remediation history and validation notes
@@ -59,7 +62,10 @@ npm run build
 # Preview production build locally
 npm run preview
 
-# Type-check without emitting
+# Astro + TypeScript check
+npm run check
+
+# TypeScript-only check
 npm run lint
 
 # Clean build output
@@ -68,19 +74,20 @@ npm run clean
 
 Important:
 - There is no automated test suite in this repo.
-- The only code-quality gate is `npm run lint` (`tsc --noEmit`).
+- The main code-quality gate is `npm run check` (`astro check && tsc --noEmit`).
 - `npm run clean` uses `rm -rf`; on Windows, prefer deleting `dist/` manually if needed.
 
 ---
 
 ## Build Configuration
 
-### Vite (`vite.config.ts`)
+### Astro (`astro.config.mjs`)
 
-- **Multi-page input:** All HTML files are declared as Rollup inputs so that Vite processes each page as a separate entry point.
-- **Path alias:** `@/` maps to the project root (`__dirname`).
-- **HMR:** Disabled when `DISABLE_HMR=true` (AI Studio environment).
-- **Tailwind CSS:** Integrated via the official Vite plugin (`@tailwindcss/vite`).
+- **Static output:** `output: 'static'` with file-style HTML output.
+- **Routes:** Pages are generated from `src/pages/*.astro`.
+- **Sitemap:** `@astrojs/sitemap` generates sitemap output during build.
+- **Path alias:** `@/` maps to the project root.
+- **Tailwind CSS:** Integrated through Vite with `@tailwindcss/vite`.
 
 ### TypeScript (`tsconfig.json`)
 
@@ -96,38 +103,25 @@ Important:
 
 ### Code Organization
 
-### Entry Point (`src/main.ts`)
+### Entry Points
 
-This file is intentionally thin. It only composes shared modules and a tiny back-to-top handler:
+- `src/layouts/Layout.astro` owns the shared document shell, metadata, header/footer slots, Vercel Analytics and rich-motion bootstrap.
+- `src/pages/*.astro` owns route content.
+- React islands are reserved for stateful widgets such as the quote form and product modal.
 
-```ts
-import { initAnalytics } from './scripts/analytics';
-import { initContactForm } from './scripts/contact-form';
-import { initDesktopDropdowns, initMobileAccordion, initMobileNav } from './scripts/mobile-nav';
-import { initProductModal } from './scripts/product-modal';
-
-initAnalytics();
-initContactForm();
-initMobileNav();
-initMobileAccordion();
-initDesktopDropdowns();
-initProductModal();
-```
-
-If you need new behavior, prefer a new module in `src/scripts/` and keep `src/main.ts` as composition only.
-
-### Script Modules
+### Script Modules / Islands
 
 | Module | Responsibility |
 |--------|---------------|
 | `analytics.ts` | One-liner wrapper around `@vercel/analytics` `inject()`. |
-| `contact-form.ts` | Client-side validation for `#contactForm`. Sets `aria-invalid`, updates `aria-describedby` error messages, shows/hides `#formErrorSummary` (alert role), submits to Formspree endpoint via `fetch`, handles loading/disabled states. |
-| `mobile-nav.ts` | Three independent initializers: (1) mobile hamburger menu toggle with `aria-expanded`/`aria-hidden`, Escape key support, and focus management; (2) desktop dropdown buttons with `aria-expanded` toggle, Escape to close, and focus-out handling; (3) mobile accordion toggles for nested category menus. |
-| `product-modal.ts` | Opens a product detail modal when `.product-trigger` elements are clicked. Dynamically populates title, subtitle, description, image, and specs from `data-*` attributes and child DOM nodes. Implements focus return to trigger on close, Escape to close, and click-outside-to-close. |
+| `animations.ts` | Optional rich-motion layer. It is skipped for reduced motion, coarse pointers and `/contacto`. |
+| `ContactForm.tsx` | B2B quote form. Reads URL intent, validates fields, posts to `PUBLIC_FORMSPREE_ENDPOINT`, and offers WhatsApp/email fallback when not configured. |
+| `ProductModal.tsx` | Product detail modal with focus return, Escape close, basic focus loop and quote/WhatsApp CTAs. |
+| Inline Astro scripts | Small page-local behavior such as mobile menu, accordions, filters, lightbox and sticky CTA. |
 
 ### Styling
 
-The stylesheet is modular now. [src/index.css](src/index.css) imports the layered files under [src/styles/](src/styles); do not reintroduce large inline CSS blocks unless there is a strong reason.
+The stylesheet is modular now. [src/styles/global.css](src/styles/global.css) imports the layered files under [src/styles/](src/styles); do not reintroduce large inline CSS blocks unless there is a strong reason.
 
 | File | Responsibility |
 |------|---------------|
@@ -136,7 +130,6 @@ The stylesheet is modular now. [src/index.css](src/index.css) imports the layere
 | [src/styles/components.css](src/styles/components.css) | Buttons, cards, forms, accordion, pagination, modal, filters |
 | [src/styles/home.css](src/styles/home.css) | Homepage sections |
 | [src/styles/pages.css](src/styles/pages.css) | Secondary page layouts and content patterns |
-| [src/styles/homepage.css](src/styles/homepage.css) | Homepage-only dropdowns, mobile accordion, gallery, PDF buttons, footer details |
 
 **Design system tokens (excerpt):**
 ```css
@@ -157,12 +150,12 @@ The stylesheet is modular now. [src/index.css](src/index.css) imports the layere
 
 ## Page Architecture
 
-Each page is a standalone HTML file in the project root. They share:
+Each page is an Astro route in [src/pages](src/pages). They share:
 
 - The same `<nav>` structure (with dropdowns and mobile menu)
 - The same footer structure
-- The same `src/main.ts` entry point (loaded as `type="module"`)
-- The same `src/index.css` stylesheet
+- The same [src/layouts/Layout.astro](src/layouts/Layout.astro) shell
+- The same [src/styles/global.css](src/styles/global.css) stylesheet
 - Google Fonts loaded from `fonts.googleapis.com` (Barlow Condensed, Barlow, IBM Plex Mono)
 
 Pages include SEO metadata per page:
@@ -270,5 +263,5 @@ If tests are added later, keep them lightweight and focused on the shared naviga
 
 1. Do not treat this as a SPA.
 2. Do not add a frontend framework unless the user explicitly asks.
-3. Do not bypass [src/index.css](src/index.css); route styles through the modular `src/styles/` files.
+3. Do not bypass [src/styles/global.css](src/styles/global.css); route styles through the modular `src/styles/` files.
 4. Do not use `app/applet/optimize.js` as part of the normal build; it is a legacy HTML rewriting script.
