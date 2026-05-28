@@ -151,6 +151,7 @@ const isActive = (href: string): boolean =>
   <div
     id="tp-mobile-menu"
     class="lg:hidden hidden border-t border-steel bg-black/95 backdrop-blur-md"
+    hidden
   >
     <nav aria-label="Navegación móvil" class="px-4 py-4 flex flex-col gap-1">
       {
@@ -210,11 +211,28 @@ const isActive = (href: string): boolean =>
 <script>
   const toggle = document.getElementById('tp-mobile-toggle');
   const menu = document.getElementById('tp-mobile-menu');
+
   if (toggle && menu) {
-    toggle.addEventListener('click', () => {
-      const open = menu.classList.toggle('hidden') === false;
+    const setMenuOpen = (open: boolean) => {
+      menu.classList.toggle('hidden', !open);
+      menu.hidden = !open;
       toggle.setAttribute('aria-expanded', String(open));
       toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    };
+
+    toggle.addEventListener('click', () => {
+      setMenuOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    menu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setMenuOpen(false));
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setMenuOpen(false);
+        toggle.focus({ preventScroll: true });
+      }
     });
   }
 </script>

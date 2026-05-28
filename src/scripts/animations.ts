@@ -247,10 +247,12 @@ export function initScrollReveals() {
     );
   });
 
-  // Counter animation for stats
+  // Counter animation for stats.
+  // The HTML contains the final values as a no-JS/mobile fallback; desktop rich motion
+  // resets them only when the ScrollTrigger animation is ready to run.
   gsap.utils.toArray<HTMLElement>('.trust-n[data-value]').forEach((stat) => {
-    const target = parseInt(stat.dataset.value || '0', 10);
-    if (!target || isNaN(target)) return;
+    const target = Number.parseInt(stat.dataset.value || '0', 10);
+    if (!target || Number.isNaN(target)) return;
 
     const obj = { val: 0 };
     gsap.to(obj, {
@@ -260,9 +262,16 @@ export function initScrollReveals() {
       scrollTrigger: {
         trigger: stat,
         start: 'top 85%',
+        once: true,
+        onEnter: () => {
+          stat.textContent = '0';
+        },
       },
       onUpdate: () => {
         stat.textContent = Math.round(obj.val).toString();
+      },
+      onComplete: () => {
+        stat.textContent = target.toString();
       },
     });
   });
