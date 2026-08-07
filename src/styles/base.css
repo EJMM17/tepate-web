@@ -4,13 +4,20 @@
    STRICT PALETTE: neon (#E1FF00) + greys + black only.
    ═══════════════════════════════════════════════════════════ */
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  border-radius: 0 !important
+/* The reset lives in @layer base so it stays below Tailwind's utility
+   layer. Unlayered, `margin:0; padding:0` silently defeated every
+   Tailwind spacing utility on the page (header, footer, mobile menu),
+   which is why chrome elements sat flush against the viewport edge.
+   The square-corner mandate keeps its !important and still wins. */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border-radius: 0 !important;
+  }
 }
 
 :root {
@@ -205,29 +212,10 @@ body {
 }
 
 /* ── Section base spacing ────────────────────────────── */
-@layer base {
-  section {
-    padding: 48px 16px
-  }
-
-  @media(min-width:640px) {
-    section {
-      padding: 56px 24px
-    }
-  }
-
-  @media(min-width:768px) {
-    section {
-      padding: 80px 40px
-    }
-  }
-
-  @media(min-width:1024px) {
-    section {
-      padding: 96px 80px
-    }
-  }
-}
+/* Intentionally not set globally. Every section in this site owns its
+   own padding (see home.css / pages.css), and several are full-bleed
+   by design — the hero, the bento grid and the marquee band. A blanket
+   `section { padding }` rule would inset all of them. */
 
 /* ── Road divider (dashed neon line) ─────────────────── */
 .road-divider {

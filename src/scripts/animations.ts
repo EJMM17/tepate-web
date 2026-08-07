@@ -201,83 +201,8 @@ function initHeroReveal() {
   return true;
 }
 
-/* ── Scroll Reveals (global) ─────────────────────────── */
-export function initScrollReveals() {
-  // Mark document so CSS can hide elements before GSAP animates (prevents FOUC)
-  document.documentElement.classList.add('gsap-init');
-
-  // Generic fade-up reveal for sections
-  gsap.utils.toArray<HTMLElement>('.reveal-up').forEach((el) => {
-    gsap.fromTo(
-      el,
-      { y: 40, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.7,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 92%',
-          toggleActions: 'play none none none',
-        },
-      }
-    );
-  });
-
-  // Stagger children reveals
-  gsap.utils.toArray<HTMLElement>('.reveal-stagger').forEach((container) => {
-    const children = Array.from(container.children) as HTMLElement[];
-    if (!children.length) return;
-    gsap.fromTo(
-      children,
-      { y: 30, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        stagger: 0.06,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: container,
-          start: 'top 92%',
-          toggleActions: 'play none none none',
-        },
-      }
-    );
-  });
-
-  // Counter animation for stats.
-  // The HTML contains the final values as a no-JS/mobile fallback; desktop rich motion
-  // resets them only when the ScrollTrigger animation is ready to run.
-  gsap.utils.toArray<HTMLElement>('.trust-n[data-value]').forEach((stat) => {
-    const target = Number.parseInt(stat.dataset.value || '0', 10);
-    if (!target || Number.isNaN(target)) return;
-
-    const obj = { val: 0 };
-    gsap.to(obj, {
-      val: target,
-      duration: 2,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: stat,
-        start: 'top 85%',
-        once: true,
-        onEnter: () => {
-          stat.textContent = '0';
-        },
-      },
-      onUpdate: () => {
-        stat.textContent = Math.round(obj.val).toString();
-      },
-      onComplete: () => {
-        stat.textContent = target.toString();
-      },
-    });
-  });
-
-  // Note: hero floating stats were removed to avoid duplicate counters.
-}
+/* Scroll reveals and stat counters now live in src/scripts/motion.ts,
+   which runs on every device instead of desktop only. */
 
 /* ── Magnetic Buttons ────────────────────────────────── */
 export function initMagneticButtons() {
@@ -469,7 +394,6 @@ export function initAnimations() {
 
   initSmoothScroll();
   initPreloader();
-  initScrollReveals();
   initMagneticButtons();
   initCustomCursor();
   initScrollMarquee();

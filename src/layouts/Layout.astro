@@ -66,6 +66,28 @@ const FONTS_HREF =
       )
     }
     <slot name="head" />
+
+    {/* Motion mode is decided before first paint so revealed elements
+        never flash in. The timeout is a safety net: if the motion module
+        fails to load, the hidden states are dropped and everything shows. */}
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        var mq = window.matchMedia;
+        var reduce = mq('(prefers-reduced-motion: reduce)').matches;
+        var rich =
+          !reduce &&
+          !mq('(pointer: coarse)').matches &&
+          !window.location.pathname.startsWith('/contacto');
+
+        if (!reduce) d.classList.add('motion');
+        d.classList.add(rich ? 'motion-rich' : 'motion-lite');
+
+        window.setTimeout(function () {
+          if (!d.classList.contains('motion-ready')) d.classList.remove('motion');
+        }, 2500);
+      })();
+    </script>
   </head>
   <body
     class:list={[
@@ -80,6 +102,8 @@ const FONTS_HREF =
         <div class="preloader-progress"></div>
       </div>
     </div>
+
+    <div class="scroll-progress" aria-hidden="true"></div>
 
     <a
       href="#main-content"
@@ -123,19 +147,21 @@ const FONTS_HREF =
 
     <script>
       import { initAnalytics } from '@/scripts/analytics';
+      import { initMotion } from '@/scripts/motion';
 
       initAnalytics();
 
-      const skipRichMotion =
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-        window.matchMedia('(pointer: coarse)').matches ||
-        window.location.pathname.startsWith('/contacto');
+      // Universal motion layer — reveals, counters, header chrome.
+      // Runs on every device, including touch.
+      initMotion();
 
-      if (skipRichMotion) {
+      // Rich motion (GSAP smooth scroll, preloader, hero, cursor, grain)
+      // is desktop-only. The mode was resolved by the head guard script.
+      if (document.documentElement.classList.contains('motion-rich')) {
+        import('@/scripts/animations').then(({ initAnimations }) => initAnimations());
+      } else {
         document.body.classList.add('loaded');
         document.getElementById('preloader')?.remove();
-      } else {
-        import('@/scripts/animations').then(({ initAnimations }) => initAnimations());
       }
     </script>
   </body>
