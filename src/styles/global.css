@@ -5,6 +5,7 @@
 @import "./components.css";
 @import "./home.css";
 @import "./pages.css";
+@import "./motion.css";
 
 @layer base {
   *,
@@ -54,7 +55,15 @@
    ═══════════════════════════════════════════════════════════ */
 
 /* ── Preloader ───────────────────────────────────────── */
+/* Hidden by default. Only the rich-motion path shows it, because only
+   that path has a script that takes it away again. Without this the
+   site rendered as a permanent black screen when JS was unavailable,
+   and touch devices flashed black before the module script ran. */
 #preloader {
+  display: none;
+}
+
+html.motion-rich #preloader {
   position: fixed;
   inset: 0;
   z-index: 99999;
@@ -141,23 +150,8 @@
 }
 
 /* ── Text Reveal Utilities ───────────────────────────── */
-.reveal-up {
-  will-change: transform, opacity;
-}
-.reveal-stagger {
-  will-change: transform, opacity;
-}
-
-/* Initial hidden state — only when JS is loaded (gsap-init class added by animations.ts).
-   Without JS, elements are visible by default. Prevents FOUC from GSAP immediateRender. */
-.gsap-init .reveal-up {
-  opacity: 0;
-  transform: translateY(40px);
-}
-.gsap-init .reveal-stagger > * {
-  opacity: 0;
-  transform: translateY(30px);
-}
+/* The hidden state and choreography live in motion.css, which is
+   driven by src/scripts/motion.ts on every device. */
 
 /* ── Hero Word Mask (for split-type) ─────────────────── */
 .hero-h1 .word {

@@ -1,0 +1,431 @@
+/* ═══════════════════════════════════════════════════════════
+   MOTION — Reveal choreography & micro-interactions
+   Paired with src/scripts/motion.ts. Every rule that hides
+   content is gated behind html.motion, which is only set when
+   JS runs and reduced motion is off. No JS = nothing hidden.
+
+   The hidden state is scoped with :not(.is-in) and the motion
+   hooks are stripped by JS once played, so a revealed element
+   carries no leftover transform and its own hover states work.
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  /* Industrial easing: fast departure, machined landing */
+  --mo-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --mo-ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --mo-dur: 0.78s;
+  --mo-step: 70ms;
+}
+
+/* ═══ 1. REVEAL BASE ═══════════════════════════════════ */
+
+html.motion [data-reveal],
+html.motion .reveal-up,
+html.motion .mo-stagger > * {
+  transition:
+    opacity var(--mo-dur) var(--mo-ease),
+    transform var(--mo-dur) var(--mo-ease);
+  transition-delay: calc(var(--mo-i, 0) * var(--mo-step));
+}
+
+html.motion [data-reveal]:not(.is-in),
+html.motion .reveal-up:not(.is-in),
+html.motion .mo-stagger:not(.is-in) > * {
+  opacity: 0;
+  transform: translate3d(var(--mo-x, 0), var(--mo-y, 30px), 0) scale(var(--mo-sc, 1));
+}
+
+/* Variants — drive the shared transform through custom props */
+[data-reveal='fade'] { --mo-y: 0; }
+[data-reveal='left'] { --mo-y: 0; --mo-x: -36px; }
+[data-reveal='right'] { --mo-y: 0; --mo-x: 36px; }
+[data-reveal='scale'] { --mo-y: 16px; --mo-sc: 0.965; }
+[data-reveal='deep'] { --mo-y: 56px; }
+
+/* Clip reveal — for imagery and full-bleed panels */
+html.motion [data-reveal='clip'] {
+  transition: clip-path 1s var(--mo-ease);
+}
+html.motion [data-reveal='clip']:not(.is-in) {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 0 100% 0);
+}
+
+/* ═══ 2. ACCENT RULES DRAWING IN ═══════════════════════ */
+
+/* The neon dash that precedes every section tag */
+html.motion .sec-tag::before,
+html.motion .pcat-num::before {
+  transform-origin: left center;
+  transition: transform 0.55s 0.12s var(--mo-ease);
+}
+html.motion .sec-tag:not(.is-in)::before,
+html.motion .pcat-num:not(.is-in)::before {
+  transform: scaleX(0);
+}
+
+/* Full-width road rules draw across */
+html.motion .road-divider,
+html.motion .pedestal {
+  transform-origin: left center;
+  transition: transform 0.9s var(--mo-ease);
+}
+html.motion .road-divider:not(.is-in),
+html.motion .pedestal:not(.is-in) {
+  transform: scaleX(0);
+}
+
+/* ═══ 3. TOP CHROME ════════════════════════════════════ */
+
+/* Scroll progress — a neon road line across the top edge */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 60;
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--neon-dim), var(--neon));
+  transform: scaleX(var(--mo-progress, 0));
+  transform-origin: 0 50%;
+  box-shadow: 0 0 12px var(--neon-glow-strong);
+  will-change: transform;
+}
+
+/* Header lights its edge and condenses once you leave the top */
+header[role='banner'] {
+  transition:
+    background-color 0.4s var(--mo-ease-soft),
+    border-color 0.4s var(--mo-ease-soft),
+    box-shadow 0.4s var(--mo-ease-soft);
+}
+header[role='banner'] img {
+  transition: transform 0.4s var(--mo-ease);
+  transform-origin: left center;
+}
+header[role='banner'].is-scrolled {
+  background-color: rgba(0, 0, 0, 0.94);
+  border-bottom-color: rgba(225, 255, 0, 0.32);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.6);
+}
+header[role='banner'].is-scrolled img {
+  transform: scale(0.9);
+}
+
+/* Header social icons lift on hover */
+header[role='banner'] a svg {
+  transition: transform 0.3s var(--mo-ease);
+}
+header[role='banner'] a:hover svg {
+  transform: translateY(-2px) scale(1.08);
+}
+
+/* ═══ 4. BUTTONS ═══════════════════════════════════════ */
+
+/* Sheen sweep on the secondary buttons, matching .btn-primary */
+.btn-ghost::before,
+.btn-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(225, 255, 0, 0.18), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s var(--mo-ease-soft);
+  pointer-events: none;
+}
+.btn-dark::before {
+  background: linear-gradient(90deg, transparent, rgba(225, 255, 0, 0.14), transparent);
+}
+.btn-ghost:hover::before,
+.btn-dark:hover::before {
+  transform: translateX(100%);
+}
+
+/* Arrows lead the eye forward */
+.btn-primary svg,
+.btn-ghost svg,
+.btn-dark svg,
+.sticky-cta-btn svg {
+  transition: transform 0.35s var(--mo-ease);
+}
+.btn-primary:hover svg,
+.btn-ghost:hover svg,
+.btn-dark:hover svg,
+.sticky-cta-btn:hover svg {
+  transform: translateX(5px);
+}
+
+/* ═══ 5. CARD POINTER LIGHTING ═════════════════════════ */
+/* A soft neon pool follows the cursor across card surfaces.
+   Only applied to cards whose ::after is free. */
+
+.mo-lit {
+  position: relative;
+}
+.mo-lit::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    280px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(225, 255, 0, 0.075),
+    transparent 68%
+  );
+  opacity: 0;
+  transition: opacity 0.4s var(--mo-ease-soft);
+}
+.mo-lit:hover::after {
+  opacity: 1;
+}
+
+/* Content sits above the light pool */
+.spec > *,
+.mvv-card > *,
+.duo-panel > *,
+.qq-step > *,
+.trust-item > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══ 6. CARD & LINK MICRO-INTERACTIONS ════════════════ */
+
+/* Bento cards: lift, and push the "Ver →" link forward */
+.pbc {
+  transition:
+    background 0.4s var(--mo-ease-soft),
+    border-bottom-color 0.4s var(--mo-ease-soft),
+    transform 0.4s var(--mo-ease);
+}
+.pbc:hover {
+  transform: translateY(-4px);
+}
+.pbc:hover .pbc-link {
+  transform: translateX(6px);
+}
+
+/* Quick-quote steps get the weighted base the other cards have */
+.qq-step {
+  border-bottom: 2px solid transparent;
+  transition:
+    background 0.3s var(--mo-ease-soft),
+    border-bottom-color 0.3s var(--mo-ease-soft),
+    transform 0.35s var(--mo-ease);
+}
+.qq-step:hover {
+  border-bottom-color: var(--neon);
+  transform: translateY(-4px);
+}
+
+/* Numerals brighten with their card */
+.qq-step:hover .qq-num,
+.why-item:hover .why-num {
+  text-shadow: 0 0 16px var(--neon-glow-strong);
+}
+
+/* Editorial list rows slide toward the reader */
+.why-item {
+  transition:
+    border-top-color 0.3s var(--mo-ease-soft),
+    transform 0.35s var(--mo-ease);
+}
+.why-item:hover {
+  transform: translateX(6px);
+}
+
+/* Stat tiles lift with their rule */
+.trust-item {
+  transition:
+    background 0.3s var(--mo-ease-soft),
+    transform 0.35s var(--mo-ease);
+}
+.trust-item:hover {
+  transform: translateY(-3px);
+}
+
+/* The counter glows while it runs */
+.trust-n.is-counting {
+  color: var(--neon);
+  text-shadow: 0 0 26px var(--neon-glow-strong);
+}
+
+/* Contact rows nudge with their icon */
+.citem {
+  transition: transform 0.35s var(--mo-ease);
+}
+.citem:hover {
+  transform: translateX(4px);
+}
+.cicon {
+  transition:
+    border-color 0.3s var(--mo-ease-soft),
+    background 0.3s var(--mo-ease-soft),
+    transform 0.35s var(--mo-ease);
+}
+.citem:hover .cicon {
+  transform: rotate(-4deg) scale(1.06);
+}
+
+/* Footer nav links step forward on hover */
+footer nav ul a {
+  display: inline-block;
+  transition:
+    color 0.3s var(--mo-ease-soft),
+    transform 0.3s var(--mo-ease);
+}
+footer nav ul a:hover {
+  transform: translateX(5px);
+}
+
+/* ═══ 7. MARQUEE ═══════════════════════════════════════ */
+
+/* Hovering the logo band pauses it so a name can be read */
+.marquee-wrapper:hover .marquee-content {
+  animation-play-state: paused;
+}
+.marquee-content {
+  will-change: transform;
+}
+
+/* ═══ 8. HERO ══════════════════════════════════════════ */
+
+/* The desktop hero is choreographed by GSAP. On touch/lite it
+   would otherwise land dead-flat, so it gets a CSS entrance. */
+html.motion-lite .hero-fabrica,
+html.motion-lite .hero-h1 .line,
+html.motion-lite .hero-sub,
+html.motion-lite .hero-actions {
+  animation: moRise 0.85s var(--mo-ease) both;
+}
+html.motion-lite .hero-fabrica { animation-delay: 0.06s; }
+html.motion-lite .hero-h1 .line:nth-child(1) { animation-delay: 0.16s; }
+html.motion-lite .hero-h1 .line:nth-child(2) { animation-delay: 0.24s; }
+html.motion-lite .hero-h1 .line:nth-child(3) { animation-delay: 0.32s; }
+html.motion-lite .hero-h1 .line:nth-child(4) { animation-delay: 0.4s; }
+html.motion-lite .hero-sub { animation-delay: 0.5s; }
+html.motion-lite .hero-actions { animation-delay: 0.6s; }
+html.motion-lite .hero-visual { animation: moFade 1.1s var(--mo-ease) both; }
+
+/* Slow drift on the hero plate. Desktop runs GSAP parallax on the
+   same element, so this is scoped to lite mode only. */
+html.motion-lite .hero-bg-img {
+  animation: moDrift 26s ease-in-out infinite alternate;
+}
+
+/* Ambient neon breathing behind the headline */
+html.motion .hero-left::before {
+  animation: moBreathe 9s ease-in-out infinite;
+}
+
+/* The scroll cue invites the first scroll */
+.hero-scroll-l {
+  transition: color 0.3s var(--mo-ease-soft);
+}
+.hero-scroll:hover .hero-scroll-l {
+  color: var(--neon);
+}
+
+/* ═══ 9. FLOATING ACTIONS ══════════════════════════════ */
+
+/* A quiet pulse ring so the WhatsApp button reads as live */
+.wa::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--neon);
+  opacity: 0;
+  pointer-events: none;
+}
+html.motion .wa::after {
+  animation: moPing 3.4s var(--mo-ease-soft) infinite;
+}
+html.motion .wa:hover::after {
+  animation-play-state: paused;
+}
+
+.back-to-top.visible:hover {
+  transform: translateY(-3px);
+}
+
+/* ═══ 10. FORMS ════════════════════════════════════════ */
+
+.finput {
+  transition:
+    border-color 0.3s var(--mo-ease-soft),
+    box-shadow 0.3s var(--mo-ease-soft),
+    background 0.3s var(--mo-ease-soft);
+}
+.finput:hover:not(:focus) {
+  border-color: var(--mist);
+}
+.finput:focus {
+  background: var(--char);
+}
+
+/* ═══ 11. PAGE ENTRY ═══════════════════════════════════ */
+/* Desktop fades in behind the preloader; lite mode needs its own. */
+html.motion-lite main {
+  animation: moFade 0.5s ease both;
+}
+
+/* ═══ 12. KEYFRAMES ════════════════════════════════════ */
+
+@keyframes moRise {
+  from { opacity: 0; transform: translate3d(0, 26px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes moFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes moDrift {
+  from { transform: scale(1.04) translate3d(0, 0, 0); }
+  to { transform: scale(1.12) translate3d(0, -3%, 0); }
+}
+
+@keyframes moBreathe {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes moPing {
+  0% { opacity: 0.45; transform: scale(1); }
+  70% { opacity: 0; transform: scale(1.35); }
+  100% { opacity: 0; transform: scale(1.35); }
+}
+
+/* ═══ 13. REDUCED MOTION ═══════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  .reveal-up,
+  .mo-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+
+  .sec-tag::before,
+  .pcat-num::before,
+  .road-divider,
+  .pedestal {
+    transform: none !important;
+  }
+
+  .scroll-progress,
+  .wa::after {
+    display: none;
+  }
+
+  .hero-bg-img,
+  .hero-left::before,
+  .marquee-content {
+    animation: none !important;
+  }
+}
